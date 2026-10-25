@@ -178,7 +178,28 @@ export default function App() {
             <article className="feature-tile feature-tile-wide"><div className="feature-icon"><CircleHelp size={22}/></div><span className="feature-number">06 / GET GUIDANCE</span><h3>Expert tips and guidance</h3><p>Get help every step of the way as you build your resume with expert tips and suggested phrases.</p><div className="feature-quote">“Make your experience easy to understand, and your strengths easy to remember.”</div></article>
           </div>
           <div className="feature-showcase-bottom"><div><span className="eyebrow">READY FOR YOUR NEXT CHAPTER?</span><h3>Build a resume that opens doors.</h3></div><button className="button button-dark" onClick={() => startNew()}>Build My Resume Now <ArrowRight size={17}/></button></div>
-          <p className="feature-legal">ResumeBuilder.com is now part of Bold LLC. For more information visit our <a href="https://www.resumebuilder.com/terms-and-conditions/" target="_blank" rel="noreferrer">Terms of Use</a> and <a href="https://www.resumebuilder.com/privacy-policy/" target="_blank" rel="noreferrer">Privacy Policy</a>.</p>
+        </section>
+        <section className="ai-builder-section" id="ai-resume-builder">
+          <div className="ai-builder-copy">
+            <div className="eyebrow"><Sparkles size={14}/> YOUR IDEAS, BEAUTIFULLY WRITTEN</div>
+            <h2>Our Free AI Resume Builder <span>Works Wherever You Do</span></h2>
+            <p>Find the right words and automate your resume writing process with our free AI resume builder. Whether you’re working from your phone or laptop, our AI provides tailored suggestions to help you stand out.</p>
+            <button className="button button-dark ai-builder-button" onClick={() => startNew()}>Try Resume Builder <ArrowRight size={17}/></button>
+            <div className="ai-builder-note"><span><Check size={14}/></span> Build at your pace, from any device</div>
+          </div>
+          <div className="ai-resume-visual" aria-label="Decorative resume preview illustration">
+            <div className="ai-orbit ai-orbit-one"></div><div className="ai-orbit ai-orbit-two"></div>
+            <div className="ai-float-chip ai-chip-top"><Sparkles size={15}/> AI writing suggestions</div>
+            <div className="ai-resume-paper">
+              <div className="ai-paper-top"><div className="ai-avatar">AM</div><div><strong>Alex Morgan</strong><span>PRODUCT DESIGNER</span></div><div className="ai-paper-mark"><FileText size={17}/></div></div>
+              <div className="ai-paper-contact">alex.morgan@email.com&nbsp; · &nbsp;New York, NY&nbsp; · &nbsp;LinkedIn</div>
+              <div className="ai-paper-section">PROFILE</div><p className="ai-paper-copy">Creative product designer focused on thoughtful, accessible digital experiences and user-centered solutions.</p>
+              <div className="ai-paper-section">EXPERIENCE</div><div className="ai-paper-job"><strong>Product Designer</strong><span>2022 — Present</span></div><p className="ai-paper-copy">Led product improvements across web experiences, partnering with engineering and research teams.</p><div className="ai-paper-line"></div><div className="ai-paper-line short"></div>
+              <div className="ai-paper-section">EDUCATION</div><div className="ai-paper-job"><strong>B.A. Design & Technology</strong><span>2018 — 2022</span></div>
+              <div className="ai-paper-section">CORE SKILLS</div><div className="ai-skill-row"><span>Product strategy</span><span>Figma</span><span>Prototyping</span></div>
+            </div>
+            <div className="ai-float-chip ai-chip-bottom"><span className="ai-chip-check"><Check size={13}/></span> Resume ready to refine</div>
+          </div>
         </section>
         <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
       </main>}
