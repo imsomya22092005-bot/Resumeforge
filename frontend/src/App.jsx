@@ -107,9 +107,10 @@ export default function App() {
         </button>
         <button className="mobile-menu" onClick={() => setMobileMenu(!mobileMenu)} aria-label="Toggle menu"><Menu /></button>
         <nav className={mobileMenu ? 'nav-links open' : 'nav-links'}>
-          <button className={page === 'templates' ? 'nav-link active' : 'nav-link'} onClick={() => { setPage('templates'); setMobileMenu(false); }}>Templates</button>
-          <button className={page === 'dashboard' ? 'nav-link active' : 'nav-link'} onClick={() => { setPage('dashboard'); setMobileMenu(false); }}>My resumes</button>
-          <button className="nav-link" onClick={() => setShowHelp(true)}>How it works</button>
+          <button className="nav-link" onClick={() => { setPage('home'); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenu(false); }}>Features</button>
+          <button className={page === 'templates' ? 'nav-link active' : 'nav-link'} onClick={() => { setPage('templates'); setMobileMenu(false); }}>Resume Templates</button>
+          <button className="nav-link" onClick={() => { setPage('home'); document.getElementById('why-resumeforge')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenu(false); }}>Why ResumeForge</button>
+          <button className="nav-link" onClick={() => { setPage('home'); document.getElementById('about-us')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenu(false); }}>About us</button>
         </nav>
         <div className="top-actions">
           {currentUser ? <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></> : <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>}
@@ -119,45 +120,47 @@ export default function App() {
 
       {page === 'home' && <main>
         <section className="hero">
-          <div className="hero-copy">
-            <div className="eyebrow"><span className="eyebrow-dot"></span> YOUR NEXT CHAPTER STARTS HERE</div>
-            <h1>Your experience.<br /><span>Your next opportunity.</span></h1>
-            <p className="hero-description">Create a resume that tells your story clearly. Thoughtful templates, a simple editor, and a polished result — all in one place.</p>
-            <div className="hero-buttons">
-              <button className="button button-dark" onClick={() => setPage('templates')}>Build my resume <ArrowRight size={17} /></button>
-              <button className="button button-quiet" onClick={() => setPage('templates')}><LayoutTemplate size={17} /> Explore templates</button>
-            </div>
-            <div className="hero-proof"><div className="proof-avatars"><span>S</span><span>R</span><span>A</span></div><div><strong>A better way to get started</strong><small>Simple, focused, and made for you</small></div></div>
-          </div>
-          <div className="hero-visual">
-            <div className="visual-note note-top"><Sparkles size={15} /> Made to stand out</div>
-            <div className="resume-paper">
+          <div className="hero-visual" aria-label="Animated resume preview">
+            <div className="visual-note note-top"><Sparkles size={15} /> Make your first impression count</div>
+            <div className="resume-paper animated-resume">
               <div className="paper-topline"></div>
-              <div className="paper-name">Alex Morgan</div><div className="paper-role">PRODUCT DESIGNER</div>
-              <div className="paper-contact">alex.morgan@email.com&nbsp; · &nbsp;New York, NY</div>
-              <div className="paper-rule"></div>
+              <div className="paper-name">Alex Morgan</div><div className="paper-role">PROFESSIONAL PROFILE</div>
+              <div className="paper-contact">alex.morgan@email.com · Your City</div><div className="paper-rule"></div>
               <div className="paper-section-title">PROFILE</div><div className="paper-line long"></div><div className="paper-line medium"></div><div className="paper-line short"></div>
-              <div className="paper-section-title">EXPERIENCE</div><div className="paper-bold">Senior Product Designer</div><div className="paper-line long"></div><div className="paper-line long"></div><div className="paper-line medium"></div>
-              <div className="paper-bold">Product Designer · Studio North</div><div className="paper-line long"></div><div className="paper-line medium"></div>
-              <div className="paper-section-title">EDUCATION</div><div className="paper-bold">B.A. Design & Visual Arts</div><div className="paper-line medium"></div>
-              <div className="paper-section-title">SKILLS</div><div className="paper-skills"><span>Product strategy</span><span>Prototyping</span><span>Research</span><span>Figma</span></div>
+              <div className="paper-section-title">EXPERIENCE</div><div className="paper-bold">Your latest role</div><div className="paper-line long"></div><div className="paper-line medium"></div><div className="paper-line long"></div>
+              <div className="paper-section-title">EDUCATION</div><div className="paper-bold">Your qualification</div><div className="paper-line medium"></div>
+              <div className="paper-section-title">SKILLS</div><div className="paper-skills"><span>Creative</span><span>Organized</span><span>Problem solving</span></div>
             </div>
+            <div className="floating-template floating-template-one"><div className="float-line"></div><div className="float-line short"></div><div className="float-line"></div><div className="float-line medium"></div></div>
+            <div className="floating-template floating-template-two"><span>✓</span><div><strong>Resume ready</strong><small>Looking good!</small></div></div>
             <div className="visual-note note-bottom"><span className="check-circle"><Check size={12} /></span> Your story, beautifully told</div>
             <div className="visual-sparkle sparkle-one">✳</div><div className="visual-sparkle sparkle-two">✳</div>
           </div>
+          <div className="hero-copy">
+            <div className="eyebrow"><span className="eyebrow-dot"></span> YOUR NEXT CHAPTER STARTS HERE</div>
+            <h1>The Best Online<br /><span>Resume Builder</span></h1>
+            <p className="hero-description">Easily create a resume from any device with our best-in-class resume builder platform.</p>
+            <div className="hero-buttons">
+              <button className="button button-dark" onClick={() => startNew()}>Create My Resume Now <ArrowRight size={17} /></button>
+              <button className="button button-outline" onClick={() => notify('Import Resume will be available in the next phase.')}>Import Resume</button>
+            </div>
+            <div className="hero-stats">
+              <div><strong><span>↑</span> 38%</strong><small>more interviews</small></div>
+              <div><strong><span>↑</span> 23%</strong><small>more likely to<br/> get a job offer</small></div>
+            </div>
+          </div>
         </section>
         <section className="trust-strip"><span>DESIGNED FOR THE NEXT STEP</span><div><Check size={15} /> Clean layouts</div><div><Check size={15} /> Easy to customize</div><div><Check size={15} /> Print-ready resumes</div></section>
-        <section className="home-intro-copy">
+        <section className="home-intro-copy" id="about-us">
           <p>Our online resume builder makes it simple to create a professional resume from your phone, laptop, or tablet using 30+ customizable resume templates — anytime, anywhere.</p>
-          <p>Create a resume using our <button className="inline-text-link" onClick={() => setPage('templates')}>AI resume builder</button> feature, plus take advantage of expert suggestions, a built-in resume editor, and customizable modern and professional resume templates. <button className="inline-text-link" onClick={() => setPage('templates')}>Free users</button> have access to our easy-to-use resume creator and TXT file downloads.</p>
+          <p>Create a resume using our <button className="inline-text-link" onClick={() => notify('AI resume suggestions are coming soon.')}>AI resume builder</button> feature, plus take advantage of expert suggestions, a built-in resume editor, and customizable modern and professional resume templates. <button className="inline-text-link" onClick={() => setPage('templates')}>Free users</button> have access to our easy-to-use resume creator and TXT file downloads.</p>
         </section>
-        <section className="home-templates section-wrap">
-          <div className="template-section-title">
-            <h2>Pick From 500+ Free Resume Templates<br className="desktop-break" /> and Build Your Resume in Minutes</h2>
-          </div>
+        <section className="home-templates section-wrap" id="features">
+          <div className="template-section-title"><div className="eyebrow">FIND YOUR PERFECT LOOK</div><h2>Pick From 500+ Free Resume Templates</h2><p>Choose a style that fits your story, then personalize it in minutes.</p></div>
           <div className="template-grid">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div>
           <div className="see-all-templates"><button className="button button-outline" onClick={() => setPage('templates')}>See all templates <ArrowRight size={16} /></button></div>
         </section>
+        <section className="why-section" id="why-resumeforge"><div className="eyebrow">WHY RESUMEFORGE</div><h2>Your next opportunity starts with a stronger first impression.</h2><p>A simple, focused resume-building experience to help you present your skills, experience, and projects with confidence.</p></section>
         <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
       </main>}
 
