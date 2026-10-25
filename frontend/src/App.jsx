@@ -303,7 +303,21 @@ export default function App() {
             <div className="import-resume-trust"><span><Check size={14}/> Your existing draft</span><span><Check size={14}/> Personalized design</span><span><Check size={14}/> Matching cover letter</span></div>
           </div>
         </section>
-        <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
+        <section className="dream-job-section" id="start-resume">
+          <div className="dream-job-decoration dream-job-decoration-one"></div>
+          <div className="dream-job-decoration dream-job-decoration-two"></div>
+          <div className="dream-job-content">
+            <span className="dream-job-eyebrow"><Sparkles size={14}/> ONE STEP CLOSER</span>
+            <h2>Let’s Land Your <span>Dream Job</span> Together</h2>
+            <div className="dream-job-divider"><i></i><Sparkles size={16}/><i></i></div>
+            <h3>Let's make your next move count.</h3>
+            <p>Your next opportunity deserves a resume you feel good about.</p>
+            <button className="button dream-job-button" onClick={() => startNew()}>Start Your Resume Now <ArrowRight size={18}/></button>
+            <div className="dream-job-footnote"><Check size={14}/> Your next chapter starts with one small step.</div>
+          </div>
+          <div className="dream-job-resume dream-job-resume-left"><div className="dream-job-paper"><div className="dream-job-paper-head"></div><i></i><i></i><b>EXPERIENCE</b><i></i><i className="short"></i><b>EDUCATION</b><i></i><i className="short"></i></div></div>
+          <div className="dream-job-resume dream-job-resume-right"><div className="dream-job-mini-paper"><div className="dream-job-mini-avatar">JL</div><b>Jordan Lee</b><small>CREATIVE DEVELOPER</small><i></i><i></i><i className="short"></i><div className="dream-job-mini-skills"><span></span><span></span><span></span></div></div></div>
+        </section>
       </main>}
 
       {(page === 'login' || page === 'signup') && <main className="auth-page">
