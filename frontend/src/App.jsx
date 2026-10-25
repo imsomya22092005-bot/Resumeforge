@@ -337,7 +337,30 @@ export default function App() {
           <p className="auth-note">Demo mode: your profile is saved only in this browser. Secure account authentication will be connected with the backend later.</p>
           <button className="auth-back" onClick={() => setPage('home')}><ArrowLeft size={15}/> Back to home</button>
         </section>
-        <div className="auth-side-note"><span className="eyebrow">MAKE YOUR NEXT MOVE COUNT</span><h2>A resume that feels like you.</h2><p>Clear, thoughtful, and ready for what's next.</p><div className="auth-mini-paper"><div className="mini-paper-title"></div><div className="mini-paper-line"></div><div className="mini-paper-line short"></div><div className="mini-paper-heading"></div><div className="mini-paper-line"></div><div className="mini-paper-line"></div><div className="mini-paper-heading"></div><div className="mini-paper-line short"></div></div></div>
+        <div className={page === 'signup' ? 'auth-side-note auth-side-signup' : 'auth-side-note auth-side-login'}>
+          {page === 'signup' ? <>
+            <span className="eyebrow">YOUR STORY, BEAUTIFULLY TOLD</span>
+            <h2>Every great career starts with a first draft.</h2>
+            <p>Create a resume that brings your skills, story, and ambition together.</p>
+            <div className="signup-visual-board">
+              <div className="signup-orbit signup-orbit-one"></div><div className="signup-orbit signup-orbit-two"></div>
+              <div className="signup-note signup-note-top"><span>01</span><b>Your experience</b><i></i><i className="short"></i></div>
+              <div className="signup-resume-sheet"><div className="signup-resume-head"><div className="signup-avatar">S</div><div><b>YOUR NAME</b><small>Creative professional</small></div></div><div className="signup-sheet-label"></div><i></i><i className="short"></i><div className="signup-sheet-label second"></div><i></i><i></i><i className="short"></i></div>
+              <div className="signup-note signup-note-bottom"><span>02</span><b>Your next chapter</b><small>Starts here ✦</small></div>
+            </div>
+          </> : <>
+            <span className="eyebrow">GOOD TO HAVE YOU BACK</span>
+            <h2>Your next opportunity is still in reach.</h2>
+            <p>Pick up where you left off and keep shaping your next move.</p>
+            <div className="login-visual-board">
+              <div className="login-dashboard-top"><span><i></i> RESUME WORKSPACE</span><b>•••</b></div>
+              <div className="login-progress-card"><div className="login-progress-copy"><small>YOUR RESUME</small><b>Looking sharp.</b><span>Keep your momentum going.</span></div><div className="login-progress-ring"><b>85<small>%</small></b></div></div>
+              <div className="login-task-card"><span className="login-task-check">✓</span><div><b>Experience added</b><small>Your story is taking shape</small></div><span className="login-task-status">DONE</span></div>
+              <div className="login-task-card"><span className="login-task-check">✓</span><div><b>Skills & strengths</b><small>Ready for your next edit</small></div><span className="login-task-status">DONE</span></div>
+              <div className="login-dashboard-footer"><span>✦</span> One step closer to your next chapter</div>
+            </div>
+          </>}
+        </div>
       </main>}
 
       {page === 'templates' && <main className="page-content"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Pick a clean layout, then make it your own in the editor.</p></div><div className="template-grid template-grid-large">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></main>}
