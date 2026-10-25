@@ -36,6 +36,13 @@ export default function App() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [section, setSection] = useState('personal');
   const [showHelp, setShowHelp] = useState(false);
+  const [authName, setAuthName] = useState('');
+  const [authEmail, setAuthEmail] = useState('');
+  const [authPassword, setAuthPassword] = useState('');
+  const [authError, setAuthError] = useState('');
+  const [currentUser, setCurrentUser] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('resumeforge-user') || 'null'); } catch { return null; }
+  });
 
   useEffect(() => {
     localStorage.setItem('resumeforge-resumes', JSON.stringify(saved));
@@ -45,6 +52,18 @@ export default function App() {
     setToast(message);
     window.setTimeout(() => setToast(''), 2600);
   };
+  const openAuth = (mode) => { setAuthError(''); setAuthName(''); setAuthEmail(''); setAuthPassword(''); setPage(mode); setMobileMenu(false); };
+  const submitAuth = (event) => {
+    event.preventDefault();
+    const email = authEmail.trim().toLowerCase();
+    if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) { setAuthError('Please enter a valid email address.'); return; }
+    if (authPassword.length < 6) { setAuthError('Password must be at least 6 characters.'); return; }
+    if (page === 'signup' && !authName.trim()) { setAuthError('Please enter your name.'); return; }
+    const user = { name: authName.trim() || email.split('@')[0], email };
+    localStorage.setItem('resumeforge-user', JSON.stringify(user));
+    setCurrentUser(user); setAuthError(''); setPage('dashboard');
+  };
+  const signOut = () => { localStorage.removeItem('resumeforge-user'); setCurrentUser(null); setPage('home'); };
   const startNew = (chosenTemplate = template) => {
     setResume(starterResume);
     setTemplate(chosenTemplate);
@@ -93,7 +112,7 @@ export default function App() {
           <button className="nav-link" onClick={() => setShowHelp(true)}>How it works</button>
         </nav>
         <div className="top-actions">
-          <button className="avatar-button" onClick={() => setPage('dashboard')} aria-label="My resumes"><UserRound size={17} /></button>
+          {currentUser ? <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></> : <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>}
           <button className="button button-dark button-small" onClick={() => startNew()}>Create my resume <ArrowRight size={15} /></button>
         </div>
       </header>
@@ -133,6 +152,26 @@ export default function App() {
           <div className="template-grid">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div>
         </section>
         <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
+      </main>}
+
+      {(page === 'login' || page === 'signup') && <main className="auth-page">
+        <section className="auth-card">
+          <div className="auth-brand-mark"><FileText size={22} /></div>
+          <div className="eyebrow">{page === 'signup' ? 'YOUR NEXT CHAPTER STARTS HERE' : 'WELCOME BACK'}</div>
+          <h1>{page === 'signup' ? 'Create your account.' : 'Good to see you again.'}</h1>
+          <p className="auth-subtitle">{page === 'signup' ? 'Save your resume drafts and keep building towards your next opportunity.' : 'Log in to continue working on your resume.'}</p>
+          <form className="auth-form" onSubmit={submitAuth}>
+            {page === 'signup' && <label className="field-label">Full name<input autoComplete="name" value={authName} onChange={e => setAuthName(e.target.value)} placeholder="e.g. Alex Morgan" /></label>}
+            <label className="field-label">Email address<input type="email" autoComplete="email" value={authEmail} onChange={e => setAuthEmail(e.target.value)} placeholder="you@example.com" /></label>
+            <label className="field-label">Password<input type="password" autoComplete={page === 'signup' ? 'new-password' : 'current-password'} value={authPassword} onChange={e => setAuthPassword(e.target.value)} placeholder="At least 6 characters" /></label>
+            {authError && <p className="auth-error" role="alert">{authError}</p>}
+            <button className="button button-dark auth-submit" type="submit">{page === 'signup' ? 'Create account' : 'Log in'} <ArrowRight size={16}/></button>
+          </form>
+          <p className="auth-switch">{page === 'signup' ? 'Already have an account?' : "Don't have an account?"} <button onClick={() => openAuth(page === 'signup' ? 'login' : 'signup')}>{page === 'signup' ? 'Log in' : 'Sign up'}</button></p>
+          <p className="auth-note">Demo mode: your profile is saved only in this browser. Secure account authentication will be connected with the backend later.</p>
+          <button className="auth-back" onClick={() => setPage('home')}><ArrowLeft size={15}/> Back to home</button>
+        </section>
+        <div className="auth-side-note"><span className="eyebrow">MAKE YOUR NEXT MOVE COUNT</span><h2>A resume that feels like you.</h2><p>Clear, thoughtful, and ready for what's next.</p><div className="auth-mini-paper"><div className="mini-paper-title"></div><div className="mini-paper-line"></div><div className="mini-paper-line short"></div><div className="mini-paper-heading"></div><div className="mini-paper-line"></div><div className="mini-paper-line"></div><div className="mini-paper-heading"></div><div className="mini-paper-line short"></div></div></div>
       </main>}
 
       {page === 'templates' && <main className="page-content"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Pick a clean layout, then make it your own in the editor.</p></div><div className="template-grid template-grid-large">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></main>}
