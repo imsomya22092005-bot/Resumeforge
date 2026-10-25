@@ -468,3 +468,123 @@ body{background:#F5FAE1;color:#463737}
 @media(max-width:900px){.dream-job-resume{width:130px}.dream-job-resume-left{left:3%;top:12%}.dream-job-resume-right{right:3%;bottom:9%}.dream-job-paper{min-height:165px}}
 @media(max-width:650px){.dream-job-section{min-height:650px;padding:85px 8%}.dream-job-section:after{inset:10px;border-radius:19px}.dream-job-content h2{font-size:43px;letter-spacing:-1.6px}.dream-job-content h2 span{letter-spacing:-1px}.dream-job-content>p{font-size:14px}.dream-job-resume{width:100px;padding:6px;opacity:.85}.dream-job-resume-left{left:4%;top:5%}.dream-job-resume-right{right:4%;bottom:4%}.dream-job-paper{min-height:125px;padding:8px 6px}.dream-job-paper-head{height:18px;margin-bottom:9px}.dream-job-paper b{margin-top:8px;font-size:5px}.dream-job-paper i{height:3px;margin:5px 0}.dream-job-mini-paper{min-height:130px;padding:8px 5px}.dream-job-mini-avatar{width:26px;height:26px;font-size:10px}.dream-job-mini-paper>b{font-size:10px}.dream-job-mini-paper>small{font-size:5px}.dream-job-mini-paper>i{margin-top:7px}.dream-job-footnote{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.dream-job-resume-left,.dream-job-resume-right{animation:none}.dream-job-button{transition:none}}
+
+
+/* Premium ResumeForge authentication experience */
+.auth-page{
+  position:relative;
+  isolation:isolate;
+  width:min(1180px,calc(100% - 48px));
+  min-height:calc(100vh - 100px);
+  padding:46px 0 64px;
+  grid-template-columns:minmax(0,1fr) minmax(320px,.92fr);
+  gap:clamp(42px,7vw,100px);
+}
+.auth-page::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:430px;height:430px;
+  left:-190px;top:16%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(229,190,181,.38),rgba(229,190,181,0) 70%);
+  pointer-events:none;
+}
+.auth-card{
+  max-width:460px;
+  padding:clamp(26px,3.5vw,42px);
+  border:1px solid rgba(137,108,108,.17);
+  border-radius:26px;
+  background:rgba(255,255,255,.78);
+  box-shadow:0 24px 70px rgba(77,54,54,.09),0 3px 12px rgba(77,54,54,.035);
+  backdrop-filter:blur(14px);
+}
+.auth-brand-mark{
+  width:54px;height:54px;
+  border-radius:18px;
+  margin-bottom:25px;
+  color:#F5FAE1;
+  background:linear-gradient(145deg,#896C6C,#6f5353);
+  box-shadow:0 9px 22px rgba(137,108,108,.25);
+}
+.auth-card>.eyebrow{color:#896C6C;font-size:10px;letter-spacing:2px;font-weight:800}
+.auth-card h1{font-family:var(--serif);font-size:clamp(32px,3.3vw,43px);line-height:1.12;letter-spacing:-1.25px;color:#493939;margin-bottom:14px}
+.auth-subtitle{font-size:14px;line-height:1.75;color:#796868;margin-bottom:28px}
+.auth-form{gap:18px}
+.auth-form .field-label{gap:9px;color:#594747;font-size:12px;font-weight:700;letter-spacing:.15px}
+.auth-form input{
+  min-height:52px;
+  padding:14px 16px;
+  border:1px solid rgba(137,108,108,.23);
+  border-radius:13px;
+  background:#fffdfa;
+  color:#493939;
+  font-size:14px;
+  transition:border-color .2s,box-shadow .2s,background .2s;
+}
+.auth-form input::placeholder{color:#b4a3a0}
+.auth-form input:focus{border-color:#896C6C;background:#fff;box-shadow:0 0 0 4px rgba(229,190,181,.32)}
+.auth-submit{
+  min-height:53px;
+  margin-top:3px;
+  border:1px solid #896C6C;
+  border-radius:13px;
+  color:#F5FAE1;
+  background:linear-gradient(115deg,#896C6C,#715454);
+  box-shadow:0 9px 20px rgba(137,108,108,.2);
+  font-size:14px;font-weight:750;
+  transition:transform .2s,box-shadow .2s,filter .2s;
+}
+.auth-submit:hover{transform:translateY(-2px);box-shadow:0 13px 26px rgba(137,108,108,.27);filter:saturate(1.06)}
+.auth-switch{margin-top:23px;color:#796868;font-size:13px}
+.auth-switch button{color:#765858;text-decoration:none;border-bottom:1px solid #E5BEB5}
+.auth-note{color:#998987;font-size:10px}
+.auth-back{margin-top:17px;color:#896C6C;transition:transform .2s}
+.auth-back:hover{transform:translateX(-3px)}
+.auth-error{padding:10px 12px;border:1px solid rgba(137,108,108,.2);border-radius:10px;background:#FFF9F2;color:#896C6C}
+.auth-side-note{
+  min-height:540px;
+  padding:48px 44px 0;
+  border:1px solid rgba(245,250,225,.6);
+  border-radius:30px;
+  background:linear-gradient(145deg,#896C6C 0%,#765858 60%,#5f4848 100%);
+  box-shadow:0 26px 65px rgba(77,54,54,.18);
+}
+.auth-side-note::before,.auth-side-note::after{
+  content:"";position:absolute;border-radius:50%;pointer-events:none;
+}
+.auth-side-note::before{width:300px;height:300px;right:-105px;top:-95px;border:1px solid rgba(245,250,225,.2);box-shadow:0 0 0 28px rgba(245,250,225,.035),0 0 0 58px rgba(245,250,225,.025)}
+.auth-side-note::after{width:180px;height:180px;left:-80px;bottom:20px;background:rgba(229,190,181,.13);filter:blur(2px)}
+.auth-side-note>.eyebrow{position:relative;z-index:1;color:#F5FAE1;letter-spacing:2.2px;font-size:10px;font-weight:800}
+.auth-side-note h2{position:relative;z-index:1;color:#FFF9F2;font-size:clamp(32px,3.2vw,43px);max-width:350px;letter-spacing:-1.3px;margin-top:19px}
+.auth-side-note>p{position:relative;z-index:1;color:#F5FAE1;font-size:14px;max-width:300px}
+.auth-mini-paper{
+  position:relative;z-index:1;
+  width:min(310px,90%);height:275px;
+  margin-top:35px;
+  padding:30px 28px;
+  border:1px solid rgba(137,108,108,.13);
+  border-radius:10px 10px 0 0;
+  background:linear-gradient(150deg,#fffdf7,#EEE6CA);
+  box-shadow:0 24px 50px rgba(45,29,29,.24);
+  transform:rotate(2.5deg);
+  animation:authPaperFloat 6s ease-in-out infinite;
+}
+.mini-paper-title{height:13px;background:#896C6C;border-radius:3px}
+.mini-paper-line{height:5px;background:#E5BEB5;border-radius:5px}
+.mini-paper-heading{height:6px;background:#896C6C;border-radius:4px}
+@keyframes authPaperFloat{0%,100%{transform:translateY(0) rotate(2.5deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+@media(max-width:760px){
+  .auth-page{width:min(100% - 32px,500px);padding:28px 0 48px;gap:26px}
+  .auth-card{padding:27px 23px;border-radius:22px}
+  .auth-side-note{min-height:360px;padding:32px 28px 0;border-radius:24px}
+  .auth-side-note h2{font-size:34px}
+  .auth-mini-paper{height:180px;margin-top:22px;padding:18px 20px}
+}
+@media(max-width:420px){
+  .auth-page{width:calc(100% - 24px)}
+  .auth-card{padding:24px 18px}
+  .auth-card h1{font-size:31px}
+  .auth-side-note{min-height:330px;padding:27px 23px 0}
+}
+@media(prefers-reduced-motion:reduce){.auth-mini-paper{animation:none}.auth-submit,.auth-back{transition:none}}
