@@ -18,9 +18,16 @@ const starterResume = {
   projects: [{ id: 3, title: 'Featured Project', description: 'What you built, how you built it, and the result.' }]
 };
 const templates = [
-  { id: 'classic', name: 'Classic', detail: 'Clean, professional, timeless', tag: 'ATS FRIENDLY' },
-  { id: 'modern', name: 'Modern', detail: 'Confident headings and clean lines', tag: 'POPULAR' },
-  { id: 'minimal', name: 'Minimal', detail: 'Simple layout with room to breathe', tag: 'SIMPLE' }
+{id:'classic',name:'Classic Professional',detail:'Clear and ATS-friendly',tag:'ATS FRIENDLY',color:'#896C6C',person:'ALEX MORGAN',role:'SOFTWARE DEVELOPER',email:'alex.morgan@email.com',skills:'JavaScript · React · SQL'},
+{id:'modern',name:'Modern Sidebar',detail:'Bold, modern two-column style',tag:'POPULAR',color:'#34495e',person:'JAMIE WILSON',role:'MARKETING SPECIALIST',email:'jamie.w@email.com',skills:'Campaigns · SEO · Analytics'},
+{id:'minimal',name:'Minimal',detail:'Simple, spacious and elegant',tag:'MINIMAL',color:'#b18a65',person:'TAYLOR LEE',role:'UX DESIGNER',email:'taylor.lee@email.com',skills:'Figma · Research · Prototyping'},
+{id:'sage',name:'Sage Executive',detail:'Calm green executive look',tag:'EXECUTIVE',color:'#617b68',person:'MORGAN REED',role:'PROJECT MANAGER',email:'morgan.r@email.com',skills:'Leadership · Agile · Planning'},
+{id:'ocean',name:'Ocean Blue',detail:'Trustworthy and structured',tag:'PROFESSIONAL',color:'#26718a',person:'JORDAN PARK',role:'DATA ANALYST',email:'jordan.p@email.com',skills:'Python · SQL · Power BI'},
+{id:'terracotta',name:'Terracotta',detail:'Warm creative portfolio style',tag:'CREATIVE',color:'#c56d50',person:'RILEY SHAH',role:'GRAPHIC DESIGNER',email:'riley.s@email.com',skills:'Branding · Adobe · Layout'},
+{id:'plum',name:'Plum Accent',detail:'Refined, distinctive headings',tag:'ELEGANT',color:'#79546f',person:'CASEY PATEL',role:'BUSINESS ANALYST',email:'casey.p@email.com',skills:'Research · Excel · Strategy'},
+{id:'navy',name:'Navy Classic',detail:'Traditional corporate format',tag:'CORPORATE',color:'#263b58',person:'SAM RIVERA',role:'FINANCE ASSOCIATE',email:'sam.r@email.com',skills:'Forecasting · Excel · Reports'},
+{id:'coral',name:'Coral Fresh',detail:'Bright and friendly presentation',tag:'FRESH',color:'#d66d72',person:'AVA THOMAS',role:'CONTENT WRITER',email:'ava.t@email.com',skills:'Writing · Editing · SEO'},
+{id:'mono',name:'Monochrome',detail:'Black-and-white understated style',tag:'TIMELESS',color:'#343434',person:'NOAH BENNETT',role:'OPERATIONS COORDINATOR',email:'noah.b@email.com',skills:'Process · Logistics · Teams'}
 ];
 const loadSaved = () => {
   try { return JSON.parse(localStorage.getItem('resumeforge-resumes') || '[]'); } catch { return []; }
