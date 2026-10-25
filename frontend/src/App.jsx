@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import {
   ArrowDown, ArrowLeft, ArrowRight, Check, ChevronDown, CircleHelp,
   Download, FileText, LayoutTemplate, Menu, Plus, Sparkles, Trash2,
-  UserRound, WandSparkles, X
+  UserRound, WandSparkles, Smartphone, X
 } from 'lucide-react';
 
 const starterResume = {
