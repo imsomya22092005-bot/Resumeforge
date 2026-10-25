@@ -277,6 +277,32 @@ export default function App() {
             <div className="customize-mini-points"><span><Check size={14}/> Flexible layouts</span><span><Check size={14}/> Personal style</span><span><Check size={14}/> Live preview</span></div>
           </div>
         </section>
+        <section className="import-resume-section" id="import-resume">
+          <div className="import-resume-visual">
+            <div className="import-resume-halo"></div>
+            <div className="import-resume-device">
+              <div className="import-device-top"><span></span><span></span><span></span><small>ResumeForge · Import</small></div>
+              <div className="import-device-content">
+                <div className="import-upload-icon"><FileText size={24}/><span><Check size={12}/></span></div>
+                <h3>Your experience,<br/>ready for its next chapter.</h3>
+                <p>Bring your existing resume into ResumeForge.</p>
+                <div className="import-drop-zone"><div className="import-file-icon"><FileText size={21}/></div><strong>Jordan_Lee_Resume.pdf</strong><small>PDF document · 248 KB</small><div className="import-progress"><i></i></div><small className="import-complete"><Check size={12}/> Ready to customize</small></div>
+                <div className="import-file-row"><span><FileText size={15}/></span><div><strong>Cover letter</strong><small>Match your resume's style</small></div><ArrowRight size={15}/></div>
+              </div>
+              <div className="import-device-footer"><Check size={13}/> Your draft stays yours</div>
+            </div>
+            <div className="import-floating-badge import-badge-pdf"><span><FileText size={17}/></span><div><strong>PDF ready</strong><small>Resume detected</small></div></div>
+            <div className="import-floating-badge import-badge-device"><span><Smartphone size={17}/></span><div><strong>Import anywhere</strong><small>Phone, tablet or desktop</small></div></div>
+            <div className="import-orbit-ring"></div>
+          </div>
+          <div className="import-resume-copy">
+            <div className="eyebrow"><FileText size={14}/> PICK UP RIGHT WHERE YOU LEFT OFF</div>
+            <h2>Import Your Resume <span>Without Interrupting Your Day</span></h2>
+            <p>Already have a draft? Upload it to our platform in seconds from your preferred device — whether that’s a mobile phone, tablet, or work computer — and start customizing right away. Pair it with a matching cover letter template for a consistent, professional look.</p>
+            <button className="button button-dark import-resume-cta" onClick={() => openAuth('signup')}>Import <ArrowRight size={17}/></button>
+            <div className="import-resume-trust"><span><Check size={14}/> Your existing draft</span><span><Check size={14}/> Personalized design</span><span><Check size={14}/> Matching cover letter</span></div>
+          </div>
+        </section>
         <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
       </main>}
 
