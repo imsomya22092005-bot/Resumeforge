@@ -227,6 +227,34 @@ export default function App() {
             <div className="mobile-resume-trust"><span><Check size={14}/></span> Phone, tablet and desktop friendly</div>
           </div>
         </section>
+        <section className="expert-guidance-section" id="expert-guidance">
+          <div className="expert-guidance-visual">
+            <div className="expert-guidance-glow"></div>
+            <div className="expert-dashboard">
+              <div className="expert-dashboard-top"><span className="expert-brand-dot">R.</span><strong>ResumeForge</strong><span className="expert-dots">•••</span></div>
+              <div className="expert-dashboard-layout">
+                <aside className="expert-sidebar"><span>⌂ &nbsp; Home</span><span>▤ &nbsp; Templates</span><span className="expert-side-active">✧ &nbsp; Expert Tips</span><span>▧ &nbsp; My Resumes</span></aside>
+                <div className="expert-main"><small>YOUR CAREER TOOLKIT</small><h3>Resume examples</h3><p>Find inspiration for your next opportunity.</p>
+                  <div className="expert-search">⌕ &nbsp; Search your dream role...</div>
+                  <div className="expert-example"><span className="expert-example-icon">⌘</span><div><strong>Software Engineer</strong><small>Skills, impact & technical projects</small></div><ArrowRight size={14}/></div>
+                  <div className="expert-example"><span className="expert-example-icon blush">✎</span><div><strong>Marketing Specialist</strong><small>Achievements & campaign results</small></div><ArrowRight size={14}/></div>
+                  <div className="expert-example"><span className="expert-example-icon sage">▥</span><div><strong>Product Designer</strong><small>Portfolio, process & outcomes</small></div><ArrowRight size={14}/></div>
+                  <div className="expert-tip-card"><span><Sparkles size={14}/></span><div><strong>Expert tip</strong><small>Show impact with clear, specific achievements.</small></div></div>
+                </div>
+              </div>
+            </div>
+            <div className="expert-floating-note expert-note-one"><span><Check size={13}/></span><div><strong>Expert examples</strong><small>Made for your career path</small></div></div>
+            <div className="expert-floating-note expert-note-two"><Sparkles size={15}/><div><strong>Make it stand out</strong><small>Tips for stronger resumes</small></div></div>
+            <div className="expert-orbit"></div>
+          </div>
+          <div className="expert-guidance-copy">
+            <div className="eyebrow"><Sparkles size={14}/> EXPERT INSIGHTS, REAL RESULTS</div>
+            <h2>Expert Resume Tips <span>— Even on the Go</span></h2>
+            <p>Access <a href="https://www.resumebuilder.com/resume-examples/" target="_blank" rel="noreferrer">job-specific resume examples</a> written by certified professionals, no matter where you are. Edit your resume during your commute, while waiting for an interview, or from the comfort of your home without losing any features.</p>
+            <button className="button button-dark expert-guidance-cta" onClick={() => startNew()}>Get Expert Guidance <ArrowRight size={17}/></button>
+            <div className="expert-guidance-benefits"><div><span><FileText size={17}/></span><small>Job-Specific<br/>Examples</small></div><div><span><Sparkles size={17}/></span><small>Professional<br/>Guidance</small></div><div><span><Smartphone size={17}/></span><small>Edit Anywhere,<br/>Anytime</small></div></div>
+          </div>
+        </section>
         <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
       </main>}
 
