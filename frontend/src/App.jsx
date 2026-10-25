@@ -201,6 +201,32 @@ export default function App() {
             <div className="ai-float-chip ai-chip-bottom"><span className="ai-chip-check"><Check size={13}/></span> Resume ready to refine</div>
           </div>
         </section>
+        <section className="mobile-resume-section" id="mobile-resume">
+          <div className="mobile-resume-visual">
+            <div className="mobile-gradient-orb"></div>
+            <div className="mobile-phone">
+              <div className="phone-speaker"></div>
+              <div className="phone-screen">
+                <div className="phone-appbar"><span className="phone-brand-mark">R.</span><span>ResumeForge</span><span className="phone-menu">•••</span></div>
+                <div className="phone-resume">
+                  <div className="phone-resume-head"><strong>Alex Morgan</strong><span>PRODUCT DESIGNER</span><small>alex.morgan@email.com · LinkedIn</small></div>
+                  <div className="phone-resume-body"><b>PROFILE</b><p>Creative designer passionate about clear, accessible digital experiences.</p><b>EXPERIENCE</b><strong>Product Designer</strong><small>2022 — Present</small><i></i><i className="phone-line-short"></i><b>EDUCATION</b><strong>B.A. Design & Technology</strong><b>KEY SKILLS</b><div className="phone-tags"><span>Figma</span><span>UX</span><span>Research</span></div></div>
+                </div>
+                <div className="phone-bottom-button">Preview resume <ArrowRight size={12}/></div>
+              </div>
+            </div>
+            <div className="mobile-float-card mobile-float-ready"><span><Check size={13}/></span> Ready to share</div>
+            <div className="mobile-float-card mobile-float-device"><Smartphone size={15}/> Fits your screen</div>
+            <div className="mobile-floating-dot"></div>
+          </div>
+          <div className="mobile-resume-copy">
+            <div className="eyebrow"><Smartphone size={14}/> MADE FOR EVERY SCREEN</div>
+            <h2>Mobile-Friendly Resume Generator <span>You Can Use Anywhere</span></h2>
+            <p>Create a professional resume in minutes with our AI-powered, fully responsive tool. Enter your details — such as work experience, skills, and career goals — from your smartphone, tablet, or desktop browser, and instantly generate a polished, ATS-friendly resume that’s ready to send.</p>
+            <button className="button button-dark mobile-resume-cta" onClick={() => startNew()}>Create Resume from Phone <ArrowRight size={17}/></button>
+            <div className="mobile-resume-trust"><span><Check size={14}/></span> Phone, tablet and desktop friendly</div>
+          </div>
+        </section>
         <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
       </main>}
 
