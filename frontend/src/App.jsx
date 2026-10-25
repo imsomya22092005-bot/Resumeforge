@@ -365,8 +365,41 @@ export default function App() {
 
       {page === 'templates' && <main className="page-content"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Pick a clean layout, then make it your own in the editor.</p></div><div className="template-grid template-grid-large">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></main>}
 
-      {page === 'dashboard' && <main className="page-content dashboard-page"><div className="dashboard-heading"><div><div className="eyebrow">YOUR WORKSPACE</div><h1>My resumes<span>.</span></h1><p>Pick up where you left off, or start fresh.</p></div><button className="button button-dark" onClick={() => setPage('templates')}><Plus size={17} /> New resume</button></div>
-        {saved.length === 0 ? <div className="empty-state"><div className="empty-icon"><FileText size={27} /></div><h2>Your next opportunity starts with a first draft.</h2><p>Your saved resumes will live here, ready whenever you are.</p><button className="button button-dark" onClick={() => setPage('templates')}>Create your first resume <ArrowRight size={16} /></button></div> : <div className="saved-grid">{saved.map(item => <div className="saved-card" key={item.id}><div className="saved-preview"><ResumePreview resume={item} template={item.template} /></div><div className="saved-info"><div><h3>{item.name || 'Untitled resume'}</h3><p>{item.role || 'Resume draft'}</p></div><button className="icon-button danger" onClick={() => deleteResume(item.id)} aria-label="Delete resume"><Trash2 size={16} /></button></div><button className="button button-outline full-width" onClick={() => openResume(item)}>Continue editing <ArrowRight size={15} /></button></div>)}</div>}
+      {page === 'dashboard' && <main className="page-content dashboard-page dashboard-redesign">
+        <section className="welcome-hero">
+          <div className="welcome-copy">
+            <div className="eyebrow"><span className="eyebrow-dot"></span> YOUR NEXT CHAPTER STARTS HERE</div>
+            <h1>Welcome back,<br/><span>{currentUser?.name || 'there'}.</span></h1>
+            <p>Your experience has a story worth telling. Let’s turn it into a resume that feels like you — polished, professional, and ready for what’s next.</p>
+            <div className="welcome-actions">
+              <button className="button button-dark welcome-create" onClick={() => startNew()}>Create My Resume <ArrowRight size={17}/></button>
+              <button className="button button-outline" onClick={() => setPage('templates')}>Explore templates <LayoutTemplate size={16}/></button>
+            </div>
+            <div className="welcome-points"><span><Check size={14}/> Easy to customize</span><span><Check size={14}/> Print-ready layout</span></div>
+          </div>
+          <div className="welcome-art" aria-label="Resume preview illustration">
+            <div className="welcome-orbit"></div>
+            <div className="welcome-paper">
+              <div className="welcome-paper-head"><div className="welcome-avatar">AM</div><div><b>Alex Morgan</b><small>SOFTWARE DEVELOPER</small></div></div>
+              <div className="welcome-paper-contact">alex.morgan@email.com · LinkedIn · India</div>
+              <div className="welcome-paper-label">PROFILE</div><i></i><i className="short"></i>
+              <div className="welcome-paper-label">EXPERIENCE</div><b className="welcome-paper-role">Frontend Developer</b><i></i><i></i><i className="short"></i>
+              <div className="welcome-paper-label">EDUCATION</div><i></i><i className="short"></i>
+              <div className="welcome-paper-label">SKILLS</div><div className="welcome-paper-skills"><span>React</span><span>JavaScript</span><span>CSS</span></div>
+            </div>
+            <div className="welcome-float welcome-float-top"><Sparkles size={15}/><span><b>Make it yours</b><small>Your story, your style</small></span></div>
+            <div className="welcome-float welcome-float-bottom"><span className="welcome-float-check"><Check size={13}/></span><span><b>Looking professional</b><small>One step closer</small></span></div>
+          </div>
+        </section>
+        <section className="dashboard-shortcuts">
+          <button className="shortcut-card" onClick={() => startNew()}><span className="shortcut-icon"><Plus size={20}/></span><span><b>Start from scratch</b><small>Build a resume step by step</small></span><ArrowRight size={17}/></button>
+          <button className="shortcut-card" onClick={() => setPage('templates')}><span className="shortcut-icon shortcut-icon-cream"><LayoutTemplate size={20}/></span><span><b>Choose a template</b><small>Find a style that fits your goals</small></span><ArrowRight size={17}/></button>
+          <div className="shortcut-card shortcut-static"><span className="shortcut-icon shortcut-icon-sage"><FileText size={20}/></span><span><b>{saved.length} saved {saved.length === 1 ? 'resume' : 'resumes'}</b><small>Your drafts stay on this device</small></span></div>
+        </section>
+        <section className="dashboard-saved-section">
+          <div className="dashboard-heading"><div><div className="eyebrow">YOUR WORKSPACE</div><h2>My resumes<span>.</span></h2><p>Pick up where you left off, or start something new.</p></div>{saved.length > 0 && <button className="button button-outline" onClick={() => startNew()}><Plus size={16}/> New resume</button>}</div>
+          {saved.length === 0 ? <div className="empty-state"><div className="empty-icon"><FileText size={27} /></div><h2>Your first draft starts here.</h2><p>Create a resume and it will appear here, ready whenever you are.</p><button className="button button-dark" onClick={() => startNew()}>Create My Resume <ArrowRight size={16} /></button></div> : <div className="saved-grid">{saved.map(item => <div className="saved-card" key={item.id}><div className="saved-preview"><ResumePreview resume={item} template={item.template} /></div><div className="saved-info"><div><h3>{item.name || 'Untitled resume'}</h3><p>{item.role || 'Resume draft'}</p></div><button className="icon-button danger" onClick={() => deleteResume(item.id)} aria-label="Delete resume"><Trash2 size={16} /></button></div><button className="button button-outline full-width" onClick={() => openResume(item)}>Continue editing <ArrowRight size={15} /></button></div>)}</div>}
+        </section>
       </main>}
 
       {page === 'editor' && <main className="editor-page">
