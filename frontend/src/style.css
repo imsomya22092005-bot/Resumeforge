@@ -430,3 +430,41 @@ body{background:#F5FAE1;color:#463737}
 @media(max-width:900px){.import-resume-section{padding:75px 6%;gap:30px}.import-resume-visual{min-height:435px}}
 @media(max-width:650px){.import-resume-section{grid-template-columns:1fr;padding:56px 6% 60px;gap:22px}.import-resume-visual{min-height:410px;order:0}.import-resume-copy{order:1}.import-resume-copy h2{font-size:36px;letter-spacing:-1px}.import-resume-copy>p{font-size:14px}.import-resume-device{transform:none}.import-badge-pdf{left:-4px;top:8px}.import-badge-device{right:-4px;bottom:8px}.import-floating-badge{padding:8px 9px}.import-orbit-ring{width:330px;height:350px}}
 @media(prefers-reduced-motion:reduce){.import-badge-pdf,.import-badge-device{animation:none}.import-resume-device{transition:none}.import-resume-visual:hover .import-resume-device{transform:none}}
+
+/* Ninth and final homepage section: dream job CTA */
+.dream-job-section{position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:590px;padding:100px 7%;background:#896C6C;text-align:center}
+.dream-job-section:before{content:"";position:absolute;z-index:-2;inset:0;background:radial-gradient(ellipse at 50% 0%,#E5BEB5 0%,transparent 48%),radial-gradient(ellipse at 8% 100%,#EEE6CA 0%,transparent 35%),linear-gradient(135deg,#896C6C 0%,#725657 55%,#896C6C 100%)}
+.dream-job-section:after{content:"";position:absolute;z-index:-1;inset:22px;border:1px solid #F5FAE14d;border-radius:28px;pointer-events:none}
+.dream-job-content{position:relative;z-index:3;width:min(760px,100%);margin:auto}
+.dream-job-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid #F5FAE180;border-radius:99px;background:#ffffff12;color:#F5FAE1;font-size:10px;letter-spacing:2.2px;font-weight:800}
+.dream-job-content h2{margin:25px 0 16px;color:#FFFDF8;font-size:clamp(42px,6vw,76px);line-height:1.04;letter-spacing:-2.8px;font-weight:750}
+.dream-job-content h2 span{display:block;color:#F5FAE1;font-family:Georgia,serif;font-weight:500;font-style:italic;letter-spacing:-1.8px}
+.dream-job-divider{display:flex;align-items:center;justify-content:center;gap:12px;margin:23px auto 25px;color:#EEE6CA}
+.dream-job-divider i{display:block;width:66px;height:1px;background:linear-gradient(90deg,transparent,#EEE6CA)}
+.dream-job-divider i:last-child{transform:rotate(180deg)}
+.dream-job-content h3{margin:0 0 10px;color:#FFFDF8;font-size:clamp(19px,2.3vw,26px);font-weight:600;letter-spacing:-.5px}
+.dream-job-content>p{max-width:490px;margin:0 auto;color:#f6eae5;font-size:15px;line-height:1.8}
+.dream-job-button{display:inline-flex;align-items:center;justify-content:center;gap:11px;min-height:54px;margin-top:29px;padding:0 25px;border:1px solid #F5FAE1;background:#F5FAE1;color:#62494a;border-radius:12px;font-weight:750;box-shadow:0 10px 28px #38252630;transition:transform .25s ease,background .25s ease,box-shadow .25s ease}
+.dream-job-button:hover{transform:translateY(-3px);background:#FFFDF8;box-shadow:0 16px 35px #38252645}
+.dream-job-footnote{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:19px;color:#f3e4df;font-size:10px;letter-spacing:.2px}
+.dream-job-resume{position:absolute;z-index:1;width:170px;padding:10px;border:1px solid #ffffff70;border-radius:12px;background:#fffdf8c9;box-shadow:0 25px 60px #38252624;backdrop-filter:blur(5px);transition:transform .45s ease}
+.dream-job-resume-left{left:8%;top:20%;transform:rotate(-10deg);animation:dream-paper-float 6s ease-in-out infinite}
+.dream-job-resume-right{right:8%;bottom:16%;transform:rotate(9deg);animation:dream-paper-float 6.8s ease-in-out infinite reverse}
+.dream-job-paper{min-height:205px;padding:13px 10px;background:#fff;border:1px solid #eee5de;text-align:left}
+.dream-job-paper-head{width:60%;height:28px;margin-bottom:15px;background:#896C6C;border-radius:3px}
+.dream-job-paper i{display:block;width:100%;height:4px;margin:7px 0;background:#e9dfd8;border-radius:4px}
+.dream-job-paper i.short{width:62%}
+.dream-job-paper b{display:block;margin-top:14px;padding-bottom:4px;border-bottom:1px solid #E5BEB5;color:#896C6C;font-size:7px;letter-spacing:1px}
+.dream-job-mini-paper{display:flex;flex-direction:column;align-items:center;min-height:190px;padding:14px 10px;background:#fff;border:1px solid #eee5de}
+.dream-job-mini-avatar{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#E5BEB5;color:#896C6C;font-family:Georgia,serif;font-size:13px;font-weight:bold}
+.dream-job-mini-paper>b{margin-top:8px;color:#463737;font-family:Georgia,serif;font-size:13px}
+.dream-job-mini-paper>small{margin-top:4px;color:#896C6C;font-size:6px;letter-spacing:1px}
+.dream-job-mini-paper>i{width:90%;height:4px;margin-top:10px;background:#eee5de;border-radius:4px}
+.dream-job-mini-paper>i+ i{margin-top:5px}.dream-job-mini-paper>i.short{width:58%;align-self:flex-start;margin-left:5%}
+.dream-job-mini-skills{display:flex;gap:4px;margin-top:12px}
+.dream-job-mini-skills span{width:25px;height:8px;border-radius:3px;background:#EEE6CA}
+.dream-job-mini-skills span:nth-child(2){background:#E5BEB5}.dream-job-mini-skills span:nth-child(3){background:#F5FAE1}
+@keyframes dream-paper-float{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@media(max-width:900px){.dream-job-resume{width:130px}.dream-job-resume-left{left:3%;top:12%}.dream-job-resume-right{right:3%;bottom:9%}.dream-job-paper{min-height:165px}}
+@media(max-width:650px){.dream-job-section{min-height:650px;padding:85px 8%}.dream-job-section:after{inset:10px;border-radius:19px}.dream-job-content h2{font-size:43px;letter-spacing:-1.6px}.dream-job-content h2 span{letter-spacing:-1px}.dream-job-content>p{font-size:14px}.dream-job-resume{width:100px;padding:6px;opacity:.85}.dream-job-resume-left{left:4%;top:5%}.dream-job-resume-right{right:4%;bottom:4%}.dream-job-paper{min-height:125px;padding:8px 6px}.dream-job-paper-head{height:18px;margin-bottom:9px}.dream-job-paper b{margin-top:8px;font-size:5px}.dream-job-paper i{height:3px;margin:5px 0}.dream-job-mini-paper{min-height:130px;padding:8px 5px}.dream-job-mini-avatar{width:26px;height:26px;font-size:10px}.dream-job-mini-paper>b{font-size:10px}.dream-job-mini-paper>small{font-size:5px}.dream-job-mini-paper>i{margin-top:7px}.dream-job-footnote{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.dream-job-resume-left,.dream-job-resume-right{animation:none}.dream-job-button{transition:none}}
