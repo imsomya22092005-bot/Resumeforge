@@ -105,3 +105,38 @@ body{background:#F5FAE1;color:#463737}
 @media(max-width:900px){.hero{padding:40px 6%;gap:3%;}.hero-stats{gap:16px}.hero-stats>div{padding-right:15px}}
 @media(max-width:680px){.hero{grid-template-columns:1fr;padding:30px 6% 45px;gap:16px}.hero-visual{grid-row:2;min-height:350px}.hero-copy{grid-row:1}.hero h1{font-size:42px;letter-spacing:-1.8px}.hero-description{font-size:16px}.hero-buttons{align-items:stretch}.hero-buttons .button{white-space:normal}.hero-stats{margin-top:28px}.hero-stats strong{font-size:29px}.hero-stats small{font-size:12px}.note-top{right:0;top:18px}.note-bottom{bottom:20px}.floating-template-two{bottom:48px}.floating-template-one{top:45px}.trust-strip{flex-wrap:wrap;gap:14px 22px}.home-templates{padding-top:50px;padding-bottom:50px}}
 @media(prefers-reduced-motion:reduce){.animated-resume,.floating-template{animation:none}}
+
+/* Scrolling resume template gallery */
+.template-carousel-window{width:100%;overflow:hidden;padding:12px 0 22px;mask-image:linear-gradient(to right,transparent,black 3%,black 97%,transparent)}
+.template-carousel-track{display:flex;align-items:stretch;gap:22px;width:max-content;animation:template-loop 62s linear infinite}
+.template-carousel-track:hover{animation-play-state:paused}
+.template-carousel-track .template-card{width:250px;flex:0 0 250px}
+.resume-card-art{height:310px!important;padding:20px 18px!important;background:linear-gradient(145deg,#EEE6CA,#fffdf8)!important;border-radius:13px!important;--resume-accent:#896C6C}
+.resume-card-art .mini-resume{width:100%;height:100%;min-height:0;transform:none!important;padding:0;overflow:hidden;border:1px solid #e9e3dc;box-shadow:0 9px 22px #46373716;display:flex;flex-direction:column}
+.resume-card-art .mini-resume-head{background:var(--resume-accent);color:white;text-align:left;padding:13px 12px 11px;min-height:72px}
+.resume-card-art .mini-person{font-size:12px;font-weight:800;letter-spacing:.35px}
+.resume-card-art .mini-role{font-size:6px;letter-spacing:.9px;margin-top:5px}
+.resume-card-art .mini-contact{font-size:5px;margin-top:6px;opacity:.9}
+.resume-card-art .mini-resume-body{padding:8px 12px;text-align:left;overflow:hidden;color:#36312f;background:#fff}
+.resume-card-art .mini-section{height:auto;width:auto;background:transparent!important;color:var(--resume-accent);font-size:6px;letter-spacing:.9px;font-weight:800;margin:7px 0 4px;padding:0}
+.resume-card-art .mini-copy{font-size:5.5px;line-height:1.45;margin:0 0 4px;color:#5f5a57}
+.resume-card-art .mini-job{display:block;font-size:6px;color:#383332;margin-top:3px}
+.resume-card-art .mini-date{display:block;font-size:5px;color:#89817c;margin:2px 0}
+.resume-card-art .mini-line{height:2px;background:#e8e4df;margin:4px 0;width:100%}
+.resume-card-art .mini-line.medium{width:74%}
+.resume-card-art .template-badge{z-index:2;font-size:8px;color:var(--resume-accent);border:1px solid #eee4df}
+.resume-card-art .template-hover{z-index:3}
+.mini-modern .mini-resume-head{background:#34495e}
+.mini-minimal .mini-resume-head{background:#b18a65}
+.mini-sage .mini-resume-head{background:#617b68}
+.mini-ocean .mini-resume-head{background:#26718a}
+.mini-terracotta .mini-resume-head{background:#c56d50}
+.mini-plum .mini-resume-head{background:#79546f}
+.mini-navy .mini-resume-head{background:#263b58}
+.mini-coral .mini-resume-head{background:#d66d72}
+.mini-mono .mini-resume-head{background:#343434}
+.template-carousel-track .template-meta h3{font-size:14px}
+.template-carousel-track .template-meta p{font-size:11px}
+@keyframes template-loop{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:680px){.template-carousel-track{gap:14px;animation-duration:48s}.template-carousel-track .template-card{width:215px;flex-basis:215px}.resume-card-art{height:285px!important}.template-carousel-window{margin:0 -3%;width:106%}}
+@media(prefers-reduced-motion:reduce){.template-carousel-track{animation:none;overflow-x:auto}}
