@@ -46,7 +46,7 @@ export default function App() {
   const [authName, setAuthName] = useState('');
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
-  const [authError, setAuthError] = useState('');
+  const [authConfirmPassword, setAuthConfirmPassword] = useState('');
   const [currentUser, setCurrentUser] = useState(() => {
     try { return JSON.parse(localStorage.getItem('resumeforge-user') || 'null'); } catch { return null; }
   });
@@ -59,13 +59,14 @@ export default function App() {
     setToast(message);
     window.setTimeout(() => setToast(''), 2600);
   };
-  const openAuth = (mode) => { setAuthError(''); setAuthName(''); setAuthEmail(''); setAuthPassword(''); setPage(mode); setMobileMenu(false); };
+  const openAuth = (mode) => { setAuthError(''); setAuthName(''); setAuthEmail(''); setAuthPassword(''); setAuthConfirmPassword(''); setPage(mode); setMobileMenu(false); };
   const submitAuth = (event) => {
     event.preventDefault();
     const email = authEmail.trim().toLowerCase();
-    if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) { setAuthError('Please enter a valid email address.'); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setAuthError('Please enter a valid email address.'); return; }
     if (authPassword.length < 6) { setAuthError('Password must be at least 6 characters.'); return; }
     if (page === 'signup' && !authName.trim()) { setAuthError('Please enter your name.'); return; }
+    if (page === 'signup' && authPassword !== authConfirmPassword) { setAuthError('Passwords do not match. Please try again.'); return; }
     const user = { name: authName.trim() || email.split('@')[0], email };
     localStorage.setItem('resumeforge-user', JSON.stringify(user));
     setCurrentUser(user); setAuthError(''); setPage('dashboard');
@@ -329,7 +330,8 @@ export default function App() {
           <form className="auth-form" onSubmit={submitAuth}>
             {page === 'signup' && <label className="field-label">Full name<input autoComplete="name" value={authName} onChange={e => setAuthName(e.target.value)} placeholder="e.g. Alex Morgan" /></label>}
             <label className="field-label">Email address<input type="email" autoComplete="email" value={authEmail} onChange={e => setAuthEmail(e.target.value)} placeholder="you@example.com" /></label>
-            <label className="field-label">Password<input type="password" autoComplete={page === 'signup' ? 'new-password' : 'current-password'} value={authPassword} onChange={e => setAuthPassword(e.target.value)} placeholder="At least 6 characters" /></label>
+            <label className="field-label">Password<input type="password" autoComplete={page === 'signup' ? 'new-password' : 'current-password'} value={authPassword} onChange={e => setAuthPassword(e.target.value)} placeholder="At least 6 characters" required minLength={6} /></label>
+            {page === 'signup' && <label className="field-label">Confirm password<input type="password" autoComplete="new-password" value={authConfirmPassword} onChange={e => setAuthConfirmPassword(e.target.value)} placeholder="Re-enter your password" required minLength={6} /></label>}
             {authError && <p className="auth-error" role="alert">{authError}</p>}
             <button className="button button-dark auth-submit" type="submit">{page === 'signup' ? 'Create account' : 'Log in'} <ArrowRight size={16}/></button>
           </form>
