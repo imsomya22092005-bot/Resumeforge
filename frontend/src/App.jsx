@@ -147,9 +147,16 @@ export default function App() {
           </div>
         </section>
         <section className="trust-strip"><span>DESIGNED FOR THE NEXT STEP</span><div><Check size={15} /> Clean layouts</div><div><Check size={15} /> Easy to customize</div><div><Check size={15} /> Print-ready resumes</div></section>
+        <section className="home-intro-copy">
+          <p>Our online resume builder makes it simple to create a professional resume from your phone, laptop, or tablet using 30+ customizable resume templates — anytime, anywhere.</p>
+          <p>Create a resume using our <button className="inline-text-link" onClick={() => setPage('templates')}>AI resume builder</button> feature, plus take advantage of expert suggestions, a built-in resume editor, and customizable modern and professional resume templates. <button className="inline-text-link" onClick={() => setPage('templates')}>Free users</button> have access to our easy-to-use resume creator and TXT file downloads.</p>
+        </section>
         <section className="home-templates section-wrap">
-          <div className="section-heading"><div><div className="eyebrow">A GOOD FIRST IMPRESSION</div><h2>A style that feels like you.</h2><p>Start with a layout. Make every detail your own.</p></div><button className="text-link" onClick={() => setPage('templates')}>View all templates <ArrowRight size={16} /></button></div>
+          <div className="template-section-title">
+            <h2>Pick From 500+ Free Resume Templates<br className="desktop-break" /> and Build Your Resume in Minutes</h2>
+          </div>
           <div className="template-grid">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div>
+          <div className="see-all-templates"><button className="button button-outline" onClick={() => setPage('templates')}>See all templates <ArrowRight size={16} /></button></div>
         </section>
         <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
       </main>}
