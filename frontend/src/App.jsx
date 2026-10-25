@@ -43,6 +43,7 @@ export default function App() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [section, setSection] = useState('personal');
   const [showHelp, setShowHelp] = useState(false);
+  const [authError, setAuthError] = useState('');
   const [authName, setAuthName] = useState('');
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
