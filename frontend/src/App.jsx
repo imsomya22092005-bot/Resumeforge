@@ -329,7 +329,7 @@ export default function App() {
           <p className="auth-subtitle">{page === 'signup' ? 'Save your resume drafts and keep building towards your next opportunity.' : 'Log in to continue working on your resume.'}</p>
           <form className="auth-form" onSubmit={submitAuth}>
             {page === 'signup' && <label className="field-label">Full name<input autoComplete="name" value={authName} onChange={e => setAuthName(e.target.value)} placeholder="e.g. Alex Morgan" /></label>}
-            <label className="field-label">Email address<input type="email" autoComplete="email" value={authEmail} onChange={e => setAuthEmail(e.target.value)} placeholder="you@example.com" /></label>
+            <label className="field-label">Email address<input type="email" autoComplete="email" value={authEmail} onChange={e => setAuthEmail(e.target.value.trim())} placeholder="you@example.com" /></label>
             <label className="field-label">Password<input type="password" autoComplete={page === 'signup' ? 'new-password' : 'current-password'} value={authPassword} onChange={e => setAuthPassword(e.target.value)} placeholder="At least 6 characters" required minLength={6} /></label>
             {page === 'signup' && <label className="field-label">Confirm password<input type="password" autoComplete="new-password" value={authConfirmPassword} onChange={e => setAuthConfirmPassword(e.target.value)} placeholder="Re-enter your password" required minLength={6} /></label>}
             {authError && <p className="auth-error" role="alert">{authError}</p>}
