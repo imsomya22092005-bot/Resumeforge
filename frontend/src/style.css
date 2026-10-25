@@ -217,3 +217,52 @@ body{background:#F5FAE1;color:#463737}
 @media(max-width:850px){.ai-builder-section{padding:75px 6%;gap:30px}.ai-resume-visual{min-height:420px}.ai-resume-paper{width:min(300px,85%);padding:22px}.ai-orbit-one{width:350px}.ai-orbit-two{width:330px}.ai-chip-top{right:-8px}.ai-chip-bottom{left:-12px}}
 @media(max-width:620px){.ai-builder-section{grid-template-columns:1fr;padding:58px 6% 45px;gap:24px}.ai-builder-copy h2{font-size:37px;letter-spacing:-1px}.ai-builder-copy>p{font-size:14px}.ai-resume-visual{min-height:430px;margin:0 -5px}.ai-resume-paper{width:min(315px,78%)}.ai-chip-top{top:30px;right:0}.ai-chip-bottom{bottom:28px;left:0}.ai-orbit-one{width:340px;height:290px}.ai-orbit-two{width:310px;height:360px}}
 @media(prefers-reduced-motion:reduce){.ai-resume-paper,.ai-chip-top,.ai-chip-bottom{animation:none;transition:none}.ai-resume-visual:hover .ai-resume-paper{transform:none}}
+
+/* Fifth homepage section: mobile-first resume experience */
+.mobile-resume-section{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(40px,7vw,100px);padding:100px 8%;background:#F5FAE1}
+.mobile-resume-section:after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(120deg,#F5FAE1 5%,#EEE6CA 52%,#F5FAE1 100%);opacity:.8}
+.mobile-resume-visual{min-height:520px;position:relative;display:flex;align-items:center;justify-content:center;perspective:1000px}
+.mobile-gradient-orb{position:absolute;width:360px;height:360px;border-radius:50%;background:linear-gradient(140deg,#E5BEB5 0%,#896C6C 115%);opacity:.85;filter:saturate(.8);box-shadow:0 0 0 24px #ffffff3d,0 0 0 48px #E5BEB51c;transition:transform .6s ease}
+.mobile-resume-visual:hover .mobile-gradient-orb{transform:scale(1.07) rotate(12deg)}
+.mobile-phone{position:relative;width:244px;height:455px;padding:8px;border-radius:34px;background:linear-gradient(135deg,#5c4848,#2f2929 58%,#896C6C);box-shadow:0 28px 55px #49383842, inset 0 0 0 1px #ffffff55;transform:rotate(-5deg);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s ease;animation:phone-drift 6s ease-in-out infinite}
+.mobile-resume-visual:hover .mobile-phone{transform:rotate(0deg) translateY(-8px) scale(1.035);box-shadow:0 38px 70px #49383850,inset 0 0 0 1px #ffffff66}
+.phone-speaker{position:absolute;z-index:2;top:13px;left:50%;transform:translateX(-50%);width:62px;height:13px;border-radius:20px;background:#302929}
+.phone-screen{height:100%;overflow:hidden;border-radius:27px;background:#fffdf8;padding:26px 11px 12px;display:flex;flex-direction:column}
+.phone-appbar{display:flex;align-items:center;gap:5px;font-size:8px;font-weight:800;color:#896C6C;padding:5px 2px 12px;border-bottom:1px solid #eee3dc}
+.phone-brand-mark{display:grid;place-items:center;width:18px;height:18px;border-radius:6px;background:#896C6C;color:#fff;font-size:10px}
+.phone-menu{margin-left:auto;letter-spacing:2px;color:#896C6C}
+.phone-resume{flex:1;margin-top:12px;background:#fff;border:1px solid #eee5df;box-shadow:0 5px 15px #896c6c0c;overflow:hidden}
+.phone-resume-head{background:#896C6C;color:#fff;padding:13px 10px 10px}
+.phone-resume-head strong{display:block;font-size:15px;letter-spacing:-.3px}
+.phone-resume-head span{display:block;font-size:6px;letter-spacing:1.2px;margin-top:4px}
+.phone-resume-head small{display:block;font-size:5px;margin-top:7px;opacity:.85}
+.phone-resume-body{padding:10px;color:#4a403e}
+.phone-resume-body>b{display:block;color:#896C6C;font-size:7px;letter-spacing:1.3px;margin:10px 0 5px;border-bottom:1px solid #E5BEB5;padding-bottom:4px}
+.phone-resume-body>p{font-size:6px;line-height:1.6;margin:0;color:#716663}
+.phone-resume-body>strong{display:block;font-size:7px;margin-top:5px}
+.phone-resume-body>small{display:block;color:#968984;font-size:5px;margin-top:3px}
+.phone-resume-body>i{display:block;height:3px;border-radius:5px;background:#e9e1dc;margin-top:5px;width:95%}
+.phone-resume-body>i.phone-line-short{width:65%}
+.phone-tags{display:flex;gap:4px;flex-wrap:wrap}
+.phone-tags span{font-size:5px;background:#F5FAE1;color:#896C6C;border-radius:4px;padding:4px 5px}
+.phone-bottom-button{display:flex;align-items:center;justify-content:center;gap:5px;background:#896C6C;color:#fff;border-radius:8px;font-size:8px;font-weight:700;padding:10px;margin-top:9px}
+.mobile-float-card{position:absolute;z-index:2;display:flex;align-items:center;gap:8px;padding:11px 13px;border:1px solid #e7d7d0;border-radius:13px;background:#fffdf8;color:#5f4b4b;font-size:10px;font-weight:750;box-shadow:0 12px 30px #4938381a;transition:transform .3s ease}
+.mobile-float-ready{top:92px;right:0;animation:phone-chip-bob 4.2s ease-in-out infinite}
+.mobile-float-ready>span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#F5FAE1;color:#617b68}
+.mobile-float-device{bottom:75px;left:-4px;animation:phone-chip-bob 5s ease-in-out infinite reverse}
+.mobile-float-device svg{color:#896C6C}
+.mobile-floating-dot{position:absolute;width:13px;height:13px;border-radius:50%;background:#896C6C;right:18%;bottom:20%;box-shadow:0 0 0 7px #896C6C20;animation:phone-dot-pulse 3s ease-in-out infinite}
+.mobile-resume-copy{max-width:590px}
+.mobile-resume-copy .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #E5BEB5;background:#fffdf8;padding:9px 13px;border-radius:99px;color:#896C6C;font-size:10px;letter-spacing:1.1px;font-weight:800}
+.mobile-resume-copy h2{font-size:clamp(33px,4.2vw,53px);line-height:1.12;letter-spacing:-1.6px;color:#463737;margin:23px 0 18px}
+.mobile-resume-copy h2 span{display:block;color:#896C6C}
+.mobile-resume-copy>p{font-size:15px;line-height:1.9;color:#796767;margin:0}
+.mobile-resume-cta{margin-top:27px;min-height:49px;border-radius:12px;display:inline-flex;align-items:center;gap:10px}
+.mobile-resume-trust{display:flex;align-items:center;gap:9px;margin-top:19px;color:#896C6C;font-size:12px}
+.mobile-resume-trust>span{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#fffdf8}
+@keyframes phone-drift{0%,100%{transform:rotate(-5deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-9px)}}
+@keyframes phone-chip-bob{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@keyframes phone-dot-pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.25);opacity:1}}
+@media(max-width:850px){.mobile-resume-section{padding:75px 6%;gap:28px}.mobile-resume-visual{min-height:475px}.mobile-gradient-orb{width:300px;height:300px}.mobile-phone{transform:rotate(-3deg) scale(.94)}.mobile-float-ready{right:-8px}.mobile-float-device{left:-10px}}
+@media(max-width:620px){.mobile-resume-section{grid-template-columns:1fr;padding:52px 6% 55px;gap:25px}.mobile-resume-copy h2{font-size:36px;letter-spacing:-1px}.mobile-resume-copy>p{font-size:14px}.mobile-resume-visual{min-height:485px;order:0}.mobile-resume-copy{order:1}.mobile-phone{transform:rotate(-4deg) scale(.96)}.mobile-float-ready{top:60px;right:0}.mobile-float-device{bottom:45px;left:0}.mobile-floating-dot{right:12%;bottom:18%}}
+@media(prefers-reduced-motion:reduce){.mobile-phone,.mobile-float-ready,.mobile-float-device,.mobile-floating-dot{animation:none}.mobile-resume-visual:hover .mobile-phone{transform:none}}
