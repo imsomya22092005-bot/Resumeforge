@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   ArrowDown, ArrowLeft, ArrowRight, Check, ChevronDown, CircleHelp,
-  Download, FileText, LayoutTemplate, Menu, Plus, Sparkles, Trash2,
+  Download, FileText, LayoutTemplate, Menu, Palette, Plus, Sparkles, Trash2,
   UserRound, WandSparkles, Smartphone, X
 } from 'lucide-react';
 
