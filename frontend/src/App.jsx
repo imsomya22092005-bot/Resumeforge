@@ -255,6 +255,28 @@ export default function App() {
             <div className="expert-guidance-benefits"><div><span><FileText size={17}/></span><small>Job-Specific<br/>Examples</small></div><div><span><Sparkles size={17}/></span><small>Professional<br/>Guidance</small></div><div><span><Smartphone size={17}/></span><small>Edit Anywhere,<br/>Anytime</small></div></div>
           </div>
         </section>
+        <section className="customize-section" id="customize-resume">
+          <div className="customize-visual">
+            <div className="customize-glow"></div>
+            <div className="customize-editor-card">
+              <div className="customize-editor-top"><span className="customize-mark">R.</span><strong>ResumeForge Studio</strong><span className="customize-live-dot"></span><small>Live preview</small></div>
+              <div className="customize-editor-content">
+                <div className="customize-controls"><strong>Make it yours</strong><small>DESIGN SETTINGS</small><label>Font style</label><div className="customize-select">Modern Sans <span>⌄</span></div><label>Accent color</label><div className="customize-swatches"><i></i><i></i><i></i><i></i></div><label>Page layout</label><div className="customize-layouts"><span className="active"><i></i><i></i></span><span><i></i><i></i></span><span><i></i><i></i></span></div><div className="customize-slider-label">Section spacing <b>Comfortable</b></div><div className="customize-slider"><i></i></div><div className="customize-save"><Check size={12}/> Changes saved</div></div>
+                <div className="customize-paper"><div className="customize-paper-head"><strong>Jordan Lee</strong><small>CREATIVE DEVELOPER</small><span>jordan.lee@email.com · Portfolio</span></div><div className="customize-paper-body"><b>PROFILE</b><p>Creative developer blending thoughtful design with clean, accessible code.</p><b>EXPERIENCE</b><strong>Frontend Developer</strong><small>2023 — Present</small><i></i><i className="short"></i><b>EDUCATION</b><strong>B.Sc. Computer Science</strong><b>SKILLS</b><div className="customize-skill-pills"><span>React</span><span>UI Design</span><span>CSS</span></div></div></div>
+              </div>
+              <div className="customize-editor-footer"><span><Check size={12}/> ATS-friendly structure</span><span>100% yours</span></div>
+            </div>
+            <div className="customize-float customize-float-one"><span>Aa</span><div><strong>Modern typography</strong><small>Choose your style</small></div></div>
+            <div className="customize-float customize-float-two"><span className="customize-color-icon"><Palette size={15}/></span><div><strong>Your colors</strong><small>Match your personality</small></div></div>
+          </div>
+          <div className="customize-copy">
+            <div className="eyebrow"><Palette size={14}/> YOUR STYLE, YOUR STORY</div>
+            <h2>Custom Resume Maker <span>That Fits Your Lifestyle</span></h2>
+            <p>Quickly change your resume's font styles, colors, and layout on any screen — from a small phone display to a large desktop monitor. Browse our <a href="https://www.resumebuilder.com/resume-templates/" target="_blank" rel="noreferrer">resume templates</a> to start customizing your design and making it stand out.</p>
+            <button className="button button-dark customize-cta" onClick={() => startNew()}>Customize My Resume Now <ArrowRight size={17}/></button>
+            <div className="customize-mini-points"><span><Check size={14}/> Flexible layouts</span><span><Check size={14}/> Personal style</span><span><Check size={14}/> Live preview</span></div>
+          </div>
+        </section>
         <section className="bottom-cta"><div><span className="eyebrow">ONE STEP CLOSER</span><h2>Let's make your next move count.</h2><p>Your next opportunity deserves a resume you feel good about.</p></div><button className="button button-light" onClick={() => setPage('templates')}>Get started <ArrowRight size={17} /></button></section>
       </main>}
 
