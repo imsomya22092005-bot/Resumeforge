@@ -784,3 +784,22 @@ button.shortcut-card{cursor:pointer}
 @media(max-width:850px){.advantage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.advantage-page{padding-top:38px}.advantage-card{min-height:250px}}
 @media(max-width:560px){.advantage-page{padding-top:25px}.advantage-heading{margin-bottom:30px}.advantage-heading h1{font-size:38px;letter-spacing:-1px}.advantage-heading>p{font-size:13px}.advantage-grid{grid-template-columns:1fr;gap:12px}.advantage-card{min-height:0;padding:23px}.advantage-card h2{font-size:22px}.advantage-card p{font-size:12px}.advantage-quote{margin:38px auto}.advantage-cta{padding:32px 20px}.advantage-cta h2{font-size:31px}}
 @media(prefers-reduced-motion:reduce){.advantage-card{transition:none}.advantage-card:hover{transform:none}}
+
+
+/* Easy as 1-2-3 resume onboarding */
+.start-resume-page{max-width:1120px;margin:0 auto;padding-top:64px;padding-bottom:90px}
+.start-resume-heading{max-width:760px;margin:0 auto 42px;text-align:center}
+.start-resume-heading>.eyebrow{display:flex;justify-content:center;align-items:center;gap:8px;color:#896C6C;font-size:10px;font-weight:800;letter-spacing:1.8px}
+.start-resume-heading h1{margin:18px 0 12px;color:#493939;font-family:var(--serif);font-size:clamp(42px,5vw,62px);line-height:1.1;letter-spacing:-1.8px}
+.start-resume-heading h1 span{color:#896C6C;font-style:italic;font-weight:500}
+.start-resume-heading>p{margin:0;color:#796762;font-size:14px;line-height:1.8}
+.start-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.start-step{position:relative;min-height:250px;padding:30px 25px;border:1px solid #896C6C24;border-radius:21px;background:linear-gradient(150deg,#fffdf9,#FFF9F2);box-shadow:0 12px 32px #896c6c0b;text-align:center}
+.start-step-number{position:absolute;top:17px;left:18px;display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:#E5BEB5;color:#493939;font-weight:800;font-size:12px}
+.start-step:nth-child(2) .start-step-number{background:#EEE6CA}.start-step:nth-child(3) .start-step-number{background:#F5FAE1}
+.start-step-icon{display:grid;place-items:center;width:58px;height:58px;margin:10px auto 20px;border-radius:18px;background:#E5BEB5;color:#684d4d}
+.start-step:nth-child(2) .start-step-icon{background:#EEE6CA}.start-step:nth-child(3) .start-step-icon{background:#F5FAE1}
+.start-step h2{margin:0 0 10px;color:#493939;font-family:var(--serif);font-size:24px;letter-spacing:-.4px}
+.start-step p{max-width:245px;margin:0 auto;color:#796762;font-size:13px;line-height:1.8}
+.start-resume-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:34px}
+@media(max-width:760px){.start-resume-page{padding-top:38px;padding-bottom:55px}.start-steps{grid-template-columns:1fr;gap:13px}.start-step{min-height:0;padding:26px 22px 25px}.start-step-icon{margin-bottom:15px}.start-resume-heading{margin-bottom:28px}.start-resume-heading h1{font-size:43px}}
