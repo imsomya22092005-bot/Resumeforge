@@ -934,3 +934,57 @@ button.shortcut-card{cursor:pointer}
 @media(max-width:1100px){.templates-results .template-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.templates-browser-layout{grid-template-columns:190px minmax(0,1fr);gap:18px}}
 @media(max-width:700px){.templates-browser-layout{grid-template-columns:1fr}.template-filters{position:static;padding:17px}.filters-title{padding-bottom:12px}.filter-group{display:inline-block;vertical-align:top;width:49%;padding-top:14px}.filter-group+.filter-group{margin-top:0;border-top:0}.templates-results .template-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 11px}}
 @media(max-width:460px){.templates-results .template-grid{grid-template-columns:1fr}.filter-choice{font-size:11px}}
+
+
+/* Distinct preview compositions for the expanded template library */
+.mini-top-banner .mini-resume-head{padding:15px 12px 12px;background:var(--resume-accent);color:white}
+.mini-top-banner .mini-person{color:white;font-size:12px}
+.mini-top-banner .mini-role,.mini-top-banner .mini-contact{color:#ffffffc9}
+.mini-left-rail .mini-resume-body{padding-left:34%}
+.mini-left-rail .mini-resume-body:before{width:28%;background:color-mix(in srgb,var(--resume-accent) 15%,white)}
+.mini-right-rail .mini-resume-body{padding-right:34%}
+.mini-right-rail .mini-resume-body:after{content:"SKILLS  •  TOOLS  •  LANGUAGES";position:absolute;right:0;top:0;bottom:0;width:27%;padding:5px 3px;background:color-mix(in srgb,var(--resume-accent) 13%,white);font-size:5px;line-height:2.1;color:var(--resume-accent);writing-mode:vertical-rl}
+.mini-centered-classic .mini-resume-head{text-align:center;padding-bottom:12px;border-bottom:1px solid var(--resume-accent)}
+.mini-split-header .mini-resume-head{display:grid;grid-template-columns:1fr auto;gap:4px;border-bottom:1px solid #ddd;padding-bottom:10px}
+.mini-split-header .mini-contact{text-align:right}
+.mini-numbered-sections .mini-section:before{content:"01  ";color:var(--resume-accent);font-weight:800}
+.mini-skill-bars .mini-resume-body .mini-section:last-of-type{padding:5px;background:color-mix(in srgb,var(--resume-accent) 12%,white)}
+.mini-profile-card .mini-resume-head{padding:12px;background:color-mix(in srgb,var(--resume-accent) 12%,white);border-radius:0 0 12px 12px}
+.mini-profile-card .mini-headshot{width:42px;height:47px}
+.mini-serif-luxe .mini-person{font-family:Georgia,serif;font-size:13px;letter-spacing:.6px}
+.mini-serif-luxe .mini-section{font-family:Georgia,serif;border-bottom:1px solid #d8c9bb;padding-bottom:3px}
+.mini-tech-terminal .mini-person,.mini-tech-terminal .mini-contact{font-family:monospace}
+.mini-tech-terminal .mini-resume-head{border-left:3px solid var(--resume-accent);padding-left:8px}
+.mini-project-led .mini-resume-body .mini-section:nth-of-type(2){margin-top:13px;padding:7px;background:color-mix(in srgb,var(--resume-accent) 12%,white)}
+.mini-career-change .mini-resume-head{border-bottom:2px solid var(--resume-accent);padding-bottom:10px}
+.mini-career-change .mini-section:first-child{font-size:8px}
+.mini-graduate .mini-resume-body .mini-section:nth-of-type(3){margin-top:12px;border-top:2px solid var(--resume-accent);padding-top:5px}
+.mini-internship .mini-resume-head{padding:9px;background:color-mix(in srgb,var(--resume-accent) 11%,white)}
+.mini-consultant .mini-resume-body{padding-left:32%}
+.mini-consultant .mini-resume-body:before{content:"EXPERTISE  •  TOOLS";position:absolute;left:0;top:0;bottom:0;width:26%;padding:5px 3px;background:color-mix(in srgb,var(--resume-accent) 14%,white);font-size:5px;line-height:2.3;color:var(--resume-accent);writing-mode:vertical-rl}
+.mini-healthcare .mini-resume-head{border-bottom:2px solid var(--resume-accent);padding-bottom:9px}
+.mini-healthcare .mini-section{color:#47817b}
+.mini-legal .mini-resume-head{text-align:center;border-bottom:3px double var(--resume-accent);padding-bottom:12px}
+.mini-sales .mini-resume-head{display:grid;grid-template-columns:1fr auto;gap:3px;padding:10px;background:color-mix(in srgb,var(--resume-accent) 10%,white)}
+.mini-product-manager .mini-resume-body .mini-section:first-child{padding:5px;border-left:3px solid var(--resume-accent)}
+.mini-architect .mini-resume-head{display:grid;grid-template-columns:1fr auto;gap:3px;padding:10px;border-bottom:1px solid var(--resume-accent)}
+.mini-architect .mini-headshot{width:42px;height:49px}
+.mini-nonprofit .mini-resume-head{border-left:4px solid var(--resume-accent);padding-left:8px}
+.mini-international .mini-resume-head{text-align:center;padding-bottom:10px;border-bottom:1px solid #aaa}
+.mini-international .mini-resume-body .mini-section{letter-spacing:1px;font-size:6px}
+.mini-infographic .mini-section{display:inline-block;padding:3px 5px;background:color-mix(in srgb,var(--resume-accent) 14%,white);border-radius:3px}
+.mini-dark-header .mini-resume-head{background:#292f38;padding:14px;color:white}
+.mini-dark-header .mini-person{color:white}
+.mini-dark-header .mini-role,.mini-dark-header .mini-contact{color:#ffffffbd}
+.mini-soft-panels .mini-resume-body .mini-section{padding:4px 5px;background:#f4ece8;border-radius:3px}
+.mini-minimal-rule .mini-resume-head{border-bottom:1px solid #b9b4af;padding-bottom:11px}
+.mini-minimal-rule .mini-section{font-weight:400;letter-spacing:1px;border-bottom:1px solid #ddd;padding-bottom:3px}
+.mini-modern-stack .mini-resume-head{padding-bottom:9px;border-bottom:3px solid var(--resume-accent)}
+.mini-modern-stack .mini-contact{display:block;margin-top:5px}
+.mini-creative-asym .mini-resume-head{padding:12px 8px 8px 20px;border-bottom:2px solid var(--resume-accent);transform:translateX(-4px)}
+.mini-achievement .mini-resume-body .mini-section:nth-of-type(2){font-size:8px;color:var(--resume-accent);font-weight:800}
+.mini-operations .mini-resume-body{padding-left:31%}
+.mini-operations .mini-resume-body:before{content:"TOOLS  •  PROCESS";position:absolute;left:0;top:0;bottom:0;width:25%;padding:5px 3px;background:color-mix(in srgb,var(--resume-accent) 13%,white);font-size:5px;line-height:2.3;color:var(--resume-accent);writing-mode:vertical-rl}
+.mini-designer-portfolio .mini-resume-head{display:grid;grid-template-columns:1fr auto;gap:4px;padding:10px;background:color-mix(in srgb,var(--resume-accent) 12%,white)}
+.mini-designer-portfolio .mini-headshot{grid-column:2;grid-row:1 / span 3;float:none;width:42px;height:47px}
+@media(max-width:700px){.mini-right-rail .mini-resume-body:after,.mini-consultant .mini-resume-body:before,.mini-operations .mini-resume-body:before{font-size:4px}}
