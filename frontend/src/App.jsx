@@ -34,7 +34,13 @@ const loadSaved = () => {
 };
 
 export default function App() {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState(() => {
+    const allowedPages = ['home', 'login', 'signup', 'about', 'templates', 'dashboard', 'start', 'experience', 'editor'];
+    try {
+      const savedPage = localStorage.getItem('resumeforge-current-page');
+      return allowedPages.includes(savedPage) ? savedPage : 'home';
+    } catch { return 'home'; }
+  });
   const [resume, setResume] = useState(starterResume);
   const [template, setTemplate] = useState('classic');
   const [experienceLevel, setExperienceLevel] = useState('');
@@ -57,6 +63,12 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('resumeforge-resumes', JSON.stringify(saved));
   }, [saved]);
+  
+  useEffect(() => {
+    try {
+      localStorage.setItem('resumeforge-current-page', page);
+    } catch { /* Page persistence is optional when storage is unavailable. */ }
+  }, [page]);
 
   const notify = (message) => {
     setToast(message);
