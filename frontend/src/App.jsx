@@ -18,16 +18,26 @@ const starterResume = {
   projects: [{ id: 3, title: 'Featured Project', description: 'What you built, how you built it, and the result.' }]
 };
 const templates = [
-{id:'classic',name:'Classic Professional',detail:'Clear and ATS-friendly',tag:'ATS FRIENDLY',color:'#896C6C',person:'ALEX MORGAN',role:'SOFTWARE DEVELOPER',email:'alex.morgan@email.com',skills:'JavaScript · React · SQL'},
-{id:'modern',name:'Modern Sidebar',detail:'Bold, modern two-column style',tag:'POPULAR',color:'#34495e',person:'JAMIE WILSON',role:'MARKETING SPECIALIST',email:'jamie.w@email.com',skills:'Campaigns · SEO · Analytics'},
-{id:'minimal',name:'Minimal',detail:'Simple, spacious and elegant',tag:'MINIMAL',color:'#b18a65',person:'TAYLOR LEE',role:'UX DESIGNER',email:'taylor.lee@email.com',skills:'Figma · Research · Prototyping'},
-{id:'sage',name:'Sage Executive',detail:'Calm green executive look',tag:'EXECUTIVE',color:'#617b68',person:'MORGAN REED',role:'PROJECT MANAGER',email:'morgan.r@email.com',skills:'Leadership · Agile · Planning'},
-{id:'ocean',name:'Ocean Blue',detail:'Trustworthy and structured',tag:'PROFESSIONAL',color:'#26718a',person:'JORDAN PARK',role:'DATA ANALYST',email:'jordan.p@email.com',skills:'Python · SQL · Power BI'},
-{id:'terracotta',name:'Terracotta',detail:'Warm creative portfolio style',tag:'CREATIVE',color:'#c56d50',person:'RILEY SHAH',role:'GRAPHIC DESIGNER',email:'riley.s@email.com',skills:'Branding · Adobe · Layout'},
-{id:'plum',name:'Plum Accent',detail:'Refined, distinctive headings',tag:'ELEGANT',color:'#79546f',person:'CASEY PATEL',role:'BUSINESS ANALYST',email:'casey.p@email.com',skills:'Research · Excel · Strategy'},
-{id:'navy',name:'Navy Classic',detail:'Traditional corporate format',tag:'CORPORATE',color:'#263b58',person:'SAM RIVERA',role:'FINANCE ASSOCIATE',email:'sam.r@email.com',skills:'Forecasting · Excel · Reports'},
-{id:'coral',name:'Coral Fresh',detail:'Bright and friendly presentation',tag:'FRESH',color:'#d66d72',person:'AVA THOMAS',role:'CONTENT WRITER',email:'ava.t@email.com',skills:'Writing · Editing · SEO'},
-{id:'mono',name:'Monochrome',detail:'Black-and-white understated style',tag:'TIMELESS',color:'#343434',person:'NOAH BENNETT',role:'OPERATIONS COORDINATOR',email:'noah.b@email.com',skills:'Process · Logistics · Teams'}
+{id:'classic',name:'Classic Professional',detail:'Clear and ATS-friendly',tag:'ATS FRIENDLY',color:'#896C6C',columns:1,photo:false,person:'ALEX MORGAN',role:'SOFTWARE DEVELOPER',email:'alex.morgan@email.com',skills:'JavaScript · React · SQL'},
+{id:'modern',name:'Modern Sidebar',detail:'Bold, modern two-column style',tag:'POPULAR',color:'#34495e',columns:2,photo:true,person:'JAMIE WILSON',role:'MARKETING SPECIALIST',email:'jamie.w@email.com',skills:'Campaigns · SEO · Analytics'},
+{id:'minimal',name:'Minimal',detail:'Simple, spacious and elegant',tag:'MINIMAL',color:'#b18a65',columns:1,photo:false,person:'TAYLOR LEE',role:'UX DESIGNER',email:'taylor.lee@email.com',skills:'Figma · Research · Prototyping'},
+{id:'sage',name:'Sage Executive',detail:'Calm green executive look',tag:'EXECUTIVE',color:'#617b68',columns:2,photo:true,person:'MORGAN REED',role:'PROJECT MANAGER',email:'morgan.r@email.com',skills:'Leadership · Agile · Planning'},
+{id:'ocean',name:'Ocean Blue',detail:'Trustworthy and structured',tag:'PROFESSIONAL',color:'#26718a',columns:1,photo:false,person:'JORDAN PARK',role:'DATA ANALYST',email:'jordan.p@email.com',skills:'Python · SQL · Power BI'},
+{id:'terracotta',name:'Terracotta',detail:'Warm creative portfolio style',tag:'CREATIVE',color:'#c56d50',columns:2,photo:true,person:'RILEY SHAH',role:'GRAPHIC DESIGNER',email:'riley.s@email.com',skills:'Branding · Adobe · Layout'},
+{id:'plum',name:'Plum Accent',detail:'Refined, distinctive headings',tag:'ELEGANT',color:'#79546f',columns:1,photo:false,person:'CASEY PATEL',role:'BUSINESS ANALYST',email:'casey.p@email.com',skills:'Research · Excel · Strategy'},
+{id:'navy',name:'Navy Classic',detail:'Traditional corporate format',tag:'CORPORATE',color:'#263b58',columns:2,photo:false,person:'SAM RIVERA',role:'FINANCE ASSOCIATE',email:'sam.r@email.com',skills:'Forecasting · Excel · Reports'},
+{id:'coral',name:'Coral Fresh',detail:'Bright and friendly presentation',tag:'FRESH',color:'#d66d72',columns:1,photo:true,person:'AVA THOMAS',role:'CONTENT WRITER',email:'ava.t@email.com',skills:'Writing · Editing · SEO'},
+{id:'mono',name:'Monochrome',detail:'Black-and-white understated style',tag:'TIMELESS',color:'#343434',columns:1,photo:false,person:'NOAH BENNETT',role:'OPERATIONS COORDINATOR',email:'noah.b@email.com',skills:'Process · Logistics · Teams'},
+{id:'editorial',name:'Editorial Split',detail:'Editorial-style split layout',tag:'EDITORIAL',color:'#8c5d46',columns:2,photo:true,person:'SKYLER JAMES',role:'EDITORIAL DESIGNER',email:'skyler.j@email.com',skills:'Typography · Layout · Design'},
+{id:'academic',name:'Academic Scholar',detail:'Education and research focused',tag:'ACADEMIC',color:'#435b73',columns:1,photo:false,person:'PRIYA SHARMA',role:'RESEARCH ASSISTANT',email:'priya.s@email.com',skills:'Research · Writing · Analysis'},
+{id:'bold',name:'Bold Header',detail:'Strong header with compact sections',tag:'BOLD',color:'#9a493d',columns:1,photo:false,person:'MAYA CLARK',role:'PRODUCT DESIGNER',email:'maya.c@email.com',skills:'Product · Figma · UX'},
+{id:'timeline',name:'Career Timeline',detail:'Chronological experience layout',tag:'TIMELINE',color:'#53766e',columns:2,photo:false,person:'DEV PATEL',role:'PROJECT LEAD',email:'dev.p@email.com',skills:'Planning · Agile · Teams'},
+{id:'compact',name:'Compact One Page',detail:'Space-efficient single-page format',tag:'COMPACT',color:'#6d6d6d',columns:1,photo:false,person:'EMMA WILSON',role:'BUSINESS ASSOCIATE',email:'emma.w@email.com',skills:'Operations · Excel · Reports'},
+{id:'creative-grid',name:'Creative Grid',detail:'Asymmetric sections for creatives',tag:'CREATIVE',color:'#bd7659',columns:2,photo:true,person:'NOOR KHAN',role:'VISUAL ARTIST',email:'noor.k@email.com',skills:'Illustration · Branding · Art'},
+{id:'executive-dark',name:'Executive Contrast',detail:'High-contrast executive layout',tag:'EXECUTIVE',color:'#303d4b',columns:2,photo:false,person:'ARJUN MEHTA',role:'OPERATIONS DIRECTOR',email:'arjun.m@email.com',skills:'Strategy · Leadership · Growth'},
+{id:'soft-modern',name:'Soft Modern',detail:'Gentle typography and open spacing',tag:'MODERN',color:'#a66f73',columns:1,photo:true,person:'ISHA VERMA',role:'COMMUNICATIONS SPECIALIST',email:'isha.v@email.com',skills:'Writing · PR · Content'},
+{id:'tech-stack',name:'Tech Stack',detail:'Skills-forward technical resume',tag:'TECH',color:'#426a83',columns:2,photo:false,person:'KABIR SINGH',role:'SOFTWARE ENGINEER',email:'kabir.s@email.com',skills:'Java · React · APIs'},
+{id:'freelance',name:'Freelance Portfolio',detail:'Project-led creative portfolio',tag:'PORTFOLIO',color:'#8b6a48',columns:2,photo:true,person:'ZARA ALI',role:'FREELANCE CREATIVE',email:'zara.a@email.com',skills:'Clients · Campaigns · Design'}
 ];
 const loadSaved = () => {
   try { return JSON.parse(localStorage.getItem('resumeforge-resumes') || '[]'); } catch { return []; }
@@ -49,6 +59,8 @@ export default function App() {
   const [experienceLevel, setExperienceLevel] = useState('');
   const [isStudent, setIsStudent] = useState('');
   const [educationLevel, setEducationLevel] = useState('');
+  const [headshotFilter, setHeadshotFilter] = useState('all');
+  const [columnFilter, setColumnFilter] = useState('all');
   const [saved, setSaved] = useState(loadSaved);
   const [resumeId, setResumeId] = useState(null);
   const [toast, setToast] = useState('');
@@ -506,7 +518,7 @@ export default function App() {
         <section className="experience-actions"><button className="button button-outline" onClick={() => { setPage('experience'); setIsStudent(''); window.scrollTo({top:0,behavior:'smooth'}); }}><ArrowLeft size={16}/> Back</button><button className="button button-dark" disabled={!educationLevel} onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
       </main>}
 
-      {page === 'templates' && <main className="page-content"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Pick a clean layout, then make it your own in the editor.</p></div><div className="template-grid template-grid-large">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></main>}
+      {page === 'templates' && <main className="page-content templates-browser"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Explore 20 distinctive layouts, then make your favorite your own.</p></div><div className="templates-browser-layout"><aside className="template-filters"><div className="filters-title"><h2>Filters</h2><button type="button" onClick={() => { setHeadshotFilter('all'); setColumnFilter('all'); }}>Clear filters</button></div><div className="filter-group"><h3>Headshot</h3>{[{value:'with',label:'With photo'},{value:'without',label:'Without photo'}].map(option => <label key={option.value} className="filter-choice"><input type="radio" name="headshot" checked={headshotFilter===option.value} onChange={() => setHeadshotFilter(option.value)}/>{option.label}</label>)}</div><div className="filter-group"><h3>Columns</h3>{[{value:'1',label:'1 column'},{value:'2',label:'2 columns'}].map(option => <label key={option.value} className="filter-choice"><input type="radio" name="columns" checked={columnFilter===option.value} onChange={() => setColumnFilter(option.value)}/>{option.label}</label>)}</div></aside><section className="templates-results"><div className="templates-results-count">{templates.filter(item => (headshotFilter==='all' || (headshotFilter==='with' ? item.photo : !item.photo)) && (columnFilter==='all' || String(item.columns)===columnFilter)).length} resume templates</div><div className="template-grid template-grid-large">{templates.filter(item => (headshotFilter==='all' || (headshotFilter==='with' ? item.photo : !item.photo)) && (columnFilter==='all' || String(item.columns)===columnFilter)).map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></section></div></main>}
 
       {page === 'dashboard' && <main className="page-content dashboard-page dashboard-redesign">
         <section className="welcome-hero">
@@ -577,8 +589,8 @@ function Field({ label, value, onChange, placeholder = '', multiline = false }) 
 
 function TemplateCard({ item, index, onChoose }) {
   return <article className="template-card"><button className="template-art resume-card-art" onClick={onChoose} aria-label={'Choose '+item.name+' template'} style={{'--resume-accent':item.color}}>
-    <div className={'mini-resume mini-'+item.id}>
-      <div className="mini-resume-head"><div className="mini-person">{item.person || 'ALEX MORGAN'}</div><div className="mini-role">{item.role || 'SOFTWARE DEVELOPER'}</div><div className="mini-contact">{item.email || 'alex.morgan@email.com'} · LinkedIn</div></div>
+    <div className={'mini-resume mini-'+item.id+' '+(item.columns===2?'mini-two-column':'mini-one-column')}>
+      <div className="mini-resume-head">{item.photo && <div className="mini-headshot" aria-label="Photo placeholder"><UserRound size={16}/></div>}<div className="mini-person">{item.person || 'ALEX MORGAN'}</div><div className="mini-role">{item.role || 'SOFTWARE DEVELOPER'}</div><div className="mini-contact">{item.email || 'alex.morgan@email.com'} · LinkedIn</div></div>
       <div className="mini-resume-body"><div className="mini-section">PROFILE</div><p className="mini-copy">Motivated professional with hands-on experience, a thoughtful approach to problem solving, and a passion for continuous learning.</p>
       <div className="mini-section">EXPERIENCE</div><strong className="mini-job">Senior {item.role.split(' ').slice(-1)[0]}</strong><small className="mini-date">2023 — Present</small><div className="mini-line"></div><div className="mini-line medium"></div><div className="mini-line"></div>
       <div className="mini-section">EDUCATION</div><strong className="mini-job">Bachelor's Degree</strong><small className="mini-date">University · 2020–2024</small>
