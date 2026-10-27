@@ -826,3 +826,28 @@ button.shortcut-card{cursor:pointer}
 .experience-actions{display:flex;justify-content:space-between;gap:12px;margin-top:28px}
 .experience-actions .button:disabled{opacity:.45;cursor:not-allowed;transform:none}
 @media(max-width:640px){.experience-page{padding-top:38px;padding-bottom:55px}.experience-options{grid-template-columns:1fr;gap:10px}.experience-option{min-height:78px;padding:14px}.experience-heading{margin-bottom:26px}.experience-heading h1{font-size:39px}}
+
+
+/* Evenly spaced experience choices and student follow-up */
+.experience-options{grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;align-items:stretch}
+.experience-option{grid-column:span 2;min-width:0;min-height:116px;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:12px;padding:18px}
+.experience-option:nth-child(4){grid-column:2 / span 2}
+.experience-option:nth-child(5){grid-column:4 / span 2}
+.experience-option-icon{flex-basis:38px;width:38px;height:38px}
+.experience-option-copy{width:100%;gap:5px}
+.experience-option-copy strong{font-size:14px;line-height:1.35}
+.experience-option-copy small{font-size:11px;line-height:1.5}
+.experience-option-radio{position:absolute;right:15px;top:15px}
+.experience-option{position:relative}
+.student-question{margin-top:28px;padding:25px;border:1px solid #896C6C30;border-radius:18px;background:linear-gradient(145deg,#fffdf9,#FFF9F2);text-align:center;animation:experienceReveal .22s ease-out}
+.student-question h2{margin:0 0 8px;color:#493939;font-family:var(--serif);font-size:26px}
+.student-question>p{margin:0;color:#796762;font-size:13px;line-height:1.7}
+.student-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;max-width:510px;margin:20px auto 0}
+.student-option{display:flex;align-items:center;justify-content:center;gap:11px;min-height:54px;padding:12px;border:1px solid #896C6C30;border-radius:13px;background:#fffdf9;color:#493939;font-weight:700;cursor:pointer;transition:all .18s}
+.student-option:hover{border-color:#896C6C}
+.student-option.selected{border:2px solid #896C6C;background:#F9EEE8}
+.student-option-radio{display:grid;place-items:center;width:20px;height:20px;border:1.5px solid #c5aaa3;border-radius:50%;font-size:11px}
+.student-option.selected .student-option-radio{border-color:#896C6C;background:#896C6C;color:#fff}
+@keyframes experienceReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){.experience-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.experience-option{grid-column:auto!important;min-height:125px;padding:15px}.experience-option:nth-child(5){grid-column:1 / -1!important}.experience-option-copy strong{font-size:13px}.experience-option-copy small{font-size:10px}}
+@media(max-width:420px){.experience-options{grid-template-columns:1fr}.experience-option{min-height:86px;flex-direction:row;align-items:center}.experience-option:nth-child(5){grid-column:auto!important}.experience-option-icon{flex-basis:38px}.student-question{padding:19px 14px}.student-options{gap:9px}}
