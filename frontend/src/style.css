@@ -879,3 +879,58 @@ button.shortcut-card{cursor:pointer}
 .education-option-copy small{font-size:11px;line-height:1.5}
 @media(max-width:760px){.education-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.education-option{grid-column:auto;min-height:105px;padding:15px}.education-option:nth-child(7){grid-column:1 / -1;width:calc(50% - 6px);justify-self:center}}
 @media(max-width:520px){.education-options{grid-template-columns:1fr;gap:10px}.education-option,.education-option:nth-child(7){grid-column:1;width:100%;min-height:82px;padding:14px;justify-self:stretch}}
+
+
+/* Resume template browser with practical sidebar filters */
+.templates-browser{max-width:1440px}
+.templates-browser-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:start}
+.template-filters{position:sticky;top:24px;padding:22px 18px;border:1px solid #896C6C26;border-radius:17px;background:#fffdf9;box-shadow:0 8px 24px #896c6c0a}
+.filters-title{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:17px;border-bottom:1px solid #896C6C20}
+.filters-title h2{margin:0;color:#493939;font-family:var(--serif);font-size:23px}
+.filters-title button{padding:0;border:0;background:transparent;color:#896C6C;font-size:11px;font-weight:700;cursor:pointer}
+.filter-group{padding:19px 0 5px}
+.filter-group+.filter-group{margin-top:13px;border-top:1px solid #896C6C20}
+.filter-group h3{margin:0 0 13px;color:#493939;font-size:13px}
+.filter-choice{display:flex;align-items:center;gap:10px;margin:12px 0;color:#796762;font-size:12px;cursor:pointer}
+.filter-choice input{width:15px;height:15px;margin:0;accent-color:#896C6C}
+.templates-results{min-width:0}
+.templates-results-count{margin:0 0 15px;color:#88746e;font-size:12px}
+.templates-results .template-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 17px}
+.mini-resume{position:relative;overflow:hidden}
+.mini-headshot{display:grid;place-items:center;float:right;width:35px;height:39px;margin:0 0 7px 8px;border:1px solid #ddd2ca;border-radius:4px;background:#f2e9e2;color:var(--resume-accent)}
+.mini-two-column .mini-resume-body{position:relative;padding-left:32%}
+.mini-two-column .mini-resume-body:before{content:"";position:absolute;top:0;bottom:0;left:0;width:26%;background:color-mix(in srgb,var(--resume-accent) 13%,white);border-right:1px solid color-mix(in srgb,var(--resume-accent) 20%,white)}
+.mini-two-column .mini-resume-body .mini-section:first-child{margin-top:0}
+.mini-modern .mini-resume-head,.mini-sage .mini-resume-head,.mini-terracotta .mini-resume-head{padding:14px 14px 12px;background:var(--resume-accent);color:white}
+.mini-modern .mini-person,.mini-sage .mini-person,.mini-terracotta .mini-person{color:white}
+.mini-modern .mini-role,.mini-sage .mini-role,.mini-terracotta .mini-role{color:#fff9}
+.mini-minimal .mini-resume-head{text-align:center;padding:19px 10px 12px;border-bottom:2px solid var(--resume-accent)}
+.mini-minimal .mini-person{font-weight:500;letter-spacing:1.2px}
+.mini-sage .mini-resume-head{display:flex;gap:6px;align-items:center}
+.mini-sage .mini-headshot{float:none;flex:none;background:#ffffff25;border-color:#ffffff60;color:white}
+.mini-ocean .mini-resume-head{border-left:4px solid var(--resume-accent);padding-left:10px}
+.mini-plum .mini-resume-head{border-bottom:1px solid var(--resume-accent);padding-bottom:10px}
+.mini-navy .mini-resume-head{padding-bottom:10px;border-bottom:4px double var(--resume-accent)}
+.mini-coral .mini-resume-head{text-align:center;padding:12px 8px;background:color-mix(in srgb,var(--resume-accent) 12%,white);border-radius:0 0 16px 16px}
+.mini-mono .mini-person{font-family:monospace;letter-spacing:1.1px}
+.mini-editorial .mini-resume-head{display:grid;grid-template-columns:1fr auto;gap:4px;align-items:center;border-bottom:2px solid var(--resume-accent);padding-bottom:12px}
+.mini-editorial .mini-headshot{grid-column:2;grid-row:1 / span 3;float:none;width:43px;height:49px}
+.mini-academic .mini-resume-head{text-align:center;border-bottom:1px solid #777;padding-bottom:12px}
+.mini-bold .mini-resume-head{padding:15px;background:var(--resume-accent);color:white}
+.mini-bold .mini-person{color:white;font-size:12px}
+.mini-bold .mini-role,.mini-bold .mini-contact{color:#fff9}
+.mini-timeline .mini-resume-body .mini-section{border-left:2px solid var(--resume-accent);padding-left:6px}
+.mini-compact .mini-resume-body{font-size:7px}
+.mini-compact .mini-section{margin-top:8px}
+.mini-creative-grid .mini-resume-head{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px;padding:10px;background:color-mix(in srgb,var(--resume-accent) 12%,white)}
+.mini-creative-grid .mini-headshot{grid-column:2;grid-row:1 / span 3;float:none;width:39px;height:45px}
+.mini-executive-dark .mini-resume-head{padding:14px;background:#303d4b;color:white}
+.mini-executive-dark .mini-person{color:white}
+.mini-executive-dark .mini-role,.mini-executive-dark .mini-contact{color:#ffffffb8}
+.mini-soft-modern .mini-resume-head{padding-bottom:12px;border-bottom:1px solid #ead8d8}
+.mini-tech-stack .mini-resume-body .mini-section:last-of-type{padding:5px;background:color-mix(in srgb,var(--resume-accent) 13%,white)}
+.mini-freelance .mini-resume-head{display:grid;grid-template-columns:1fr auto;gap:4px;align-items:center;padding-bottom:10px;border-bottom:1px dashed var(--resume-accent)}
+.mini-freelance .mini-headshot{grid-column:2;grid-row:1 / span 3;float:none;width:40px;height:46px}
+@media(max-width:1100px){.templates-results .template-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.templates-browser-layout{grid-template-columns:190px minmax(0,1fr);gap:18px}}
+@media(max-width:700px){.templates-browser-layout{grid-template-columns:1fr}.template-filters{position:static;padding:17px}.filters-title{padding-bottom:12px}.filter-group{display:inline-block;vertical-align:top;width:49%;padding-top:14px}.filter-group+.filter-group{margin-top:0;border-top:0}.templates-results .template-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px 11px}}
+@media(max-width:460px){.templates-results .template-grid{grid-template-columns:1fr}.filter-choice{font-size:11px}}
