@@ -322,40 +322,22 @@ export default function App() {
         </section>
       </main>}
 
-      {page === 'about' && <main className="about-page">
-        <section className="about-hero">
-          <div className="about-hero-copy">
-            <div className="eyebrow"><Sparkles size={14}/> A LITTLE ABOUT US</div>
-            <h1>Your story deserves<br/><span>a great first page.</span></h1>
-            <p>ResumeForge helps you turn your experience, skills, and ambitions into a resume that feels clear, confident, and truly yours.</p>
-            <div className="about-hero-actions">
-              <button className="button button-dark" onClick={() => startNew()}>Create my resume <ArrowRight size={16}/></button>
-              <button className="button button-outline" onClick={() => setPage('templates')}>Explore templates</button>
-            </div>
-            <div className="about-trust-points"><span><Check size={15}/> Simple to use</span><span><Check size={15}/> Easy to personalize</span><span><Check size={15}/> Your pace, your story</span></div>
-          </div>
-          <div className="about-hero-art" aria-label="Decorative resume illustration">
-            <div className="about-art-orbit"></div>
-            <div className="about-art-card about-art-card-back"><i></i><i className="short"></i><b>EXPERIENCE</b><i></i><i></i><b>EDUCATION</b><i className="short"></i></div>
-            <div className="about-art-paper"><div className="about-art-avatar">AM</div><strong>Alex Morgan</strong><small>YOUR NEXT CHAPTER</small><div className="about-art-rule"></div><b>PROFILE</b><i></i><i></i><i className="short"></i><b>EXPERIENCE</b><i></i><i className="short"></i><b>SKILLS</b><div className="about-art-chips"><span>Creative</span><span>Focused</span></div></div>
-            <div className="about-floating-note"><span><Check size={14}/></span><div><strong>Made to feel like you</strong><small>One step at a time</small></div></div>
-          </div>
+      {page === 'about' && <main className="about-page advantage-page">
+        <section className="advantage-heading">
+          <div className="eyebrow"><Sparkles size={14}/> THE RESUMEFORGE ADVANTAGE</div>
+          <h1>Get hired <span>36% faster</span> with our feature-packed and easy-to-use resume builder app</h1>
+          <p>Everything you need to turn your experience into a confident next step.</p>
         </section>
-        <section className="about-purpose">
-          <div className="about-section-kicker">WHY WE’RE HERE</div>
-          <h2>Job searching is a big step.<br/><span>Your resume shouldn’t make it harder.</span></h2>
-          <p>We believe creating a resume should feel less overwhelming and more empowering. ResumeForge brings the essentials together in one calm, approachable space, so you can focus on what matters: showing people what you can do.</p>
+        <section className="advantage-grid">
+          <article className="advantage-card"><div className="advantage-icon"><FileText size={23}/></div><div className="advantage-kicker">01 / CREATE</div><h2>Powerful resume builder</h2><p>Use our easy creation tools and practical guidance to shape a resume for your next job application.</p><span className="advantage-card-mark">01</span></article>
+          <article className="advantage-card"><div className="advantage-icon"><Check size={23}/></div><div className="advantage-kicker">02 / CHOOSE</div><h2>Professional templates</h2><p>Choose a clean, professional layout and make it your own with a few simple edits.</p><span className="advantage-card-mark">02</span></article>
+          <article className="advantage-card"><div className="advantage-icon"><Palette size={23}/></div><div className="advantage-kicker">03 / PERSONALIZE</div><h2>Customize fonts and colors</h2><p>Make your resume feel personal with thoughtful styling and a look that suits your professional story.</p><span className="advantage-card-mark">03</span></article>
+          <article className="advantage-card"><div className="advantage-icon"><FileText size={23}/></div><div className="advantage-kicker">04 / EXPLORE</div><h2>Resume examples to inspire you</h2><p>Use your own projects, education, and experience as a starting point to build a resume that feels complete.</p><span className="advantage-card-mark">04</span></article>
+          <article className="advantage-card"><div className="advantage-icon"><Check size={23}/></div><div className="advantage-kicker">05 / STAND OUT</div><h2>Clear, ATS-conscious layouts</h2><p>Keep information organized and easy to scan with straightforward resume structures designed for readability.</p><span className="advantage-card-mark">05</span></article>
+          <article className="advantage-card"><div className="advantage-icon"><WandSparkles size={23}/></div><div className="advantage-kicker">06 / GET GUIDANCE</div><h2>Helpful tips as you build</h2><p>Work through each section step by step, with a live preview to help you refine your details.</p><span className="advantage-card-mark">06</span></article>
         </section>
-        <section className="about-values">
-          <article className="about-value-card"><span className="about-value-number">01</span><div className="about-value-icon"><FileText size={21}/></div><h3>Clarity over clutter</h3><p>Thoughtful layouts help your skills and experience stand out without unnecessary distractions.</p></article>
-          <article className="about-value-card"><span className="about-value-number">02</span><div className="about-value-icon"><Palette size={21}/></div><h3>Your story, your style</h3><p>Choose a template and personalize your resume so it reflects the professional you are becoming.</p></article>
-          <article className="about-value-card"><span className="about-value-number">03</span><div className="about-value-icon"><WandSparkles size={21}/></div><h3>Progress made simpler</h3><p>Build section by section, preview as you go, and keep refining until it feels right.</p></article>
-        </section>
-        <section className="about-steps">
-          <div><div className="eyebrow">A SIMPLE WAY FORWARD</div><h2>From blank page<br/><span>to ready for what’s next.</span></h2><p>No need to have every word figured out. Start with the basics and build from there.</p></div>
-          <div className="about-step-list"><div><span>01</span><section><strong>Choose a template</strong><small>Start with a layout that suits your goals.</small></section></div><div><span>02</span><section><strong>Add your details</strong><small>Bring together your education, experience, skills, and projects.</small></section></div><div><span>03</span><section><strong>Review and refine</strong><small>See your resume update as you make changes, then save or print it.</small></section></div></div>
-        </section>
-        <section className="about-cta"><div><div className="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div><h2>Let’s make your experience shine.</h2><p>Start building a resume that feels clear, considered, and yours.</p></div><button className="button button-dark" onClick={() => startNew()}>Build my resume <ArrowRight size={16}/></button></section>
+        <blockquote className="advantage-quote">“Make your experience easy to understand, and your strengths easy to remember.”</blockquote>
+        <section className="advantage-cta"><div className="eyebrow">READY FOR YOUR NEXT CHAPTER?</div><h2>Build a resume that opens doors.</h2><button className="button button-dark" onClick={() => startNew()}>Build My Resume Now <ArrowRight size={16}/></button></section>
       </main>}
       {(page === 'login' || page === 'signup') && <main className="auth-page">
         <section className="auth-card">
