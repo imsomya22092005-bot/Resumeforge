@@ -67,8 +67,7 @@ const templates = [
 {id:'modern-stack',name:'Modern Stack',detail:'Stacked header with separated contact row',tag:'MODERN',color:'#466f80',columns:1,photo:false,person:'OMAR FAROOQ',role:'CLOUD ENGINEER',email:'omar.f@email.com',skills:'Cloud · Linux · DevOps'},
 {id:'creative-asym',name:'Asymmetric Creative',detail:'Offset title and uneven content blocks',tag:'ASYMMETRIC',color:'#ad715f',columns:2,photo:true,person:'LILA FERN',role:'ART DIRECTOR',email:'lila.f@email.com',skills:'Art Direction · Brand · Concept'},
 {id:'achievement',name:'Achievement First',detail:'Impact statements and results stand out',tag:'RESULTS',color:'#6d7e56',columns:1,photo:false,person:'NEEL SHARMA',role:'GROWTH SPECIALIST',email:'neel.s@email.com',skills:'Conversion · Testing · Growth'},
-{id:'operations',name:'Operations Lead',detail:'Process, tools and delivery at a glance',tag:'OPERATIONS',color:'#5f6d76',columns:2,photo:false,person:'GRACE KIM',role:'OPERATIONS MANAGER',email:'grace.k@email.com',skills:'Workflow · Logistics · Quality'},
-{id:'designer-portfolio',name:'Designer Portfolio',detail:'Personal brand and selected work emphasis',tag:'DESIGN',color:'#b27b65',columns:2,photo:true,person:'ELI TURNER',role:'VISUAL DESIGNER',email:'eli.t@email.com',skills:'Identity · UI · Illustration'}
+{id:'operations',name:'Operations Lead',detail:'Process, tools and delivery at a glance',tag:'OPERATIONS',color:'#5f6d76',columns:2,photo:false,person:'GRACE KIM',role:'OPERATIONS MANAGER',email:'grace.k@email.com',skills:'Workflow · Logistics · Quality'}
 ];
 const loadSaved = () => {
   try { return JSON.parse(localStorage.getItem('resumeforge-resumes') || '[]'); } catch { return []; }
