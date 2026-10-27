@@ -48,6 +48,7 @@ export default function App() {
   const [template, setTemplate] = useState('classic');
   const [experienceLevel, setExperienceLevel] = useState('');
   const [isStudent, setIsStudent] = useState('');
+  const [educationLevel, setEducationLevel] = useState('');
   const [saved, setSaved] = useState(loadSaved);
   const [resumeId, setResumeId] = useState(null);
   const [toast, setToast] = useState('');
@@ -476,11 +477,33 @@ export default function App() {
           <h2>Are you a student?</h2>
           <p>This helps us suggest resume layouts that fit your current stage.</p>
           <div className="student-options">
-            <button type="button" className={isStudent === 'yes' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'yes'} onClick={() => setIsStudent('yes')}><span className="student-option-radio">{isStudent === 'yes' ? '✓' : ''}</span>Yes</button>
+            <button type="button" className={isStudent === 'yes' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'yes'} onClick={() => { setIsStudent('yes'); setPage('education'); window.scrollTo({top:0,behavior:'smooth'}); }}><span className="student-option-radio">{isStudent === 'yes' ? '✓' : ''}</span>Yes</button>
             <button type="button" className={isStudent === 'no' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'no'} onClick={() => setIsStudent('no')}><span className="student-option-radio">{isStudent === 'no' ? '✓' : ''}</span>No</button>
           </div>
         </section>}
         <section className="experience-actions"><button className="button button-outline" onClick={() => { setPage('start'); window.scrollTo({top:0,behavior:'smooth'}); }}><ArrowLeft size={16}/> Back</button><button className="button button-dark" disabled={!experienceLevel || !isStudent} onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
+      </main>}
+
+      {page === 'education' && <main className="page-content education-page">
+        <section className="experience-heading">
+          <div className="eyebrow"><Sparkles size={14}/> YOUR EDUCATION JOURNEY</div>
+          <h1>What education level are you <span>currently pursuing?</span></h1>
+          <p>Select the highest level you are working toward so we can organize your resume correctly.</p>
+        </section>
+        <section className="education-options" aria-label="Select your education level">
+          {[
+            {value:'secondary',title:'Secondary School',detail:'High school or secondary education',icon:'▤'},
+            {value:'vocational',title:'Vocational Certificate or Diploma',detail:'Career-focused training or certification',icon:'✳'},
+            {value:'apprenticeship',title:'Apprenticeship or Internship Training',detail:'Practical, hands-on training',icon:'↗'},
+            {value:'associates',title:'Associates',detail:'Associate degree or equivalent',icon:'▧'},
+            {value:'bachelors',title:'Bachelors',detail:'Bachelor’s degree',icon:'⌂'},
+            {value:'masters',title:'Masters',detail:'Master’s degree',icon:'✦'},
+            {value:'doctorate',title:'Doctorate or Ph.D.',detail:'Doctoral-level study',icon:'★'}
+          ].map(option => <button type="button" key={option.value} className={educationLevel === option.value ? 'education-option selected' : 'education-option'} onClick={() => setEducationLevel(option.value)} aria-pressed={educationLevel === option.value}>
+            <span className="education-option-icon">{option.icon}</span><span className="education-option-copy"><strong>{option.title}</strong><small>{option.detail}</small></span><span className="experience-option-radio">{educationLevel === option.value ? '✓' : ''}</span>
+          </button>)}
+        </section>
+        <section className="experience-actions"><button className="button button-outline" onClick={() => { setPage('experience'); setIsStudent(''); window.scrollTo({top:0,behavior:'smooth'}); }}><ArrowLeft size={16}/> Back</button><button className="button button-dark" disabled={!educationLevel} onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
       </main>}
 
       {page === 'templates' && <main className="page-content"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Pick a clean layout, then make it your own in the editor.</p></div><div className="template-grid template-grid-large">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></main>}
