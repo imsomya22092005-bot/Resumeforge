@@ -988,3 +988,15 @@ button.shortcut-card{cursor:pointer}
 .mini-designer-portfolio .mini-resume-head{display:grid;grid-template-columns:1fr auto;gap:4px;padding:10px;background:color-mix(in srgb,var(--resume-accent) 12%,white)}
 .mini-designer-portfolio .mini-headshot{grid-column:2;grid-row:1 / span 3;float:none;width:42px;height:47px}
 @media(max-width:700px){.mini-right-rail .mini-resume-body:after,.mini-consultant .mini-resume-body:before,.mini-operations .mini-resume-body:before{font-size:4px}}
+
+
+/* Per-template color customization */
+.template-color-options{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:10px 2px 2px;min-height:38px}
+.template-color-swatch{width:22px;height:22px;flex:0 0 22px;border:2px solid #fff;border-radius:50%;box-shadow:0 0 0 1px #c9bdb6;cursor:pointer;transition:transform .16s,box-shadow .16s}
+.template-color-swatch:hover{transform:scale(1.12)}
+.template-color-swatch.selected{box-shadow:0 0 0 2px var(--swatch-ring,#493939),0 0 0 4px #fff;transform:scale(1.06)}
+.resume-paper-live{--resume-accent:#896C6C}
+.resume-paper-live .resume-live-header{border-color:var(--resume-accent)}
+.resume-paper-live .resume-live-header h1,.resume-paper-live .resume-live-role{color:var(--resume-accent)}
+.resume-paper-live .resume-section h2{color:var(--resume-accent);border-color:var(--resume-accent)}
+@media(max-width:460px){.template-color-options{gap:8px}.template-color-swatch{width:20px;height:20px;flex-basis:20px}}
