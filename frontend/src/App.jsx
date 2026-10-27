@@ -35,11 +35,11 @@ const loadSaved = () => {
 
 export default function App() {
   const [page, setPage] = useState(() => {
-    const allowedPages = ['home', 'login', 'signup', 'about', 'templates', 'dashboard', 'start', 'experience', 'editor'];
+    const allowedPages = ['home', 'login', 'signup', 'about', 'templates', 'dashboard', 'start', 'experience', 'education', 'editor'];
     try {
       const savedPage = localStorage.getItem('resumeforge-current-page');
       const savedUser = JSON.parse(localStorage.getItem('resumeforge-user') || 'null');
-      const protectedPages = ['templates', 'dashboard', 'start', 'experience', 'editor'];
+      const protectedPages = ['templates', 'dashboard', 'start', 'experience', 'education', 'editor'];
       if (protectedPages.includes(savedPage) && !savedUser) return 'home';
       return allowedPages.includes(savedPage) ? savedPage : 'home';
     } catch { return 'home'; }
@@ -478,7 +478,7 @@ export default function App() {
           <p>This helps us suggest resume layouts that fit your current stage.</p>
           <div className="student-options">
             <button type="button" className={isStudent === 'yes' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'yes'} onClick={() => { setIsStudent('yes'); setPage('education'); window.scrollTo({top:0,behavior:'smooth'}); }}><span className="student-option-radio">{isStudent === 'yes' ? '✓' : ''}</span>Yes</button>
-            <button type="button" className={isStudent === 'no' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'no'} onClick={() => setIsStudent('no')}><span className="student-option-radio">{isStudent === 'no' ? '✓' : ''}</span>No</button>
+            <button type="button" className={isStudent === 'no' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'no'} onClick={() => { setIsStudent('no'); setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}><span className="student-option-radio">{isStudent === 'no' ? '✓' : ''}</span>No</button>
           </div>
         </section>}
         <section className="experience-actions"><button className="button button-outline" onClick={() => { setPage('start'); window.scrollTo({top:0,behavior:'smooth'}); }}><ArrowLeft size={16}/> Back</button><button className="button button-dark" disabled={!experienceLevel || !isStudent} onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
