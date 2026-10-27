@@ -38,6 +38,9 @@ export default function App() {
     const allowedPages = ['home', 'login', 'signup', 'about', 'templates', 'dashboard', 'start', 'experience', 'editor'];
     try {
       const savedPage = localStorage.getItem('resumeforge-current-page');
+      const savedUser = JSON.parse(localStorage.getItem('resumeforge-user') || 'null');
+      const protectedPages = ['templates', 'dashboard', 'start', 'experience', 'editor'];
+      if (protectedPages.includes(savedPage) && !savedUser) return 'home';
       return allowedPages.includes(savedPage) ? savedPage : 'home';
     } catch { return 'home'; }
   });
@@ -86,7 +89,13 @@ export default function App() {
     localStorage.setItem('resumeforge-user', JSON.stringify(user));
     setCurrentUser(user); setAuthError(''); setPage('dashboard');
   };
-  const signOut = () => { localStorage.removeItem('resumeforge-user'); setCurrentUser(null); setPage('home'); };
+  const signOut = () => {
+    localStorage.removeItem('resumeforge-user');
+    localStorage.setItem('resumeforge-current-page', 'home');
+    setCurrentUser(null);
+    setPage('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   const startNew = (chosenTemplate = template) => {
     setResume(starterResume);
     setTemplate(chosenTemplate);
