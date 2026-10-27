@@ -851,3 +851,21 @@ button.shortcut-card{cursor:pointer}
 @keyframes experienceReveal{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:760px){.experience-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.experience-option{grid-column:auto!important;min-height:125px;padding:15px}.experience-option:nth-child(5){grid-column:1 / -1!important}.experience-option-copy strong{font-size:13px}.experience-option-copy small{font-size:10px}}
 @media(max-width:420px){.experience-options{grid-template-columns:1fr}.experience-option{min-height:86px;flex-direction:row;align-items:center}.experience-option:nth-child(5){grid-column:auto!important}.experience-option-icon{flex-basis:38px}.student-question{padding:19px 14px}.student-options{gap:9px}}
+
+
+/* Education level onboarding selection */
+.education-page{max-width:900px;margin:0 auto;padding-top:62px;padding-bottom:85px}
+.education-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;align-items:stretch}
+.education-option{position:relative;display:flex;align-items:center;gap:14px;min-width:0;min-height:92px;padding:17px;border:1px solid #896C6C30;border-radius:16px;background:linear-gradient(145deg,#fffdf9,#FFF9F2);color:#493939;text-align:left;cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s}
+.education-option:hover{border-color:#896C6C;transform:translateY(-2px);box-shadow:0 9px 22px #896c6c12}
+.education-option.selected{border:2px solid #896C6C;background:#F9EEE8;box-shadow:0 0 0 3px #E5BEB555}
+.education-option-icon{display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;border-radius:13px;background:#E5BEB5;color:#624949;font-size:20px}
+.education-option:nth-child(2) .education-option-icon,.education-option:nth-child(6) .education-option-icon{background:#EEE6CA}
+.education-option:nth-child(3) .education-option-icon,.education-option:nth-child(7) .education-option-icon{background:#F5FAE1}
+.education-option:nth-child(4) .education-option-icon{background:#F3DDD2}
+.education-option-copy{display:flex;flex:1;flex-direction:column;gap:5px;min-width:0}
+.education-option-copy strong{font-size:14px;line-height:1.4;font-weight:750}
+.education-option-copy small{font-size:11px;color:#88746e;line-height:1.5}
+.education-option .experience-option-radio{position:static;flex:0 0 22px}
+.education-option.selected .experience-option-radio{border-color:#896C6C;background:#896C6C;color:#fff}
+@media(max-width:640px){.education-page{padding-top:38px;padding-bottom:55px}.education-options{grid-template-columns:1fr;gap:10px}.education-option{min-height:80px;padding:14px}.experience-heading h1{font-size:39px}}
