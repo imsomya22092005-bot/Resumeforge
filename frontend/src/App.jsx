@@ -418,8 +418,8 @@ export default function App() {
           <div className="welcome-art" aria-label="Resume preview illustration">
             <div className="welcome-orbit"></div>
             <div className="welcome-paper">
-              <div className="welcome-paper-head"><div className="welcome-avatar">AM</div><div><b>Alex Morgan</b><small>SOFTWARE DEVELOPER</small></div></div>
-              <div className="welcome-paper-contact">alex.morgan@email.com · LinkedIn · India</div>
+              <div className="welcome-paper-head"><div className="welcome-avatar">{(currentUser?.name || 'Alex Morgan').trim().split(/\s+/).map(part => part[0]).join('').slice(0, 2).toUpperCase()}</div><div><b>{currentUser?.name || 'Alex Morgan'}</b><small>YOUR RESUME PREVIEW</small></div></div>
+              <div className="welcome-paper-contact">{currentUser?.email || 'you@example.com'} · Your profile</div>
               <div className="welcome-paper-label">PROFILE</div><i></i><i className="short"></i>
               <div className="welcome-paper-label">EXPERIENCE</div><b className="welcome-paper-role">Frontend Developer</b><i></i><i></i><i className="short"></i>
               <div className="welcome-paper-label">EDUCATION</div><i></i><i className="short"></i>
