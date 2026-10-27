@@ -160,7 +160,9 @@ export default function App() {
           <button className={page === 'about' ? 'nav-link active' : 'nav-link'} onClick={() => { setPage('about'); setMobileMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>About us</button>
         </nav>
         <div className="top-actions">
-          {currentUser ? <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></> : <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>}
+          {!currentUser || page === 'home' || page === 'about'
+            ? <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>
+            : <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></>}
           <button className="button button-dark button-small" onClick={() => createResumeEntry()}>Create my resume <ArrowRight size={15} /></button>
         </div>
       </header>
