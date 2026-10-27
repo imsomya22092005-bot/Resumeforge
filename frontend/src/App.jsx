@@ -80,6 +80,14 @@ export default function App() {
     setSection('personal');
     setPage('editor');
   };
+  const beginResume = () => {
+    setResume(starterResume);
+    setTemplate('classic');
+    setResumeId(null);
+    setSection('personal');
+    setPage('start');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   const update = (key, value) => setResume(current => ({ ...current, [key]: value }));
   const saveResume = () => {
     const id = resumeId || (globalThis.crypto?.randomUUID?.() ?? String(Date.now()));
@@ -123,7 +131,7 @@ export default function App() {
         </nav>
         <div className="top-actions">
           {currentUser ? <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></> : <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>}
-          <button className="button button-dark button-small" onClick={() => startNew()}>Create my resume <ArrowRight size={15} /></button>
+          <button className="button button-dark button-small" onClick={() => beginResume()}>Create my resume <ArrowRight size={15} /></button>
         </div>
       </header>
 
@@ -150,7 +158,7 @@ export default function App() {
             <h1>The Best Online<br /><span>Resume Builder</span></h1>
             <p className="hero-description">Easily create a resume from any device with our best-in-class resume builder platform.</p>
             <div className="hero-buttons">
-              <button className="button button-dark" onClick={() => startNew()}>Create My Resume Now <ArrowRight size={17} /></button>
+              <button className="button button-dark" onClick={() => beginResume()}>Create My Resume Now <ArrowRight size={17} /></button>
               <button className="button button-outline" onClick={() => notify('Import Resume will be available in the next phase.')}>Import Resume</button>
             </div>
             <div className="hero-stats">
@@ -401,6 +409,20 @@ export default function App() {
         </div>
       </main>}
 
+      {page === 'start' && <main className="page-content start-resume-page">
+        <section className="start-resume-heading">
+          <div className="eyebrow"><Sparkles size={14}/> YOUR RESUME, YOUR NEXT CHAPTER</div>
+          <h1>Easy as <span>1-2-3</span></h1>
+          <p>A simple path from your experience to a resume you’re ready to share.</p>
+        </section>
+        <section className="start-steps" aria-label="How ResumeForge works">
+          <article className="start-step"><span className="start-step-number">1</span><div className="start-step-icon"><LayoutTemplate size={23}/></div><h2>Select a template</h2><p>from our library of professional designs</p></article>
+          <article className="start-step"><span className="start-step-number">2</span><div className="start-step-icon"><FileText size={23}/></div><h2>Build your resume</h2><p>with our industry-specific bullet points</p></article>
+          <article className="start-step"><span className="start-step-number">3</span><div className="start-step-icon"><Download size={23}/></div><h2>Download</h2><p>in your desired format. You’re ready to apply!</p></article>
+        </section>
+        <section className="start-resume-actions"><button className="button button-dark" onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Choose a template <ArrowRight size={16}/></button><button className="button button-outline" onClick={() => startNew('classic')}>Start with classic template</button></section>
+      </main>}
+
       {page === 'templates' && <main className="page-content"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Pick a clean layout, then make it your own in the editor.</p></div><div className="template-grid template-grid-large">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></main>}
 
       {page === 'dashboard' && <main className="page-content dashboard-page dashboard-redesign">
@@ -410,7 +432,7 @@ export default function App() {
             <h1>Welcome back,<br/><span>{currentUser?.name || 'there'}.</span></h1>
             <p>Your experience has a story worth telling. Let’s turn it into a resume that feels like you — polished, professional, and ready for what’s next.</p>
             <div className="welcome-actions">
-              <button className="button button-dark welcome-create" onClick={() => startNew()}>Create My Resume <ArrowRight size={17}/></button>
+              <button className="button button-dark welcome-create" onClick={() => beginResume()}>Create My Resume <ArrowRight size={17}/></button>
               <button className="button button-outline" onClick={() => setPage('templates')}>Explore templates <LayoutTemplate size={16}/></button>
             </div>
             <div className="welcome-points"><span><Check size={14}/> Easy to customize</span><span><Check size={14}/> Print-ready layout</span></div>
@@ -430,12 +452,12 @@ export default function App() {
           </div>
         </section>
         <section className="dashboard-shortcuts">
-          <button className="shortcut-card" onClick={() => startNew()}><span className="shortcut-icon"><Plus size={20}/></span><span><b>Start from scratch</b><small>Build a resume step by step</small></span><ArrowRight size={17}/></button>
+          <button className="shortcut-card" onClick={() => beginResume()}><span className="shortcut-icon"><Plus size={20}/></span><span><b>Start from scratch</b><small>Build a resume step by step</small></span><ArrowRight size={17}/></button>
           <button className="shortcut-card" onClick={() => setPage('templates')}><span className="shortcut-icon shortcut-icon-cream"><LayoutTemplate size={20}/></span><span><b>Choose a template</b><small>Find a style that fits your goals</small></span><ArrowRight size={17}/></button>
           <div className="shortcut-card shortcut-static"><span className="shortcut-icon shortcut-icon-sage"><FileText size={20}/></span><span><b>{saved.length} saved {saved.length === 1 ? 'resume' : 'resumes'}</b><small>Your drafts stay on this device</small></span></div>
         </section>
         <section className="dashboard-saved-section">
-          <div className="dashboard-heading"><div><div className="eyebrow">YOUR WORKSPACE</div><h2>My resumes<span>.</span></h2><p>Pick up where you left off, or start something new.</p></div>{saved.length > 0 && <button className="button button-outline" onClick={() => startNew()}><Plus size={16}/> New resume</button>}</div>
+          <div className="dashboard-heading"><div><div className="eyebrow">YOUR WORKSPACE</div><h2>My resumes<span>.</span></h2><p>Pick up where you left off, or start something new.</p></div>{saved.length > 0 && <button className="button button-outline" onClick={() => beginResume()}><Plus size={16}/> New resume</button>}</div>
           {saved.length === 0 ? <div className="empty-state"><div className="empty-icon"><FileText size={27} /></div><h2>Your first draft starts here.</h2><p>Create a resume and it will appear here, ready whenever you are.</p><button className="button button-dark" onClick={() => startNew()}>Create My Resume <ArrowRight size={16} /></button></div> : <div className="saved-grid">{saved.map(item => <div className="saved-card" key={item.id}><div className="saved-preview"><ResumePreview resume={item} template={item.template} /></div><div className="saved-info"><div><h3>{item.name || 'Untitled resume'}</h3><p>{item.role || 'Resume draft'}</p></div><button className="icon-button danger" onClick={() => deleteResume(item.id)} aria-label="Delete resume"><Trash2 size={16} /></button></div><button className="button button-outline full-width" onClick={() => openResume(item)}>Continue editing <ArrowRight size={15} /></button></div>)}</div>}
         </section>
       </main>}
