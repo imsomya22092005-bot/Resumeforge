@@ -69,6 +69,13 @@ const templates = [
 {id:'achievement',name:'Achievement First',detail:'Impact statements and results stand out',tag:'RESULTS',color:'#6d7e56',columns:1,photo:false,person:'NEEL SHARMA',role:'GROWTH SPECIALIST',email:'neel.s@email.com',skills:'Conversion · Testing · Growth'},
 {id:'operations',name:'Operations Lead',detail:'Process, tools and delivery at a glance',tag:'OPERATIONS',color:'#5f6d76',columns:2,photo:false,person:'GRACE KIM',role:'OPERATIONS MANAGER',email:'grace.k@email.com',skills:'Workflow · Logistics · Quality'}
 ];
+const templatePalettes = {
+  classic:['#896C6C','#34495e','#26718a','#617b68','#c56d50','#79546f'],
+  modern:['#34495e','#896C6C','#26718a','#617b68','#c56d50','#343434'],
+  minimal:['#b18a65','#896C6C','#343434','#26718a','#c56d50','#617b68']
+};
+const defaultPalette = ['#896C6C','#34495e','#26718a','#617b68','#c56d50','#79546f'];
+
 const loadSaved = () => {
   try { return JSON.parse(localStorage.getItem('resumeforge-resumes') || '[]'); } catch { return []; }
 };
@@ -91,6 +98,8 @@ export default function App() {
   const [educationLevel, setEducationLevel] = useState('');
   const [headshotFilter, setHeadshotFilter] = useState('all');
   const [columnFilter, setColumnFilter] = useState('all');
+  const [templateColors, setTemplateColors] = useState({});
+  const [templateAccent, setTemplateAccent] = useState('#896C6C');
   const [saved, setSaved] = useState(loadSaved);
   const [resumeId, setResumeId] = useState(null);
   const [toast, setToast] = useState('');
@@ -139,9 +148,10 @@ export default function App() {
     setPage('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  const startNew = (chosenTemplate = template) => {
+  const startNew = (chosenTemplate = template, chosenColor = null) => {
     setResume(starterResume);
     setTemplate(chosenTemplate);
+    setTemplateAccent(chosenColor || templates.find(item => item.id === chosenTemplate)?.color || '#896C6C');
     setResumeId(null);
     setSection('personal');
     setPage('editor');
@@ -164,7 +174,7 @@ export default function App() {
   const update = (key, value) => setResume(current => ({ ...current, [key]: value }));
   const saveResume = () => {
     const id = resumeId || (globalThis.crypto?.randomUUID?.() ?? String(Date.now()));
-    const item = { ...resume, id, template, updatedAt: new Date().toISOString() };
+    const item = { ...resume, id, template, templateAccent, updatedAt: new Date().toISOString() };
     setSaved(current => [item, ...current.filter(entry => entry.id !== id)]);
     setResumeId(id);
     notify('Resume saved on this device');
@@ -172,6 +182,7 @@ export default function App() {
   const openResume = (item) => {
     setResume({ ...starterResume, ...item });
     setTemplate(item.template || 'classic');
+    setTemplateAccent(item.templateAccent || templates.find(t => t.id === (item.template || 'classic'))?.color || '#896C6C');
     setResumeId(item.id);
     setSection('personal');
     setPage('editor');
@@ -249,7 +260,7 @@ export default function App() {
         </section>
         <section className="home-templates section-wrap" id="features">
           <div className="template-section-title"><div className="eyebrow">FIND YOUR PERFECT LOOK</div><h2>Pick From 500+ Free Resume Templates<br className="desktop-break" /> and Build Your Resume in Minutes</h2><p>Explore different styles and find the one that feels like you.</p></div>
-          <div className="template-carousel-window"><div className="template-carousel-track">{[...templates, ...templates].map((item, index) => <TemplateCard key={item.id+index} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></div>
+          <div className="template-carousel-window"><div className="template-carousel-track">{[...templates, ...templates].map((item, index) => <TemplateCard key={item.id+index} item={item} index={index} accent={templateColors[item.id] || item.color} palette={templatePalettes[item.id] || defaultPalette} onColorChange={(color) => setTemplateColors(current => ({...current,[item.id]:color}))} onChoose={(color) => startNew(item.id, color || templateColors[item.id] || item.color)} />)}</div></div>
           <div className="see-all-templates"><button className="button button-outline" onClick={() => window.open('https://www.resumebuilder.com/resume-templates/', '_blank', 'noopener,noreferrer')}>See All Resume Templates <ArrowRight size={16} /></button></div>
         </section>
         <section className="why-section feature-showcase" id="why-resumeforge">
@@ -602,7 +613,7 @@ export default function App() {
             </div>
             <div className="editor-bottom"><span>Changes show up in your preview instantly.</span><button className="button button-dark" onClick={() => { const sections=['personal','summary','experience','education','skills','projects']; const next=sections[(sections.indexOf(section)+1)%sections.length]; setSection(next); }}>{section === 'projects' ? 'Back to personal' : 'Next section'} <ArrowRight size={15}/></button></div>
           </section>
-          <section className="preview-panel"><div className="preview-heading no-print"><div><span className="live-dot"></span> LIVE PREVIEW</div><button className="preview-download" onClick={downloadResume}><Download size={15}/> Download <ChevronDown size={14}/></button></div><div className="resume-preview-wrap"><ResumePreview resume={resume} template={template} /></div><p className="preview-tip no-print"><CircleHelp size={14}/> Tip: Keep your resume clear, concise, and relevant.</p></section>
+          <section className="preview-panel"><div className="preview-heading no-print"><div><span className="live-dot"></span> LIVE PREVIEW</div><button className="preview-download" onClick={downloadResume}><Download size={15}/> Download <ChevronDown size={14}/></button></div><div className="resume-preview-wrap"><ResumePreview resume={resume} template={template} accent={templateAccent} /></div><p className="preview-tip no-print"><CircleHelp size={14}/> Tip: Keep your resume clear, concise, and relevant.</p></section>
         </div>
       </main>}
 
@@ -617,8 +628,8 @@ function Field({ label, value, onChange, placeholder = '', multiline = false }) 
   return <label className="field-label">{label}{multiline ? <textarea rows="4" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} /> : <input value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} />}</label>;
 }
 
-function TemplateCard({ item, index, onChoose }) {
-  return <article className="template-card"><button className="template-art resume-card-art" onClick={onChoose} aria-label={'Choose '+item.name+' template'} style={{'--resume-accent':item.color}}>
+function TemplateCard({ item, index, onChoose, accent, palette, onColorChange }) {
+  return <article className="template-card"><button className="template-art resume-card-art" onClick={() => onChoose(accent)} aria-label={'Choose '+item.name+' template'} style={{'--resume-accent':accent}}>
     <div className={'mini-resume mini-'+item.id+' '+(item.columns===2?'mini-two-column':'mini-one-column')}>
       <div className="mini-resume-head">{item.photo && <div className="mini-headshot" aria-label="Photo placeholder"><UserRound size={16}/></div>}<div className="mini-person">{item.person || 'ALEX MORGAN'}</div><div className="mini-role">{item.role || 'SOFTWARE DEVELOPER'}</div><div className="mini-contact">{item.email || 'alex.morgan@email.com'} · LinkedIn</div></div>
       <div className="mini-resume-body"><div className="mini-section">PROFILE</div><p className="mini-copy">Motivated professional with hands-on experience, a thoughtful approach to problem solving, and a passion for continuous learning.</p>
@@ -626,11 +637,11 @@ function TemplateCard({ item, index, onChoose }) {
       <div className="mini-section">EDUCATION</div><strong className="mini-job">Bachelor's Degree</strong><small className="mini-date">University · 2020–2024</small>
       <div className="mini-section">SKILLS</div><p className="mini-copy">{item.skills}</p></div>
     </div><span className="template-badge">{item.tag}</span><span className="template-hover">Use this template <ArrowRight size={14}/></span></button>
-    <div className="template-meta"><div><h3>{item.name}</h3><p>{item.detail}</p></div><button className="round-arrow" onClick={onChoose} aria-label={'Use '+item.name}><ArrowRight size={17}/></button></div></article>;
+    <div className="template-meta"><div><h3>{item.name}</h3><p>{item.detail}</p></div><button className="round-arrow" onClick={() => onChoose(accent)} aria-label={'Use '+item.name}><ArrowRight size={17}/></button></div><div className="template-color-options" aria-label={'Colors for '+item.name}>{palette.map(color => <button key={color} type="button" className={'template-color-swatch'+(accent.toLowerCase()===color.toLowerCase()?' selected':'')} style={{backgroundColor:color}} aria-label={'Use color '+color} title={color} onClick={() => onColorChange(color)} /></div></article>;
 }
-function ResumePreview({ resume, template }) {
+function ResumePreview({ resume, template, accent }) {
   const skills = (resume.skills || '').split(',').map(s => s.trim()).filter(Boolean);
-  return <article className={'resume-paper-live resume-'+(template || 'classic')}>
+  return <article className={'resume-paper-live resume-'+(template || 'classic')} style={{'--resume-accent':accent || '#896C6C'}}>
     <div className="resume-live-header"><h1>{resume.name || 'Your Name'}</h1><p className="resume-live-role">{resume.role || 'Professional Title'}</p><div className="resume-live-contact">{[resume.email,resume.phone,resume.location].filter(Boolean).join('  ·  ')}</div></div>
     {resume.summary && <ResumeSection title="Profile"><p>{resume.summary}</p></ResumeSection>}
     {!!resume.experience?.filter(x=>x.title||x.company).length && <ResumeSection title="Experience">{resume.experience.filter(x=>x.title||x.company).map(x=><div className="resume-entry" key={x.id}><div className="resume-entry-head"><strong>{x.title}</strong><span>{x.dates}</span></div><div className="resume-entry-sub">{x.company}</div>{x.description && <p>{x.description}</p>}</div>)}</ResumeSection>}
