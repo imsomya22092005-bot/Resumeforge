@@ -89,6 +89,13 @@ export default function App() {
     setPage('start');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const createResumeEntry = () => {
+    if (!currentUser) {
+      openAuth('signup');
+      return;
+    }
+    beginResume();
+  };
   const update = (key, value) => setResume(current => ({ ...current, [key]: value }));
   const saveResume = () => {
     const id = resumeId || (globalThis.crypto?.randomUUID?.() ?? String(Date.now()));
@@ -132,7 +139,7 @@ export default function App() {
         </nav>
         <div className="top-actions">
           {currentUser ? <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></> : <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>}
-          <button className="button button-dark button-small" onClick={() => beginResume()}>Create my resume <ArrowRight size={15} /></button>
+          <button className="button button-dark button-small" onClick={() => createResumeEntry()}>Create my resume <ArrowRight size={15} /></button>
         </div>
       </header>
 
@@ -159,7 +166,7 @@ export default function App() {
             <h1>The Best Online<br /><span>Resume Builder</span></h1>
             <p className="hero-description">Easily create a resume from any device with our best-in-class resume builder platform.</p>
             <div className="hero-buttons">
-              <button className="button button-dark" onClick={() => beginResume()}>Create My Resume Now <ArrowRight size={17} /></button>
+              <button className="button button-dark" onClick={() => createResumeEntry()}>Create My Resume Now <ArrowRight size={17} /></button>
               <button className="button button-outline" onClick={() => notify('Import Resume will be available in the next phase.')}>Import Resume</button>
             </div>
             <div className="hero-stats">
@@ -188,14 +195,14 @@ export default function App() {
             <article className="feature-tile"><div className="feature-icon"><Check size={22}/></div><span className="feature-number">05 / STAND OUT</span><h3>ATS-friendly templates</h3><p>Sail through <a href="https://www.resumebuilder.com/career-center/applicant-tracking-system-tools-for-job-seekers/" target="_blank" rel="noreferrer">applicant tracking systems</a> with resume templates that appeal to both machines and humans.</p></article>
             <article className="feature-tile feature-tile-wide"><div className="feature-icon"><CircleHelp size={22}/></div><span className="feature-number">06 / GET GUIDANCE</span><h3>Expert tips and guidance</h3><p>Get help every step of the way as you build your resume with expert tips and suggested phrases.</p><div className="feature-quote">“Make your experience easy to understand, and your strengths easy to remember.”</div></article>
           </div>
-          <div className="feature-showcase-bottom"><div><span className="eyebrow">READY FOR YOUR NEXT CHAPTER?</span><h3>Build a resume that opens doors.</h3></div><button className="button button-dark" onClick={() => startNew()}>Build My Resume Now <ArrowRight size={17}/></button></div>
+          <div className="feature-showcase-bottom"><div><span className="eyebrow">READY FOR YOUR NEXT CHAPTER?</span><h3>Build a resume that opens doors.</h3></div><button className="button button-dark" onClick={() => createResumeEntry()}>Build My Resume Now <ArrowRight size={17}/></button></div>
         </section>
         <section className="ai-builder-section" id="ai-resume-builder">
           <div className="ai-builder-copy">
             <div className="eyebrow"><Sparkles size={14}/> YOUR IDEAS, BEAUTIFULLY WRITTEN</div>
             <h2>Our Free AI Resume Builder <span>Works Wherever You Do</span></h2>
             <p>Find the right words and automate your resume writing process with our free AI resume builder. Whether you’re working from your phone or laptop, our AI provides tailored suggestions to help you stand out.</p>
-            <button className="button button-dark ai-builder-button" onClick={() => startNew()}>Try Resume Builder <ArrowRight size={17}/></button>
+            <button className="button button-dark ai-builder-button" onClick={() => createResumeEntry()}>Try Resume Builder <ArrowRight size={17}/></button>
             <div className="ai-builder-note"><span><Check size={14}/></span> Build at your pace, from any device</div>
           </div>
           <div className="ai-resume-visual" aria-label="Decorative resume preview illustration">
@@ -234,7 +241,7 @@ export default function App() {
             <div className="eyebrow"><Smartphone size={14}/> MADE FOR EVERY SCREEN</div>
             <h2>Mobile-Friendly Resume Generator <span>You Can Use Anywhere</span></h2>
             <p>Create a professional resume in minutes with our AI-powered, fully responsive tool. Enter your details — such as work experience, skills, and career goals — from your smartphone, tablet, or desktop browser, and instantly generate a polished, ATS-friendly resume that’s ready to send.</p>
-            <button className="button button-dark mobile-resume-cta" onClick={() => startNew()}>Create Resume from Phone <ArrowRight size={17}/></button>
+            <button className="button button-dark mobile-resume-cta" onClick={() => createResumeEntry()}>Create Resume from Phone <ArrowRight size={17}/></button>
             <div className="mobile-resume-trust"><span><Check size={14}/></span> Phone, tablet and desktop friendly</div>
           </div>
         </section>
@@ -262,7 +269,7 @@ export default function App() {
             <div className="eyebrow"><Sparkles size={14}/> EXPERT INSIGHTS, REAL RESULTS</div>
             <h2>Expert Resume Tips <span>— Even on the Go</span></h2>
             <p>Access <a href="https://www.resumebuilder.com/resume-examples/" target="_blank" rel="noreferrer">job-specific resume examples</a> written by certified professionals, no matter where you are. Edit your resume during your commute, while waiting for an interview, or from the comfort of your home without losing any features.</p>
-            <button className="button button-dark expert-guidance-cta" onClick={() => startNew()}>Get Expert Guidance <ArrowRight size={17}/></button>
+            <button className="button button-dark expert-guidance-cta" onClick={() => createResumeEntry()}>Get Expert Guidance <ArrowRight size={17}/></button>
             <div className="expert-guidance-benefits"><div><span><FileText size={17}/></span><small>Job-Specific<br/>Examples</small></div><div><span><Sparkles size={17}/></span><small>Professional<br/>Guidance</small></div><div><span><Smartphone size={17}/></span><small>Edit Anywhere,<br/>Anytime</small></div></div>
           </div>
         </section>
@@ -284,7 +291,7 @@ export default function App() {
             <div className="eyebrow"><Palette size={14}/> YOUR STYLE, YOUR STORY</div>
             <h2>Custom Resume Maker <span>That Fits Your Lifestyle</span></h2>
             <p>Quickly change your resume's font styles, colors, and layout on any screen — from a small phone display to a large desktop monitor. Browse our <a href="https://www.resumebuilder.com/resume-templates/" target="_blank" rel="noreferrer">resume templates</a> to start customizing your design and making it stand out.</p>
-            <button className="button button-dark customize-cta" onClick={() => startNew()}>Customize My Resume Now <ArrowRight size={17}/></button>
+            <button className="button button-dark customize-cta" onClick={() => createResumeEntry()}>Customize My Resume Now <ArrowRight size={17}/></button>
             <div className="customize-mini-points"><span><Check size={14}/> Flexible layouts</span><span><Check size={14}/> Personal style</span><span><Check size={14}/> Live preview</span></div>
           </div>
         </section>
@@ -323,7 +330,7 @@ export default function App() {
             <div className="dream-job-divider"><i></i><Sparkles size={16}/><i></i></div>
             <h3>Let's make your next move count.</h3>
             <p>Your next opportunity deserves a resume you feel good about.</p>
-            <button className="button dream-job-button" onClick={() => startNew()}>Start Your Resume Now <ArrowRight size={18}/></button>
+            <button className="button dream-job-button" onClick={() => createResumeEntry()}>Start Your Resume Now <ArrowRight size={18}/></button>
             <div className="dream-job-footnote"><Check size={14}/> Your next chapter starts with one small step.</div>
           </div>
           <div className="dream-job-resume dream-job-resume-left"><div className="dream-job-paper"><div className="dream-job-paper-head"></div><i></i><i></i><b>EXPERIENCE</b><i></i><i className="short"></i><b>EDUCATION</b><i></i><i className="short"></i></div></div>
@@ -338,8 +345,8 @@ export default function App() {
             <h1>Your story deserves<br/><span>a great first page.</span></h1>
             <p>ResumeForge helps you turn your experience, skills, and ambitions into a resume that feels clear, confident, and truly yours.</p>
             <div className="about-hero-actions">
-              <button className="button button-dark" onClick={() => startNew()}>Create my resume <ArrowRight size={16}/></button>
-              <button className="button button-outline" onClick={() => setPage('templates')}>Explore templates</button>
+              <button className="button button-dark" onClick={() => createResumeEntry()}>Create my resume <ArrowRight size={16}/></button>
+              <button className="button button-outline" onClick={() => currentUser ? setPage('templates') : openAuth('signup')}>Explore templates</button>
             </div>
             <div className="about-trust-points"><span><Check size={15}/> Simple to use</span><span><Check size={15}/> Easy to personalize</span><span><Check size={15}/> Your pace, your story</span></div>
           </div>
@@ -364,7 +371,7 @@ export default function App() {
           <div><div className="eyebrow">A SIMPLE WAY FORWARD</div><h2>From blank page<br/><span>to ready for what’s next.</span></h2><p>No need to have every word figured out. Start with the basics and build from there.</p></div>
           <div className="about-step-list"><div><span>01</span><section><strong>Choose a template</strong><small>Start with a layout that suits your goals.</small></section></div><div><span>02</span><section><strong>Add your details</strong><small>Bring together your education, experience, skills, and projects.</small></section></div><div><span>03</span><section><strong>Review and refine</strong><small>See your resume update as you make changes, then save or print it.</small></section></div></div>
         </section>
-        <section className="about-cta"><div><div className="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div><h2>Let’s make your experience shine.</h2><p>Start building a resume that feels clear, considered, and yours.</p></div><button className="button button-dark" onClick={() => startNew()}>Build my resume <ArrowRight size={16}/></button></section>
+        <section className="about-cta"><div><div className="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div><h2>Let’s make your experience shine.</h2><p>Start building a resume that feels clear, considered, and yours.</p></div><button className="button button-dark" onClick={() => createResumeEntry()}>Build my resume <ArrowRight size={16}/></button></section>
       </main>}
       {(page === 'login' || page === 'signup') && <main className="auth-page">
         <section className="auth-card">
