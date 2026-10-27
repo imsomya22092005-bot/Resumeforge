@@ -119,7 +119,7 @@ export default function App() {
           <button className="nav-link" onClick={() => { setPage('home'); document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenu(false); }}>Features</button>
           <button className={page === 'templates' ? 'nav-link active' : 'nav-link'} onClick={() => { setPage('templates'); setMobileMenu(false); }}>Resume Templates</button>
           <button className="nav-link" onClick={() => { setPage('home'); document.getElementById('why-resumeforge')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenu(false); }}>Why ResumeForge</button>
-          <button className="nav-link" onClick={() => { setPage('home'); document.getElementById('about-us')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenu(false); }}>About us</button>
+          <button className={page === 'about' ? 'nav-link active' : 'nav-link'} onClick={() => { setPage('about'); setMobileMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>About us</button>
         </nav>
         <div className="top-actions">
           {currentUser ? <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></> : <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>}
@@ -322,6 +322,41 @@ export default function App() {
         </section>
       </main>}
 
+      {page === 'about' && <main className="about-page">
+        <section className="about-hero">
+          <div className="about-hero-copy">
+            <div className="eyebrow"><Sparkles size={14}/> A LITTLE ABOUT US</div>
+            <h1>Your story deserves<br/><span>a great first page.</span></h1>
+            <p>ResumeForge helps you turn your experience, skills, and ambitions into a resume that feels clear, confident, and truly yours.</p>
+            <div className="about-hero-actions">
+              <button className="button button-dark" onClick={() => startNew()}>Create my resume <ArrowRight size={16}/></button>
+              <button className="button button-outline" onClick={() => setPage('templates')}>Explore templates</button>
+            </div>
+            <div className="about-trust-points"><span><Check size={15}/> Simple to use</span><span><Check size={15}/> Easy to personalize</span><span><Check size={15}/> Your pace, your story</span></div>
+          </div>
+          <div className="about-hero-art" aria-label="Decorative resume illustration">
+            <div className="about-art-orbit"></div>
+            <div className="about-art-card about-art-card-back"><i></i><i className="short"></i><b>EXPERIENCE</b><i></i><i></i><b>EDUCATION</b><i className="short"></i></div>
+            <div className="about-art-paper"><div className="about-art-avatar">AM</div><strong>Alex Morgan</strong><small>YOUR NEXT CHAPTER</small><div className="about-art-rule"></div><b>PROFILE</b><i></i><i></i><i className="short"></i><b>EXPERIENCE</b><i></i><i className="short"></i><b>SKILLS</b><div className="about-art-chips"><span>Creative</span><span>Focused</span></div></div>
+            <div className="about-floating-note"><span><Check size={14}/></span><div><strong>Made to feel like you</strong><small>One step at a time</small></div></div>
+          </div>
+        </section>
+        <section className="about-purpose">
+          <div className="about-section-kicker">WHY WE’RE HERE</div>
+          <h2>Job searching is a big step.<br/><span>Your resume shouldn’t make it harder.</span></h2>
+          <p>We believe creating a resume should feel less overwhelming and more empowering. ResumeForge brings the essentials together in one calm, approachable space, so you can focus on what matters: showing people what you can do.</p>
+        </section>
+        <section className="about-values">
+          <article className="about-value-card"><span className="about-value-number">01</span><div className="about-value-icon"><FileText size={21}/></div><h3>Clarity over clutter</h3><p>Thoughtful layouts help your skills and experience stand out without unnecessary distractions.</p></article>
+          <article className="about-value-card"><span className="about-value-number">02</span><div className="about-value-icon"><Palette size={21}/></div><h3>Your story, your style</h3><p>Choose a template and personalize your resume so it reflects the professional you are becoming.</p></article>
+          <article className="about-value-card"><span className="about-value-number">03</span><div className="about-value-icon"><WandSparkles size={21}/></div><h3>Progress made simpler</h3><p>Build section by section, preview as you go, and keep refining until it feels right.</p></article>
+        </section>
+        <section className="about-steps">
+          <div><div className="eyebrow">A SIMPLE WAY FORWARD</div><h2>From blank page<br/><span>to ready for what’s next.</span></h2><p>No need to have every word figured out. Start with the basics and build from there.</p></div>
+          <div className="about-step-list"><div><span>01</span><section><strong>Choose a template</strong><small>Start with a layout that suits your goals.</small></section></div><div><span>02</span><section><strong>Add your details</strong><small>Bring together your education, experience, skills, and projects.</small></section></div><div><span>03</span><section><strong>Review and refine</strong><small>See your resume update as you make changes, then save or print it.</small></section></div></div>
+        </section>
+        <section className="about-cta"><div><div className="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div><h2>Let’s make your experience shine.</h2><p>Start building a resume that feels clear, considered, and yours.</p></div><button className="button button-dark" onClick={() => startNew()}>Build my resume <ArrowRight size={16}/></button></section>
+      </main>}
       {(page === 'login' || page === 'signup') && <main className="auth-page">
         <section className="auth-card">
           <div className="auth-brand-mark"><FileText size={22} /></div>
