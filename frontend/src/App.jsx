@@ -260,7 +260,7 @@ export default function App() {
         </section>
         <section className="home-templates section-wrap" id="features">
           <div className="template-section-title"><div className="eyebrow">FIND YOUR PERFECT LOOK</div><h2>Pick From 500+ Free Resume Templates<br className="desktop-break" /> and Build Your Resume in Minutes</h2><p>Explore different styles and find the one that feels like you.</p></div>
-          <div className="template-carousel-window"><div className="template-carousel-track">{[...templates, ...templates].map((item, index) => <TemplateCard key={item.id+index} item={item} index={index} accent={templateColors[item.id] || item.color} palette={templatePalettes[item.id] || defaultPalette} onColorChange={(color) => setTemplateColors(current => ({...current,[item.id]:color}))} accent={templateColors[item.id] || item.color} palette={templatePalettes[item.id] || defaultPalette} onColorChange={(color) => setTemplateColors(current => ({...current,[item.id]:color}))} onChoose={(color) => startNew(item.id, color || templateColors[item.id] || item.color)} />)}</div></div>
+          <div className="template-carousel-window"><div className="template-carousel-track">{[...templates, ...templates].map((item, index) => <TemplateCard key={item.id+index} item={item} index={index} accent={templateColors[item.id] || item.color} palette={templatePalettes[item.id] || defaultPalette} onColorChange={(color) => setTemplateColors(current => ({...current,[item.id]:color}))} accent={templateColors[item.id] || item.color} palette={templatePalettes[item.id] || defaultPalette} onColorChange={(color) => setTemplateColors(current => ({...current,[item.id]:color}))} accent={templateColors[item.id] || item.color} palette={templatePalettes[item.id] || defaultPalette} onColorChange={(color) => setTemplateColors(current => ({...current,[item.id]:color}))} onChoose={(color) => startNew(item.id, color || templateColors[item.id] || item.color)} />)}</div></div>
           <div className="see-all-templates"><button className="button button-outline" onClick={() => window.open('https://www.resumebuilder.com/resume-templates/', '_blank', 'noopener,noreferrer')}>See All Resume Templates <ArrowRight size={16} /></button></div>
         </section>
         <section className="why-section feature-showcase" id="why-resumeforge">
@@ -495,7 +495,7 @@ export default function App() {
         </div>
       </main>}
 
-      {page === 'start' && <main className="page-content start-resume-page">
+      {page === 'start' && <main className="page-content start-resume-page"><button className="back-button page-back-button" onClick={() => setPage('dashboard')}><ArrowLeft size={16}/> Back to dashboard</button>
         <section className="start-resume-heading">
           <div className="eyebrow"><Sparkles size={14}/> YOUR RESUME, YOUR NEXT CHAPTER</div>
           <h1>Easy as <span>1-2-3</span></h1>
@@ -509,7 +509,7 @@ export default function App() {
         <section className="start-resume-actions"><button className="button button-dark" onClick={() => { setPage('experience'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
       </main>}
 
-      {page === 'experience' && <main className="page-content experience-page">
+      {page === 'experience' && <main className="page-content experience-page"><button className="back-button page-back-button" onClick={() => setPage('start')}><ArrowLeft size={16}/> Back</button>
         <section className="experience-heading">
           <div className="eyebrow"><Sparkles size={14}/> LET'S FIND YOUR STARTING POINT</div>
           <h1>How long have you <span>been working?</span></h1>
@@ -537,7 +537,7 @@ export default function App() {
         <section className="experience-actions"><button className="button button-outline" onClick={() => { setPage('start'); window.scrollTo({top:0,behavior:'smooth'}); }}><ArrowLeft size={16}/> Back</button><button className="button button-dark" disabled={!experienceLevel || !isStudent} onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
       </main>}
 
-      {page === 'education' && <main className="page-content education-page">
+      {page === 'education' && <main className="page-content education-page"><button className="back-button page-back-button" onClick={() => setPage('experience')}><ArrowLeft size={16}/> Back</button>
         <section className="experience-heading">
           <div className="eyebrow"><Sparkles size={14}/> YOUR EDUCATION JOURNEY</div>
           <h1>What education level are you <span>currently pursuing?</span></h1>
