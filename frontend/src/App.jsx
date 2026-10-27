@@ -37,6 +37,7 @@ export default function App() {
   const [page, setPage] = useState('home');
   const [resume, setResume] = useState(starterResume);
   const [template, setTemplate] = useState('classic');
+  const [experienceLevel, setExperienceLevel] = useState('');
   const [saved, setSaved] = useState(loadSaved);
   const [resumeId, setResumeId] = useState(null);
   const [toast, setToast] = useState('');
@@ -420,7 +421,27 @@ export default function App() {
           <article className="start-step"><span className="start-step-number">2</span><div className="start-step-icon"><FileText size={23}/></div><h2>Build your resume</h2><p>with our industry-specific bullet points</p></article>
           <article className="start-step"><span className="start-step-number">3</span><div className="start-step-icon"><Download size={23}/></div><h2>Download</h2><p>in your desired format. You’re ready to apply!</p></article>
         </section>
-        <section className="start-resume-actions"><button className="button button-dark" onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Choose a template <ArrowRight size={16}/></button><button className="button button-outline" onClick={() => startNew('classic')}>Start with classic template</button></section>
+        <section className="start-resume-actions"><button className="button button-dark" onClick={() => { setPage('experience'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
+      </main>}
+
+      {page === 'experience' && <main className="page-content experience-page">
+        <section className="experience-heading">
+          <div className="eyebrow"><Sparkles size={14}/> LET'S FIND YOUR STARTING POINT</div>
+          <h1>How long have you <span>been working?</span></h1>
+          <p>We'll find the best templates for your experience level.</p>
+        </section>
+        <section className="experience-options" aria-label="Select your experience level">
+          {[
+            {value:'none',title:'No Experience',detail:'Starting out or still studying',icon:'✳'},
+            {value:'under3',title:'Less than 3 years',detail:'Beginning your professional journey',icon:'↗'},
+            {value:'3to5',title:'3-5 Years',detail:'Building your experience',icon:'▤'},
+            {value:'5to10',title:'5-10 Years',detail:'Growing your career',icon:'✦'},
+            {value:'10plus',title:'10+ Years',detail:'Bringing extensive experience',icon:'★'}
+          ].map(option => <button type="button" key={option.value} className={experienceLevel === option.value ? 'experience-option selected' : 'experience-option'} onClick={() => setExperienceLevel(option.value)} aria-pressed={experienceLevel === option.value}>
+            <span className="experience-option-icon">{option.icon}</span><span className="experience-option-copy"><strong>{option.title}</strong><small>{option.detail}</small></span><span className="experience-option-radio">{experienceLevel === option.value ? '✓' : ''}</span>
+          </button>)}
+        </section>
+        <section className="experience-actions"><button className="button button-outline" onClick={() => { setPage('start'); window.scrollTo({top:0,behavior:'smooth'}); }}><ArrowLeft size={16}/> Back</button><button className="button button-dark" disabled={!experienceLevel} onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
       </main>}
 
       {page === 'templates' && <main className="page-content"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Pick a clean layout, then make it your own in the editor.</p></div><div className="template-grid template-grid-large">{templates.map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={() => startNew(item.id)} />)}</div></main>}
