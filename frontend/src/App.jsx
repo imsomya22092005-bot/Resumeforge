@@ -641,7 +641,7 @@ function TemplateCard({ item, index, onChoose, accent, palette, onColorChange })
         <div className="mini-section" style={{color:safeAccent}}>EXPERIENCE</div><strong className="mini-job">Senior {item.role.split(' ').slice(-1)[0]}</strong><small className="mini-date">2023 — Present</small><div className="mini-line"></div><div className="mini-line medium"></div><div className="mini-line"></div>
         <div className="mini-section" style={{color:safeAccent}}>EDUCATION</div><strong className="mini-job">Bachelor's Degree</strong><small className="mini-date">University · 2020–2024</small>
         <div className="mini-section" style={{color:safeAccent}}>SKILLS</div><p className="mini-copy">{item.skills}</p></div>
-      </div><span className="template-badge">{item.tag}</span><span className="template-hover">Select template <ArrowRight size={14}/></span>
+      </div><span className="template-badge">{item.tag}</span>
     </button>
     <div className="template-meta"><div><h3>{item.name}</h3><p>{item.detail}</p></div></div>
     {isSelected && <button type="button" className="button button-primary template-use-button" onClick={() => onChoose(safeAccent)}>Use template <ArrowRight size={16}/></button>}
