@@ -508,7 +508,7 @@ export default function App() {
           <article className="start-step"><span className="start-step-number">2</span><div className="start-step-icon"><FileText size={23}/></div><h2>Build your resume</h2><p>with our industry-specific bullet points</p></article>
           <article className="start-step"><span className="start-step-number">3</span><div className="start-step-icon"><Download size={23}/></div><h2>Download</h2><p>in your desired format. You’re ready to apply!</p></article>
         </section>
-        <section className="start-resume-actions"><button className="button button-dark" onClick={() => { setPage('experience'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
+        <section className="start-resume-actions"><button className="button button-dark" onClick={() => { setResume(starterResume); setResumeId(null); setSection('personal'); setPage('editor'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
       </main>}
 
       {page === 'experience' && <main className="page-content experience-page"><button className="back-button page-back-button" onClick={() => setPage('start')}><ArrowLeft size={16}/> Back</button>
