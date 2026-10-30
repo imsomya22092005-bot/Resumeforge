@@ -82,7 +82,7 @@ const loadSaved = () => {
 
 export default function App() {
   const [page, setPage] = useState(() => {
-    const allowedPages = ['home', 'login', 'signup', 'about', 'templates', 'dashboard', 'start', 'experience', 'education', 'editor'];
+    const allowedPages = ['home', 'login', 'signup', 'about', 'templates', 'dashboard', 'start', 'experience', 'education', 'resume-choice', 'editor'];
     try {
       const savedPage = localStorage.getItem('resumeforge-current-page');
       const savedUser = JSON.parse(localStorage.getItem('resumeforge-user') || 'null');
@@ -96,6 +96,8 @@ export default function App() {
   const [experienceLevel, setExperienceLevel] = useState('');
   const [isStudent, setIsStudent] = useState('');
   const [educationLevel, setEducationLevel] = useState('');
+  const [resumeSource, setResumeSource] = useState('scratch');
+  const [existingResumeFile, setExistingResumeFile] = useState(null);
   const [headshotFilter, setHeadshotFilter] = useState('all');
   const [columnFilter, setColumnFilter] = useState('all');
   const [templateColors, setTemplateColors] = useState({});
@@ -260,7 +262,7 @@ export default function App() {
         </section>
         <section className="home-templates section-wrap" id="features">
           <div className="template-section-title"><div className="eyebrow">FIND YOUR PERFECT LOOK</div><h2>Pick From 500+ Free Resume Templates<br className="desktop-break" /> and Build Your Resume in Minutes</h2><p>Explore different styles and find the one that feels like you.</p></div>
-          <div className="template-carousel-window"><div className="template-carousel-track">{[...templates, ...templates].map((item, index) => <TemplateCard key={item.id+index} item={item} index={index} accent={templateColors[item.id] || item.color} palette={templatePalettes[item.id] || defaultPalette} onColorChange={(color) => setTemplateColors(current => ({...current,[item.id]:color}))} onChoose={(color) => startNew(item.id, color || templateColors[item.id] || item.color)} />)}</div></div>
+          <div className="template-carousel-window"><div className="template-carousel-track">{[...templates, ...templates].map((item, index) => <TemplateCard key={item.id+index} item={item} index={index} accent={templateColors[item.id] || item.color} palette={templatePalettes[item.id] || defaultPalette} onColorChange={(color) => setTemplateColors(current => ({...current,[item.id]:color}))} onChoose={() => { setTemplate(item.id); setTemplateAccent(item.color || '#896C6C'); setResumeSource('scratch'); setExistingResumeFile(null); setPage('resume-choice'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />)}</div></div>
           <div className="see-all-templates"><button className="button button-outline" onClick={() => window.open('https://www.resumebuilder.com/resume-templates/', '_blank', 'noopener,noreferrer')}>See All Resume Templates <ArrowRight size={16} /></button></div>
         </section>
         <section className="why-section feature-showcase" id="why-resumeforge">
@@ -560,6 +562,26 @@ export default function App() {
       </main>}
 
       {page === 'templates' && <main className="page-content templates-browser"><div className="page-heading"><div className="eyebrow">CHOOSE YOUR STARTING POINT</div><h1>Find your <span>resume style.</span></h1><p>Explore 20 distinctive layouts, then make your favorite your own.</p></div><div className="templates-browser-layout"><aside className="template-filters"><div className="filters-title"><h2>Filters</h2><button type="button" onClick={() => { setHeadshotFilter('all'); setColumnFilter('all'); }}>Clear filters</button></div><div className="filter-group"><h3>Headshot</h3>{[{value:'with',label:'With photo'},{value:'without',label:'Without photo'}].map(option => <label key={option.value} className="filter-choice"><input type="radio" name="headshot" checked={headshotFilter===option.value} onChange={() => setHeadshotFilter(option.value)}/>{option.label}</label>)}</div><div className="filter-group"><h3>Columns</h3>{[{value:'1',label:'1 column'},{value:'2',label:'2 columns'}].map(option => <label key={option.value} className="filter-choice"><input type="radio" name="columns" checked={columnFilter===option.value} onChange={() => setColumnFilter(option.value)}/>{option.label}</label>)}</div></aside><section className="templates-results"><div className="templates-results-count">{templates.filter(item => (headshotFilter==='all' || (headshotFilter==='with' ? item.photo : !item.photo)) && (columnFilter==='all' || String(item.columns)===columnFilter)).length} resume templates</div><div className="template-grid template-grid-large">{templates.filter(item => (headshotFilter==='all' || (headshotFilter==='with' ? item.photo : !item.photo)) && (columnFilter==='all' || String(item.columns)===columnFilter)).map((item, index) => <TemplateCard key={item.id} item={item} index={index} onChoose={(color) => startNew(item.id, color || templateColors[item.id] || item.color)} />)}</div></section></div></main>}
+
+      {page === 'resume-choice' && <main className="page-content resume-choice-page">
+        <button className="back-button page-back-button" onClick={() => setPage('templates')}><ArrowLeft size={16}/> Back</button>
+        <section className="resume-choice-card">
+          <div className="eyebrow">ONE QUICK QUESTION</div>
+          <h1>Are you uploading an <span>existing resume?</span></h1>
+          <p className="resume-choice-subtitle">Just review, edit, and update it with new information.</p>
+          <button type="button" className={'resume-source-option'+(resumeSource==='scratch'?' active':'')} onClick={() => setResumeSource('scratch')}>
+            <span className="resume-source-radio">{resumeSource==='scratch' && <span/>}</span>
+            <span className="resume-source-copy"><strong>No, start from scratch</strong><small>We'll guide you through the whole process so your skills can shine.</small></span>
+            <span className="resume-recommended">Recommended option to save you time</span>
+          </button>
+          <button type="button" className={'resume-source-option'+(resumeSource==='upload'?' active':'')} onClick={() => setResumeSource('upload')}>
+            <span className="resume-source-radio">{resumeSource==='upload' && <span/>}</span>
+            <span className="resume-source-copy"><strong>Yes, upload from my resume</strong><small>We'll give you expert guidance to fill out your info and enhance your resume, from start to finish.</small></span>
+          </button>
+          {resumeSource==='upload' && <label className="resume-upload-picker"><FileText size={18}/><span>{existingResumeFile ? existingResumeFile.name : 'Choose your resume (PDF or DOCX)'}</span><input type="file" id="resume-choice-file" accept=".pdf,.doc,.docx" onChange={event => setExistingResumeFile(event.target.files?.[0] || null)}/></label>}
+          <div className="resume-choice-actions"><button type="button" className="button button-outline" onClick={() => setPage('templates')}>Back</button><button type="button" className="button button-dark" onClick={() => { if(resumeSource==='scratch'){beginResume();} else if(existingResumeFile){setResume(starterResume);setResumeId(null);setSection('personal');setPage('editor');notify('Resume selected. You can now add or update your details in the editor.');} else {document.getElementById('resume-choice-file')?.click();} }}>Next <ArrowRight size={16}/></button></div>
+        </section>
+      </main>}
 
       {page === 'dashboard' && <main className="page-content dashboard-page dashboard-redesign">
         <section className="welcome-hero">
