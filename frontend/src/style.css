@@ -1047,3 +1047,21 @@ button.shortcut-card{cursor:pointer}
   cursor: pointer !important;
   touch-action: manipulation;
 }
+
+.resume-choice-page { max-width: 900px; margin: 0 auto; padding-top: 28px; }
+.resume-choice-card { max-width: 720px; margin: 28px auto 70px; padding: 44px; background: #fff; border: 1px solid #eadbd3; border-radius: 18px; box-shadow: 0 18px 50px #4637370d; }
+.resume-choice-card h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.12; margin: 14px 0 10px; color: var(--ink, #493939); }
+.resume-choice-card h1 span { color: var(--accent, #896C6C); }
+.resume-choice-subtitle { color: var(--muted, #806f69); margin-bottom: 28px; }
+.resume-source-option { position: relative; width: 100%; display: flex; align-items: flex-start; gap: 15px; text-align: left; padding: 22px 20px; margin: 14px 0; border: 1px solid #e7ddd7; border-radius: 13px; background: #fffdfb; cursor: pointer; }
+.resume-source-option.active { border: 2px solid #896C6C; background: #fbf6f2; padding: 21px 19px; }
+.resume-source-radio { width: 19px; height: 19px; flex: 0 0 19px; border: 1.5px solid #9b8980; border-radius: 50%; display: grid; place-items: center; margin-top: 2px; }
+.resume-source-radio span { width: 9px; height: 9px; border-radius: 50%; background: #896C6C; }
+.resume-source-copy { display: grid; gap: 7px; padding-right: 8px; }
+.resume-source-copy strong { font-size: 16px; color: #493939; }
+.resume-source-copy small { font-size: 13px; line-height: 1.55; color: #806f69; }
+.resume-recommended { position: absolute; right: 14px; top: -10px; background: #896C6C; color: white; font-size: 10px; padding: 5px 9px; border-radius: 20px; }
+.resume-upload-picker { display: flex; align-items: center; gap: 12px; padding: 16px; margin-top: 14px; border: 1px dashed #b9a59b; border-radius: 10px; cursor: pointer; color: #493939; }
+.resume-upload-picker input { max-width: 190px; margin-left: auto; font-size: 11px; }
+.resume-choice-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; }
+@media(max-width:600px) { .resume-choice-card { padding: 25px 18px; margin: 20px auto 45px; } .resume-recommended { position: static; align-self: flex-start; margin-left: auto; } .resume-source-option { flex-wrap: wrap; } .resume-upload-picker { flex-wrap: wrap; } .resume-upload-picker input { max-width: 100%; margin-left: 0; } }
