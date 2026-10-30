@@ -629,18 +629,23 @@ function Field({ label, value, onChange, placeholder = '', multiline = false }) 
 }
 
 function TemplateCard({ item, index, onChoose, accent, palette, onColorChange }) {
+  const [isSelected, setIsSelected] = useState(false);
   const safeAccent = typeof accent === 'string' && accent ? accent : (item?.color || '#896C6C');
   const safePalette = (Array.isArray(palette) ? palette : defaultPalette).filter(color => typeof color === 'string' && color.trim());
   const colors = safePalette.length ? safePalette : defaultPalette;
-  return <article className="template-card"><button className="template-art resume-card-art" onClick={() => onChoose(safeAccent)} aria-label={'Choose '+item.name+' template'} style={{'--resume-accent':safeAccent}}>
-    <div className={'mini-resume mini-'+item.id+' '+(item.columns===2?'mini-two-column':'mini-one-column')} style={{'--resume-accent':safeAccent}}>
-      <div className="mini-resume-head" style={{backgroundColor:safeAccent}}>{item.photo && <div className="mini-headshot" aria-label="Photo placeholder"><UserRound size={16}/></div>}<div className="mini-person">{item.person || 'ALEX MORGAN'}</div><div className="mini-role">{item.role || 'SOFTWARE DEVELOPER'}</div><div className="mini-contact">{item.email || 'alex.morgan@email.com'} · LinkedIn</div></div>
-      <div className="mini-resume-body"><div className="mini-section" style={{color:safeAccent}}>PROFILE</div><p className="mini-copy">Motivated professional with hands-on experience, a thoughtful approach to problem solving, and a passion for continuous learning.</p>
-      <div className="mini-section" style={{color:safeAccent}}>EXPERIENCE</div><strong className="mini-job">Senior {item.role.split(' ').slice(-1)[0]}</strong><small className="mini-date">2023 — Present</small><div className="mini-line"></div><div className="mini-line medium"></div><div className="mini-line"></div>
-      <div className="mini-section" style={{color:safeAccent}}>EDUCATION</div><strong className="mini-job">Bachelor's Degree</strong><small className="mini-date">University · 2020–2024</small>
-      <div className="mini-section" style={{color:safeAccent}}>SKILLS</div><p className="mini-copy">{item.skills}</p></div>
-    </div><span className="template-badge">{item.tag}</span><span className="template-hover">Use this template <ArrowRight size={14}/></span></button>
-    <div className="template-meta"><div><h3>{item.name}</h3><p>{item.detail}</p></div><button className="round-arrow" onClick={() => onChoose(safeAccent)} aria-label={'Use '+item.name}><ArrowRight size={17}/></button></div></article>;
+  return <article className={'template-card'+(isSelected ? ' template-card-selected' : '')}>
+    <button type="button" className="template-art resume-card-art" onClick={() => setIsSelected(true)} aria-label={'Select '+item.name+' template'} aria-pressed={isSelected} style={{'--resume-accent':safeAccent}}>
+      <div className={'mini-resume mini-'+item.id+' '+(item.columns===2?'mini-two-column':'mini-one-column')} style={{'--resume-accent':safeAccent}}>
+        <div className="mini-resume-head" style={{backgroundColor:safeAccent}}>{item.photo && <div className="mini-headshot" aria-label="Photo placeholder"><UserRound size={16}/></div>}<div className="mini-person">{item.person || 'ALEX MORGAN'}</div><div className="mini-role">{item.role || 'SOFTWARE DEVELOPER'}</div><div className="mini-contact">{item.email || 'alex.morgan@email.com'} · LinkedIn</div></div>
+        <div className="mini-resume-body"><div className="mini-section" style={{color:safeAccent}}>PROFILE</div><p className="mini-copy">Motivated professional with hands-on experience, a thoughtful approach to problem solving, and a passion for continuous learning.</p>
+        <div className="mini-section" style={{color:safeAccent}}>EXPERIENCE</div><strong className="mini-job">Senior {item.role.split(' ').slice(-1)[0]}</strong><small className="mini-date">2023 — Present</small><div className="mini-line"></div><div className="mini-line medium"></div><div className="mini-line"></div>
+        <div className="mini-section" style={{color:safeAccent}}>EDUCATION</div><strong className="mini-job">Bachelor's Degree</strong><small className="mini-date">University · 2020–2024</small>
+        <div className="mini-section" style={{color:safeAccent}}>SKILLS</div><p className="mini-copy">{item.skills}</p></div>
+      </div><span className="template-badge">{item.tag}</span><span className="template-hover">Select template <ArrowRight size={14}/></span>
+    </button>
+    <div className="template-meta"><div><h3>{item.name}</h3><p>{item.detail}</p></div></div>
+    {isSelected && <button type="button" className="button button-primary template-use-button" onClick={() => onChoose(safeAccent)}>Use template <ArrowRight size={16}/></button>}
+  </article>;
 }
 function ResumePreview({ resume, template, accent }) {
   const skills = (resume.skills || '').split(',').map(s => s.trim()).filter(Boolean);
