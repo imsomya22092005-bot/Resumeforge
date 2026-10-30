@@ -1000,3 +1000,34 @@ button.shortcut-card{cursor:pointer}
 .resume-paper-live .resume-live-header h1,.resume-paper-live .resume-live-role{color:var(--resume-accent)}
 .resume-paper-live .resume-section h2{color:var(--resume-accent);border-color:var(--resume-accent)}
 @media(max-width:460px){.template-color-options{gap:8px}.template-color-swatch{width:20px;height:20px;flex-basis:20px}}
+
+
+/* Live template accent: selected swatch must override each template's default palette */
+.template-card .resume-card-art .mini-resume-head,
+.template-card .resume-card-art .mini-head {
+  background: var(--resume-accent) !important;
+}
+.template-card .resume-card-art .mini-section,
+.template-card .resume-card-art .mini-title {
+  background-color: var(--resume-accent) !important;
+}
+.template-card .resume-card-art .mini-section {
+  color: var(--resume-accent) !important;
+}
+.template-card .resume-card-art .template-badge {
+  color: var(--resume-accent) !important;
+  border-color: var(--resume-accent) !important;
+}
+
+/* Keep the chosen accent visible in the full-size editor preview too */
+.resume-paper-live .resume-live-header h1,
+.resume-paper-live .resume-live-role,
+.resume-paper-live .resume-live-section h2 {
+  color: var(--resume-accent) !important;
+}
+.resume-paper-live .resume-live-header {
+  border-color: var(--resume-accent) !important;
+}
+.resume-paper-live .resume-live-section h2 {
+  border-bottom-color: var(--resume-accent) !important;
+}
