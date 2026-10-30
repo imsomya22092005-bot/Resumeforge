@@ -1007,12 +1007,12 @@ button.shortcut-card{cursor:pointer}
 .template-card .resume-card-art .mini-head {
   background: var(--resume-accent) !important;
 }
-.template-card .resume-card-art .mini-section,
+.template-card .resume-card-art .mini-section {
+  background: transparent !important;
+  color: var(--resume-accent) !important;
+}
 .template-card .resume-card-art .mini-title {
   background-color: var(--resume-accent) !important;
-}
-.template-card .resume-card-art .mini-section {
-  color: var(--resume-accent) !important;
 }
 .template-card .resume-card-art .template-badge {
   color: var(--resume-accent) !important;
@@ -1030,4 +1030,20 @@ button.shortcut-card{cursor:pointer}
 }
 .resume-paper-live .resume-live-section h2 {
   border-bottom-color: var(--resume-accent) !important;
+}
+
+/* Ensure color swatches sit above the moving template carousel and receive clicks */
+.template-card { position: relative; }
+.template-color-options {
+  position: relative !important;
+  z-index: 20 !important;
+  pointer-events: auto !important;
+}
+.template-color-swatch {
+  position: relative !important;
+  z-index: 21 !important;
+  display: inline-block !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation;
 }
