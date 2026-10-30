@@ -1065,3 +1065,214 @@ button.shortcut-card{cursor:pointer}
 .resume-upload-picker input { max-width: 190px; margin-left: auto; font-size: 11px; }
 .resume-choice-actions { display: flex; justify-content: space-between; gap: 12px; margin-top: 28px; }
 @media(max-width:600px) { .resume-choice-card { padding: 25px 18px; margin: 20px auto 45px; } .resume-recommended { position: static; align-self: flex-start; margin-left: auto; } .resume-source-option { flex-wrap: wrap; } .resume-upload-picker { flex-wrap: wrap; } .resume-upload-picker input { max-width: 100%; margin-left: 0; } }
+
+
+/* Refined resume-source selection screen */
+.resume-choice-page {
+  width: min(100% - 40px, 1040px);
+  max-width: 1040px;
+  min-height: calc(100vh - 86px);
+  margin: 0 auto;
+  padding: 28px 0 72px;
+  position: relative;
+}
+.resume-choice-page::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229,190,181,.24), rgba(245,250,225,0) 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+.resume-choice-page > .page-back-button,
+.resume-choice-card { position: relative; z-index: 1; }
+.resume-choice-page > .page-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e6d8ce;
+  border-radius: 999px;
+  background: rgba(255,255,255,.82);
+  padding: 10px 16px;
+  color: #594747;
+  transition: background .2s ease, transform .2s ease;
+}
+.resume-choice-page > .page-back-button:hover {
+  background: #fff;
+  transform: translateX(-2px);
+}
+.resume-choice-card {
+  width: min(100%, 760px);
+  max-width: 760px;
+  margin: 34px auto 0;
+  padding: clamp(28px, 5vw, 54px);
+  background: rgba(255,255,255,.96);
+  border: 1px solid #eadbd3;
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(65,48,42,.09);
+}
+.resume-choice-card > .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #f5eee8;
+  color: #896c6c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+.resume-choice-card > .eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d18b72;
+}
+.resume-choice-card h1 {
+  max-width: 600px;
+  margin: 20px 0 12px;
+  color: #403637;
+  font-size: clamp(32px, 5vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -.045em;
+  font-weight: 750;
+}
+.resume-choice-card h1 span { color: #896c6c; }
+.resume-choice-subtitle {
+  margin: 0 0 32px;
+  color: #827472;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.resume-source-option {
+  min-height: 116px;
+  width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 22px minmax(0,1fr);
+  align-items: start;
+  column-gap: 16px;
+  padding: 24px;
+  margin: 16px 0;
+  text-align: left;
+  border: 1.5px solid #e9e1dc;
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.resume-source-option:hover {
+  border-color: #c8aaa1;
+  box-shadow: 0 9px 24px rgba(65,48,42,.06);
+  transform: translateY(-1px);
+}
+.resume-source-option.active {
+  border: 1.5px solid #896c6c;
+  background: linear-gradient(110deg, #fbf5f1, #fffdfb);
+  box-shadow: 0 0 0 3px rgba(137,108,108,.10);
+  padding: 24px;
+}
+.resume-source-radio {
+  width: 21px;
+  height: 21px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  margin-top: 2px;
+  border: 1.5px solid #b9aaa4;
+  border-radius: 50%;
+  background: white;
+}
+.resume-source-option.active .resume-source-radio { border-color: #896c6c; }
+.resume-source-radio span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #896c6c;
+}
+.resume-source-copy { min-width: 0; display: grid; gap: 8px; padding: 0; }
+.resume-source-copy strong {
+  color: #44383a;
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+.resume-source-copy small {
+  max-width: 540px;
+  color: #817574;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.resume-recommended {
+  position: static;
+  grid-column: 2;
+  justify-self: start;
+  margin-top: 5px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #e9f0df;
+  color: #617354;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: .025em;
+}
+.resume-upload-picker {
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 16px 18px;
+  margin-top: 18px;
+  border: 1.5px dashed #cdbbb2;
+  border-radius: 14px;
+  background: #fcfaf7;
+  color: #5d4c4c;
+  font-size: 13px;
+  font-weight: 600;
+}
+.resume-upload-picker svg { color: #896c6c; flex: none; }
+.resume-upload-picker input {
+  min-width: 0;
+  max-width: 210px;
+  margin-left: auto;
+  color: #817574;
+  font-size: 11px;
+}
+.resume-choice-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #f0e9e4;
+}
+.resume-choice-actions .button {
+  min-width: 124px;
+  min-height: 46px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+@media (max-width: 640px) {
+  .resume-choice-page { width: min(100% - 28px, 1040px); padding-top: 18px; }
+  .resume-choice-card { margin-top: 22px; padding: 26px 20px; border-radius: 18px; }
+  .resume-choice-card h1 { font-size: clamp(29px, 8vw, 38px); }
+  .resume-choice-subtitle { margin-bottom: 24px; font-size: 14px; }
+  .resume-source-option, .resume-source-option.active { padding: 19px 16px; column-gap: 12px; }
+  .resume-source-copy strong { font-size: 15px; }
+  .resume-source-copy small { font-size: 12px; }
+  .resume-upload-picker { align-items: flex-start; flex-wrap: wrap; }
+  .resume-upload-picker input { width: 100%; max-width: 100%; margin: 4px 0 0; }
+  .resume-choice-actions { margin-top: 24px; padding-top: 20px; }
+}
