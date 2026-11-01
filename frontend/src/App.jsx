@@ -205,9 +205,16 @@ export default function App() {
   const saveResume = () => {
     const id = resumeId || (globalThis.crypto?.randomUUID?.() ?? String(Date.now()));
     const item = { ...resume, id, template, templateAccent, updatedAt: new Date().toISOString() };
-    setSaved(current => [item, ...current.filter(entry => entry.id !== id)]);
-    setResumeId(id);
-    notify('Resume saved on this device');
+    const nextSaved = [item, ...saved.filter(entry => entry.id !== id)];
+    try {
+      localStorage.setItem('resumeforge-resumes', JSON.stringify(nextSaved));
+      setSaved(nextSaved);
+      setResumeId(id);
+      notify('Draft saved successfully on this device');
+    } catch (error) {
+      console.error('Could not save resume draft:', error);
+      notify('Could not save. Your browser storage may be full.');
+    }
   };
   const openResume = (item) => {
     setResume({ ...starterResume, ...item });
@@ -222,7 +229,8 @@ export default function App() {
     notify('Resume deleted');
   };
   const downloadResume = () => {
-    window.print();
+    // Print only the actual resume document; browser dialog lets the user save it as PDF.
+    window.requestAnimationFrame(() => window.print());
   };
   const updateListItem = (key, id, field, value) => {
     update(key, resume[key].map(item => item.id === id ? { ...item, [field]: value } : item));
@@ -674,6 +682,8 @@ export default function App() {
           </div>
         </section>
       </main>}
+
+      <div className="resume-print-root" aria-hidden="true"><ResumePreview resume={resume} template={template} accent={templateAccent}/></div>
 
       {showFinalPreview && <div className="modal-backdrop no-print" onClick={()=>setShowFinalPreview(false)}><div className="final-preview-modal" onClick={e=>e.stopPropagation()}><button type="button" className="modal-close" onClick={()=>setShowFinalPreview(false)}><X size={18}/></button><h2>{templates.find(item=>item.id===template)?.name || 'Resume'} preview</h2><div className="final-preview-paper"><ResumePreview resume={resume} template={template} accent={templateAccent}/></div><div className="final-preview-actions"><button className="button button-outline" onClick={()=>setShowFinalPreview(false)}>Close</button><button className="button button-dark" onClick={downloadResume}><Download size={15}/> Download PDF</button></div></div></div>}
 
