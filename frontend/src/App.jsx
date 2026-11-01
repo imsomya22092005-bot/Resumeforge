@@ -508,7 +508,7 @@ export default function App() {
           <article className="start-step"><span className="start-step-number">2</span><div className="start-step-icon"><FileText size={23}/></div><h2>Build your resume</h2><p>with our industry-specific bullet points</p></article>
           <article className="start-step"><span className="start-step-number">3</span><div className="start-step-icon"><Download size={23}/></div><h2>Download</h2><p>in your desired format. You’re ready to apply!</p></article>
         </section>
-        <section className="start-resume-actions"><button className="button button-dark" onClick={() => { setResume(starterResume); setResumeId(null); setSection('personal'); setPage('editor'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
+        <section className="start-resume-actions"><button className="button button-dark" onClick={() => { setPage('experience'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
       </main>}
 
       {page === 'experience' && <main className="page-content experience-page"><button className="back-button page-back-button" onClick={() => setPage('start')}><ArrowLeft size={16}/> Back</button>
@@ -532,11 +532,11 @@ export default function App() {
           <h2>Are you a student?</h2>
           <p>This helps us suggest resume layouts that fit your current stage.</p>
           <div className="student-options">
-            <button type="button" className={isStudent === 'yes' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'yes'} onClick={() => { setIsStudent('yes'); setPage('education'); window.scrollTo({top:0,behavior:'smooth'}); }}><span className="student-option-radio">{isStudent === 'yes' ? '✓' : ''}</span>Yes</button>
-            <button type="button" className={isStudent === 'no' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'no'} onClick={() => { setIsStudent('no'); setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}><span className="student-option-radio">{isStudent === 'no' ? '✓' : ''}</span>No</button>
+            <button type="button" className={isStudent === 'yes' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'yes'} onClick={() => setIsStudent('yes')}><span className="student-option-radio">{isStudent === 'yes' ? '✓' : ''}</span>Yes</button>
+            <button type="button" className={isStudent === 'no' ? 'student-option selected' : 'student-option'} aria-pressed={isStudent === 'no'} onClick={() => setIsStudent('no')}><span className="student-option-radio">{isStudent === 'no' ? '✓' : ''}</span>No</button>
           </div>
         </section>}
-        <section className="experience-actions"><button className="button button-outline" onClick={() => { setPage('start'); window.scrollTo({top:0,behavior:'smooth'}); }}><ArrowLeft size={16}/> Back</button><button className="button button-dark" disabled={!experienceLevel || !isStudent} onClick={() => { setPage('templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
+        <section className="experience-actions"><button className="button button-outline" onClick={() => { setPage('start'); window.scrollTo({top:0,behavior:'smooth'}); }}><ArrowLeft size={16}/> Back</button><button className="button button-dark" disabled={!experienceLevel || !isStudent} onClick={() => { setPage(isStudent === 'yes' ? 'education' : 'templates'); window.scrollTo({top:0,behavior:'smooth'}); }}>Next <ArrowRight size={16}/></button></section>
       </main>}
 
       {page === 'education' && <main className="page-content education-page"><button className="back-button page-back-button" onClick={() => setPage('experience')}><ArrowLeft size={16}/> Back</button>
