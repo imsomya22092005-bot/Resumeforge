@@ -108,16 +108,9 @@ const loadSaved = () => {
 };
 
 export default function App() {
-  const [page, setPage] = useState(() => {
-    const allowedPages = ['home', 'login', 'signup', 'about', 'templates', 'dashboard', 'start', 'experience', 'education', 'resume-choice', 'editor'];
-    try {
-      const savedPage = localStorage.getItem('resumeforge-current-page');
-      const savedUser = JSON.parse(localStorage.getItem('resumeforge-user') || 'null');
-      const protectedPages = ['templates', 'dashboard', 'start', 'experience', 'education', 'editor'];
-      if (protectedPages.includes(savedPage) && !savedUser) return 'home';
-      return allowedPages.includes(savedPage) ? savedPage : 'home';
-    } catch { return 'home'; }
-  });
+  // Always open the public landing page on a fresh visit or reload.
+  // The signed-in user session and saved resumes remain stored locally.
+  const [page, setPage] = useState('home');
   const [resume, setResume] = useState(starterResume);
   const [template, setTemplate] = useState('classic');
   const [experienceLevel, setExperienceLevel] = useState('');
