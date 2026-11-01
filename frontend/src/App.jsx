@@ -17,6 +17,33 @@ const starterResume = {
   skills: 'JavaScript, React, HTML, CSS, Communication',
   projects: [{ id: 3, title: 'Featured Project', description: 'What you built, how you built it, and the result.' }]
 };
+const getResumeCompleteness = (resume = {}) => {
+  const realText = value => {
+    const text = String(value ?? '').trim();
+    if (!text) return false;
+    return !/^(your name|your job title|company name|your degree|university name|describe your impact.*|relevant coursework.*|featured project|what you built.*|aspiring software developer|professional title|you@example\.com|\+91 98765 43210)$/i.test(text);
+  };
+  const experience = Array.isArray(resume.experience) && resume.experience.some(item =>
+    realText(item?.title) || realText(item?.company) || realText(item?.description));
+  const education = Array.isArray(resume.education) && resume.education.some(item =>
+    realText(item?.degree) || realText(item?.school) || realText(item?.description));
+  const projects = Array.isArray(resume.projects) && resume.projects.some(item =>
+    realText(item?.title) || realText(item?.description));
+  const checks = [
+    realText(resume.firstName) || realText(resume.name) && resume.name !== 'Your Name',
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(resume.email || '')),
+    String(resume.phone || '').replace(/\D/g, '').length >= 7 && resume.phone !== '+91 98765 43210',
+    realText(resume.location) && resume.location !== 'India',
+    realText(resume.role) && resume.role !== 'Aspiring Software Developer',
+    realText(resume.summary) && !String(resume.summary).startsWith('Curious and motivated professional'),
+    experience,
+    education,
+    realText(resume.skills) && !String(resume.skills).startsWith('JavaScript, React, HTML'),
+    projects
+  ];
+  return Math.round(checks.filter(Boolean).length / checks.length * 100);
+};
+
 const templates = [
 {id:'classic',name:'Classic Professional',detail:'Clear and ATS-friendly',tag:'ATS FRIENDLY',color:'#896C6C',columns:1,photo:false,person:'ALEX MORGAN',role:'SOFTWARE DEVELOPER',email:'alex.morgan@email.com',skills:'JavaScript · React · SQL'},
 {id:'modern',name:'Modern Sidebar',detail:'Bold, modern two-column style',tag:'POPULAR',color:'#34495e',columns:2,photo:true,person:'JAMIE WILSON',role:'MARKETING SPECIALIST',email:'jamie.w@email.com',skills:'Campaigns · SEO · Analytics'},
@@ -616,7 +643,7 @@ export default function App() {
         </section>
         <section className="dashboard-saved-section">
           <div className="dashboard-heading"><div><div className="eyebrow">YOUR WORKSPACE</div><h2>My resumes<span>.</span></h2><p>Pick up where you left off, or start something new.</p></div>{saved.length > 0 && <button className="button button-outline" onClick={() => beginResume()}><Plus size={16}/> New resume</button>}</div>
-          {saved.length === 0 ? <div className="empty-state"><div className="empty-icon"><FileText size={27} /></div><h2>Your first draft starts here.</h2><p>Create a resume and it will appear here, ready whenever you are.</p><button className="button button-dark" onClick={() => startNew()}>Create My Resume <ArrowRight size={16} /></button></div> : <div className="saved-grid">{(Array.isArray(saved) ? saved : []).map(item => <div className="saved-card" key={item.id}><div className="saved-preview"><ResumePreview resume={item} template={item.template} accent={item.templateAccent} /></div><div className="saved-info"><div><h3>{item.name || 'Untitled resume'}</h3><p>{item.role || 'Resume draft'}</p></div><button className="icon-button danger" onClick={() => deleteResume(item.id)} aria-label="Delete resume"><Trash2 size={16} /></button></div><button className="button button-outline full-width" onClick={() => openResume(item)}>Continue editing <ArrowRight size={15} /></button></div>)}</div>}
+          {saved.length === 0 ? <div className="empty-state"><div className="empty-icon"><FileText size={27} /></div><h2>Your first draft starts here.</h2><p>Create a resume and it will appear here, ready whenever you are.</p><button className="button button-dark" onClick={() => startNew()}>Create My Resume <ArrowRight size={16} /></button></div> : <div className="saved-grid">{(Array.isArray(saved) ? saved : []).map(item => <div className="saved-card" key={item.id}><div className="saved-preview"><ResumePreview resume={item} template={item.template} accent={item.templateAccent} /></div><div className="saved-info"><div><h3>{item.name || 'Untitled resume'}</h3><p>{item.role || 'Resume draft'}</p></div><button className="icon-button danger" onClick={() => deleteResume(item.id)} aria-label="Delete resume"><Trash2 size={16} /></button></div><div className="saved-completeness"><div><span style={{width:getResumeCompleteness(item)+'%'}}/></div><small>Resume completeness <b>{getResumeCompleteness(item)}%</b></small></div><button className="button button-outline full-width" onClick={() => openResume(item)}>Continue editing <ArrowRight size={15} /></button></div>)}</div>}
         </section>
       </main>}
 
@@ -624,7 +651,7 @@ export default function App() {
         <aside className="builder-sidebar no-print">
           <button className="builder-brand" onClick={() => setPage('home')}><span className="brand-mark"><FileText size={19}/></span> ResumeForge</button>
           <div className="builder-steps">{[['personal','Heading'],['education','Education'],['experience','Experience'],['skills','Skills'],['summary','Summary'],['projects','Finalize']].map(([id,label],index)=><button key={id} className={'builder-step'+(section===id?' active':'')} onClick={()=>setSection(id)}><span>{index+1}</span>{label}</button>)}</div>
-          <div className="builder-completion"><strong>Resume completeness</strong><div><span style={{width:Math.max(4,Math.round(([resume.name,resume.email,resume.phone,resume.role,resume.summary,resume.skills].filter(Boolean).length/6)*100))+'%'}}/></div><small>{Math.round(([resume.name,resume.email,resume.phone,resume.role,resume.summary,resume.skills].filter(Boolean).length/6)*100)}%</small></div>
+          <div className="builder-completion"><strong>Resume completeness</strong><div><span style={{width:getResumeCompleteness(resume)+'%'}}/></div><small>{getResumeCompleteness(resume)}%</small></div>
         </aside>
         <section className="builder-main">
           <div className="builder-topbar no-print"><button className="back-button" onClick={()=>setPage('resume-choice')}><ArrowLeft size={16}/> Go Back</button><div className="toolbar-actions"><button className="button button-outline button-small" onClick={saveResume}>Save draft</button><button className="button button-dark button-small" onClick={downloadResume}><Download size={15}/> Download PDF</button></div></div>
