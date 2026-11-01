@@ -1480,3 +1480,52 @@ button.shortcut-card{cursor:pointer}
 @media(max-width:760px) {
   .builder-main { background: #f5fae1; }
 }
+
+
+/* Optional profile photo in resume heading and live preview */
+.resume-photo-upload {
+  display:flex; align-items:center; gap:16px;
+  margin:0 0 26px; padding:16px;
+  border:1px solid #e5beb5; border-radius:14px;
+  background:rgba(255,255,255,.68);
+}
+.resume-photo-upload-preview {
+  width:68px; height:68px; flex:0 0 68px;
+  display:grid; place-items:center; overflow:hidden;
+  border-radius:50%; color:#896c6c;
+  background:#eee6ca; border:2px solid #e5beb5;
+}
+.resume-photo-upload-preview img { width:100%; height:100%; object-fit:cover; }
+.resume-photo-upload-copy { display:flex; flex-wrap:wrap; align-items:center; gap:5px 12px; min-width:0; }
+.resume-photo-upload-copy strong { color:#594947; font-size:14px; }
+.resume-photo-upload-copy strong span,
+.resume-photo-upload-copy p,
+.resume-photo-upload-copy small { color:#806d68; font-weight:400; font-size:12px; }
+.resume-photo-upload-copy p { flex-basis:100%; margin:0; }
+.resume-photo-upload-copy input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+.resume-photo-upload-button {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 13px; border-radius:22px;
+  color:#fffaf6; background:#896c6c;
+  font-size:12px; font-weight:700; cursor:pointer;
+}
+.resume-photo-upload-button:hover { background:#755b5b; }
+.resume-photo-upload-copy small { flex-basis:100%; }
+.resume-photo-remove {
+  border:0; background:transparent; color:#896c6c;
+  font-size:12px; font-weight:700; text-decoration:underline; cursor:pointer;
+}
+.resume-live-header.has-resume-photo {
+  display:flex; align-items:center; gap:16px;
+}
+.resume-live-photo {
+  width:76px; height:76px; flex:0 0 76px;
+  object-fit:cover; border-radius:50%;
+  border:3px solid rgba(255,255,255,.75);
+}
+.resume-live-identity { min-width:0; flex:1; }
+@media(max-width:760px) {
+  .resume-photo-upload { align-items:flex-start; padding:12px; }
+  .resume-photo-upload-preview { width:56px; height:56px; flex-basis:56px; }
+  .resume-live-photo { width:58px; height:58px; flex-basis:58px; }
+}
