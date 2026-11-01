@@ -1394,3 +1394,89 @@ button.shortcut-card{cursor:pointer}
  .resume-builder-workspace,.builder-content { display:block !important; }
  .builder-preview-panel { position:static !important; }
 }
+
+
+/* Resume builder: match the warm ResumeForge visual identity */
+.resume-builder-workspace {
+  background: #f5fae1;
+  color: #493d3b;
+}
+.builder-sidebar {
+  background: linear-gradient(180deg, #896c6c 0%, #755b5b 100%);
+  color: #fffaf6;
+}
+.builder-brand { color: #fffaf6; }
+.builder-brand .brand-mark { color: #e5beb5; }
+.builder-step { color: #f5e9e3; }
+.builder-step > span {
+  background: rgba(255,255,255,.12);
+  border-color: #e5beb5;
+  color: #fffaf6;
+}
+.builder-step.active { color: #fff; }
+.builder-step.active > span {
+  background: #eee6ca;
+  color: #755b5b;
+  border-color: #eee6ca;
+}
+.builder-completion strong { color: #fffaf6; }
+.builder-completion > div { background: rgba(255,255,255,.25); }
+.builder-completion > div span { background: #e5beb5; }
+.builder-completion small { color: #f5e9e3; }
+.builder-main { background: linear-gradient(135deg, #f5fae1 0%, #fffdf7 54%, #eee6ca 100%); }
+.builder-topbar .back-button { color: #896c6c; }
+.builder-form-panel > h1 { color: #493d3b; }
+.builder-subtitle { color: #806d68; }
+.builder-required { color: #755b5b; }
+.builder-form-panel .field-label { color: #594947; }
+.builder-form-panel .field-label input,
+.builder-form-panel .field-label textarea {
+  border-color: #d7c4bb;
+  border-radius: 10px;
+  background: rgba(255,255,255,.88);
+  color: #493d3b;
+}
+.builder-form-panel .field-label input:focus,
+.builder-form-panel .field-label textarea:focus {
+  border-color: #896c6c;
+  box-shadow: 0 0 0 3px rgba(137,108,108,.13);
+}
+.builder-additional { color: #594947; }
+.builder-additional > div button {
+  border-color: #cba69c;
+  color: #755b5b;
+  background: #fffdf8;
+}
+.builder-additional > div button:hover {
+  background: #eee6ca;
+  border-color: #896c6c;
+}
+.builder-nav-buttons { border-color: #e5d8ce; }
+.builder-nav-buttons .button-dark,
+.builder-topbar .button-dark {
+  background: #896c6c;
+  border-color: #896c6c;
+  color: #fff;
+}
+.builder-nav-buttons .button-dark:hover,
+.builder-topbar .button-dark:hover { background: #755b5b; }
+.builder-nav-buttons .button-outline,
+.builder-topbar .button-outline {
+  border-color: #c9aaa0;
+  color: #755b5b;
+  background: #fffdf8;
+}
+.builder-preview-heading { color: #755b5b; }
+.builder-preview-heading .live-dot { background: #a9b78b; }
+.builder-preview-panel .resume-paper-live {
+  border: 1px solid #e5d4c8;
+  box-shadow: 0 12px 34px rgba(89,65,59,.13);
+}
+.saved-completeness { display:grid; gap:7px; margin:14px 0; }
+.saved-completeness > div { height:7px; overflow:hidden; border-radius:20px; background:#eee6ca; }
+.saved-completeness > div span { display:block; height:100%; border-radius:inherit; background:#896c6c; transition:width .25s ease; }
+.saved-completeness small { display:flex; justify-content:space-between; color:#806d68; font-size:11px; }
+.saved-completeness small b { color:#755b5b; }
+@media(max-width:760px) {
+  .builder-main { background: #f5fae1; }
+}
