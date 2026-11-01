@@ -247,7 +247,6 @@ export default function App() {
           {!currentUser || page === 'home' || page === 'about'
             ? <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>
             : <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></>}
-          <button className="button button-dark button-small" onClick={() => createResumeEntry()}>Create my resume <ArrowRight size={15} /></button>
         </div>
       </header>
 
@@ -496,7 +495,6 @@ export default function App() {
             <button className="button button-dark auth-submit" type="submit">{page === 'signup' ? 'Create account' : 'Log in'} <ArrowRight size={16}/></button>
           </form>
           <p className="auth-switch">{page === 'signup' ? 'Already have an account?' : "Don't have an account?"} <button onClick={() => openAuth(page === 'signup' ? 'login' : 'signup')}>{page === 'signup' ? 'Log in' : 'Sign up'}</button></p>
-          <p className="auth-note">Demo mode: your profile is saved only in this browser. Secure account authentication will be connected with the backend later.</p>
           <button className="auth-back" onClick={() => setPage('home')}><ArrowLeft size={15}/> Back to home</button>
         </section>
         <div className={page === 'signup' ? 'auth-side-note auth-side-signup' : 'auth-side-note auth-side-login'}>
