@@ -288,7 +288,7 @@ export default function App() {
         <section className="trust-strip"><span>DESIGNED FOR THE NEXT STEP</span><div><Check size={15} /> Clean layouts</div><div><Check size={15} /> Easy to customize</div><div><Check size={15} /> Print-ready resumes</div></section>
         <section className="home-intro-copy" id="about-us">
           <p>Our online resume builder makes it simple to create a professional resume from your phone, laptop, or tablet using 30+ customizable resume templates — anytime, anywhere.</p>
-          <p>Create a resume using our <button className="inline-text-link" onClick={() => notify('AI resume suggestions are coming soon.')}>AI resume builder</button> feature, plus take advantage of expert suggestions, a built-in resume editor, and customizable modern and professional resume templates. <button className="inline-text-link" onClick={() => setPage('templates')}>Free users</button> have access to our easy-to-use resume creator and TXT file downloads.</p>
+          <p>Create a resume using our AI resume builder feature, plus take advantage of expert suggestions, a built-in resume editor, and customizable modern and professional resume templates. Free users have access to our easy-to-use resume creator and TXT file downloads.</p>
         </section>
         <section className="home-templates section-wrap" id="features">
           <div className="template-section-title"><div className="eyebrow">FIND YOUR PERFECT LOOK</div><h2>Pick From 500+ Free Resume Templates<br className="desktop-break" /> and Build Your Resume in Minutes</h2><p>Explore different styles and find the one that feels like you.</p></div>
@@ -300,9 +300,9 @@ export default function App() {
           <div className="feature-showcase-grid">
             <article className="feature-tile feature-tile-large"><div className="feature-icon"><WandSparkles size={22}/></div><span className="feature-number">01 / CREATE</span><h3>Powerful resume builder</h3><p>Use our potent creation tools and expert guidance to create the perfect resume for your next job application.</p><div className="feature-decoration"><FileText size={76}/><Sparkles size={20}/></div></article>
             <article className="feature-tile"><div className="feature-icon"><LayoutTemplate size={22}/></div><span className="feature-number">02 / CHOOSE</span><h3>Professional templates</h3><p>Choose from 25+ applicant tracking systems (ATS)-friendly modern and professional templates.</p></article>
-            <article className="feature-tile"><div className="feature-icon"><Sparkles size={22}/></div><span className="feature-number">03 / PERSONALIZE</span><h3>Customize fonts and colors</h3><p>Select custom <a href="https://www.resumebuilder.com/career-center/best-font-for-resume/" target="_blank" rel="noreferrer">fonts</a> and colors on any resume template.</p></article>
+            <article className="feature-tile"><div className="feature-icon"><Sparkles size={22}/></div><span className="feature-number">03 / PERSONALIZE</span><h3>Customize fonts and colors</h3><p>Select custom fonts and colors on any resume template.</p></article>
             <article className="feature-tile"><div className="feature-icon"><FileText size={22}/></div><span className="feature-number">04 / EXPLORE</span><h3>Free resume examples</h3><p>Use our more than 500 resume examples and templates to see what a great resume looks like in your field.</p></article>
-            <article className="feature-tile"><div className="feature-icon"><Check size={22}/></div><span className="feature-number">05 / STAND OUT</span><h3>ATS-friendly templates</h3><p>Sail through <a href="https://www.resumebuilder.com/career-center/applicant-tracking-system-tools-for-job-seekers/" target="_blank" rel="noreferrer">applicant tracking systems</a> with resume templates that appeal to both machines and humans.</p></article>
+            <article className="feature-tile"><div className="feature-icon"><Check size={22}/></div><span className="feature-number">05 / STAND OUT</span><h3>ATS-friendly templates</h3><p>Sail through applicant tracking systems with resume templates that appeal to both machines and humans.</p></article>
             <article className="feature-tile feature-tile-wide"><div className="feature-icon"><CircleHelp size={22}/></div><span className="feature-number">06 / GET GUIDANCE</span><h3>Expert tips and guidance</h3><p>Get help every step of the way as you build your resume with expert tips and suggested phrases.</p><div className="feature-quote">“Make your experience easy to understand, and your strengths easy to remember.”</div></article>
           </div>
           <div className="feature-showcase-bottom"><div><span className="eyebrow">READY FOR YOUR NEXT CHAPTER?</span><h3>Build a resume that opens doors.</h3></div><button className="button button-dark" onClick={() => createResumeEntry()}>Build My Resume Now <ArrowRight size={17}/></button></div>
@@ -378,7 +378,7 @@ export default function App() {
           <div className="expert-guidance-copy">
             <div className="eyebrow"><Sparkles size={14}/> EXPERT INSIGHTS, REAL RESULTS</div>
             <h2>Expert Resume Tips <span>— Even on the Go</span></h2>
-            <p>Access <a href="https://www.resumebuilder.com/resume-examples/" target="_blank" rel="noreferrer">job-specific resume examples</a> written by certified professionals, no matter where you are. Edit your resume during your commute, while waiting for an interview, or from the comfort of your home without losing any features.</p>
+            <p>Access job-specific resume examples written by certified professionals, no matter where you are. Edit your resume during your commute, while waiting for an interview, or from the comfort of your home without losing any features.</p>
             <button className="button button-dark expert-guidance-cta" onClick={() => createResumeEntry()}>Get Expert Guidance <ArrowRight size={17}/></button>
             <div className="expert-guidance-benefits"><div><span><FileText size={17}/></span><small>Job-Specific<br/>Examples</small></div><div><span><Sparkles size={17}/></span><small>Professional<br/>Guidance</small></div><div><span><Smartphone size={17}/></span><small>Edit Anywhere,<br/>Anytime</small></div></div>
           </div>
@@ -400,7 +400,7 @@ export default function App() {
           <div className="customize-copy">
             <div className="eyebrow"><Palette size={14}/> YOUR STYLE, YOUR STORY</div>
             <h2>Custom Resume Maker <span>That Fits Your Lifestyle</span></h2>
-            <p>Quickly change your resume's font styles, colors, and layout on any screen — from a small phone display to a large desktop monitor. Browse our <a href="https://www.resumebuilder.com/resume-templates/" target="_blank" rel="noreferrer">resume templates</a> to start customizing your design and making it stand out.</p>
+            <p>Quickly change your resume's font styles, colors, and layout on any screen — from a small phone display to a large desktop monitor. Browse our resume templates to start customizing your design and making it stand out.</p>
             <button className="button button-dark customize-cta" onClick={() => createResumeEntry()}>Customize My Resume Now <ArrowRight size={17}/></button>
             <div className="customize-mini-points"><span><Check size={14}/> Flexible layouts</span><span><Check size={14}/> Personal style</span><span><Check size={14}/> Live preview</span></div>
           </div>
