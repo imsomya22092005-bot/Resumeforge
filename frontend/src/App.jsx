@@ -137,6 +137,24 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState(() => {
     try { return JSON.parse(localStorage.getItem('resumeforge-user') || 'null'); } catch { return null; }
   });
+  const [profile, setProfile] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('resumeforge-profile') || '{}'); } catch { return {}; }
+  });
+  const updateProfile = (key, value) => {
+    setProfile(current => {
+      const next = { ...current, [key]: value };
+      try { localStorage.setItem('resumeforge-profile', JSON.stringify(next)); } catch {}
+      if (key === 'fullName' || key === 'email') {
+        setCurrentUser(user => {
+          if (!user) return user;
+          const updated = { ...user, ...(key === 'fullName' ? { name: value } : { email: value }) };
+          try { localStorage.setItem('resumeforge-user', JSON.stringify(updated)); } catch {}
+          return updated;
+        });
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     localStorage.setItem('resumeforge-resumes', JSON.stringify(saved));
@@ -249,7 +267,7 @@ export default function App() {
         <div className="top-actions">
           {!currentUser || page === 'home' || page === 'about'
             ? <><button className="button button-quiet button-small" onClick={() => openAuth('login')}>Log in</button><button className="button button-outline button-small" onClick={() => openAuth('signup')}>Sign up</button></>
-            : <><button className="nav-link user-greeting" onClick={() => setPage('dashboard')}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></>}
+            : <><button className="nav-link user-greeting" onClick={() => { setPage('profile'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Hi, {currentUser.name}</button><button className="button button-outline button-small" onClick={signOut}>Log out</button></>}
         </div>
       </header>
 
@@ -610,6 +628,50 @@ export default function App() {
           {resumeSource==='upload' && <label className="resume-upload-picker"><FileText size={18}/><span>{existingResumeFile ? existingResumeFile.name : 'Choose your resume (PDF or DOCX)'}</span><input type="file" id="resume-choice-file" accept=".pdf,.doc,.docx" onChange={event => setExistingResumeFile(event.target.files?.[0] || null)}/></label>}
           <div className="resume-choice-actions"><button type="button" className="button button-outline" onClick={() => setPage('templates')}>Back</button><button type="button" className="button button-dark" onClick={() => { if(resumeSource==='scratch'){setResume(starterResume);setResumeId(null);setSection('personal');setPage('editor');window.scrollTo({top:0,behavior:'smooth'});} else if(existingResumeFile){setResume(starterResume);setResumeId(null);setSection('personal');setPage('editor');notify('Resume selected. You can now add or update your details in the editor.');} else {document.getElementById('resume-choice-file')?.click();} }}>Next <ArrowRight size={16}/></button></div>
         </section>
+      </main>}
+
+      {page === 'profile' && <main className="profile-page">
+        <style>{`
+          .profile-page{max-width:1120px;margin:0 auto;padding:54px 28px 90px;color:#263746}
+          .profile-hero{background:linear-gradient(125deg,#fff4df 0%,#f7e9d9 52%,#e7f0f2 100%);border:1px solid #eadfce;border-radius:26px;padding:34px 38px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:28px}
+          .profile-hero h1{font-size:clamp(30px,4vw,44px);margin:10px 0 8px;letter-spacing:-1.5px;color:#243746}.profile-hero p{margin:0;color:#66727b;max-width:570px;line-height:1.65}
+          .profile-avatar{width:88px;height:88px;flex:0 0 88px;border-radius:26px;background:linear-gradient(145deg,#0b6682,#6ba4b5);color:white;display:grid;place-items:center;font-size:30px;font-weight:700;box-shadow:0 12px 30px #245d7130}
+          .profile-layout{display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:start}.profile-nav,.profile-card{background:#fff;border:1px solid #e8e8e5;border-radius:20px;box-shadow:0 8px 28px #2537460a}
+          .profile-nav{padding:18px;position:sticky;top:90px}.profile-nav small{display:block;color:#89939a;font-weight:700;letter-spacing:1.2px;font-size:10px;margin:4px 10px 12px}.profile-nav button{width:100%;text-align:left;border:0;background:transparent;padding:12px 13px;border-radius:11px;color:#586875;font:inherit;cursor:pointer}.profile-nav button:hover{background:#f7f0e5;color:#185b70}
+          .profile-card{padding:28px;margin-bottom:20px}.profile-card h2{margin:0 0 7px;font-size:21px;color:#243746}.profile-card>p{margin:0 0 24px;color:#78848c;font-size:14px}
+          .profile-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}.profile-field{display:flex;flex-direction:column;gap:8px}.profile-field.full{grid-column:1/-1}.profile-field label{font-size:12px;font-weight:700;color:#52616c}.profile-field input,.profile-field textarea,.profile-field select{width:100%;box-sizing:border-box;border:1px solid #dce1e2;border-radius:11px;padding:12px 13px;background:#fcfdfd;color:#263746;font:inherit;outline:none;transition:.2s}.profile-field input:focus,.profile-field textarea:focus,.profile-field select:focus{border-color:#43869a;box-shadow:0 0 0 3px #43869a18}.profile-field textarea{min-height:108px;resize:vertical}.profile-save-note{display:flex;align-items:center;gap:8px;color:#527c68;font-size:13px;margin-top:18px}
+          .profile-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}.profile-back{border:0;background:transparent;color:#23677d;font-weight:650;cursor:pointer;padding:10px 0}
+          @media(max-width:700px){.profile-page{padding:28px 16px 60px}.profile-hero{padding:25px;align-items:flex-start}.profile-avatar{width:62px;height:62px;flex-basis:62px;border-radius:19px;font-size:23px}.profile-layout{grid-template-columns:1fr}.profile-nav{position:static;display:flex;overflow:auto;gap:5px}.profile-nav small{display:none}.profile-nav button{white-space:nowrap;width:auto}.profile-card{padding:21px}.profile-fields{grid-template-columns:1fr}.profile-field.full{grid-column:auto}}
+        `}</style>
+        <div className="profile-hero"><div><div className="eyebrow">YOUR PERSONAL SPACE</div><h1>My Profile<span>.</span></h1><p>Bring your professional story together. Add your details once and keep them ready while creating your resumes.</p></div><div className="profile-avatar">{(profile.fullName || currentUser?.name || 'U').trim().split(/\\s+/).map(part=>part[0]).join('').slice(0,2).toUpperCase()}</div></div>
+        <div className="profile-layout"><aside className="profile-nav"><small>PROFILE SECTIONS</small><button onClick={()=>document.getElementById('profile-personal')?.scrollIntoView({behavior:'smooth'})}>Personal details</button><button onClick={()=>document.getElementById('profile-professional')?.scrollIntoView({behavior:'smooth'})}>Professional</button><button onClick={()=>document.getElementById('profile-education')?.scrollIntoView({behavior:'smooth'})}>Education</button><button onClick={()=>document.getElementById('profile-links')?.scrollIntoView({behavior:'smooth'})}>Links & portfolio</button></aside>
+        <div className="profile-content">
+          <section className="profile-card" id="profile-personal"><h2>Personal details</h2><p>Basic information to identify and contact you.</p><div className="profile-fields">
+            <div className="profile-field"><label>Full name</label><input value={profile.fullName ?? currentUser?.name ?? ''} onChange={e=>updateProfile('fullName',e.target.value)} placeholder="Your full name"/></div>
+            <div className="profile-field"><label>Professional title</label><input value={profile.title||''} onChange={e=>updateProfile('title',e.target.value)} placeholder="e.g. Frontend Developer"/></div>
+            <div className="profile-field"><label>Email address</label><input type="email" value={profile.email ?? currentUser?.email ?? ''} onChange={e=>updateProfile('email',e.target.value)} placeholder="you@example.com"/></div>
+            <div className="profile-field"><label>Phone number</label><input value={profile.phone||''} onChange={e=>updateProfile('phone',e.target.value)} placeholder="+91 00000 00000"/></div>
+            <div className="profile-field"><label>City</label><input value={profile.city||''} onChange={e=>updateProfile('city',e.target.value)} placeholder="Your city"/></div>
+            <div className="profile-field"><label>Country</label><input value={profile.country||''} onChange={e=>updateProfile('country',e.target.value)} placeholder="Country"/></div>
+          </div></section>
+          <section className="profile-card" id="profile-professional"><h2>Professional summary</h2><p>Tell employers what you do and what you bring to a team.</p><div className="profile-fields">
+            <div className="profile-field"><label>Current role / desired role</label><input value={profile.role||''} onChange={e=>updateProfile('role',e.target.value)} placeholder="e.g. Computer Science Student"/></div>
+            <div className="profile-field"><label>Years of experience</label><select value={profile.experience||''} onChange={e=>updateProfile('experience',e.target.value)}><option value="">Select experience</option><option>Fresher</option><option>Less than 1 year</option><option>1–3 years</option><option>3–5 years</option><option>5+ years</option></select></div>
+            <div className="profile-field full"><label>About / professional summary</label><textarea value={profile.summary||''} onChange={e=>updateProfile('summary',e.target.value)} placeholder="Write a short introduction about your skills, interests and goals..."/></div>
+            <div className="profile-field full"><label>Skills</label><input value={profile.skills||''} onChange={e=>updateProfile('skills',e.target.value)} placeholder="e.g. React, JavaScript, HTML, CSS"/></div>
+          </div></section>
+          <section className="profile-card" id="profile-education"><h2>Education</h2><p>Add your latest qualification and institution.</p><div className="profile-fields">
+            <div className="profile-field"><label>Qualification / degree</label><input value={profile.degree||''} onChange={e=>updateProfile('degree',e.target.value)} placeholder="e.g. B.Tech Computer Science"/></div>
+            <div className="profile-field"><label>Institution</label><input value={profile.institution||''} onChange={e=>updateProfile('institution',e.target.value)} placeholder="College / university"/></div>
+            <div className="profile-field"><label>Start year</label><input value={profile.startYear||''} onChange={e=>updateProfile('startYear',e.target.value)} placeholder="2024"/></div>
+            <div className="profile-field"><label>End year</label><input value={profile.endYear||''} onChange={e=>updateProfile('endYear',e.target.value)} placeholder="2028 / Present"/></div>
+          </div></section>
+          <section className="profile-card" id="profile-links"><h2>Links & portfolio</h2><p>Help people discover your work online.</p><div className="profile-fields">
+            <div className="profile-field"><label>LinkedIn URL</label><input value={profile.linkedin||''} onChange={e=>updateProfile('linkedin',e.target.value)} placeholder="https://linkedin.com/in/..."/></div>
+            <div className="profile-field"><label>GitHub URL</label><input value={profile.github||''} onChange={e=>updateProfile('github',e.target.value)} placeholder="https://github.com/..."/></div>
+            <div className="profile-field full"><label>Portfolio / personal website</label><input value={profile.portfolio||''} onChange={e=>updateProfile('portfolio',e.target.value)} placeholder="https://yourportfolio.com"/></div>
+          </div><div className="profile-save-note"><Check size={16}/> Your changes are saved automatically on this device.</div><div className="profile-actions"><button className="button button-dark" onClick={()=>{setPage('dashboard');window.scrollTo({top:0,behavior:'smooth'});}}>Back to dashboard <ArrowRight size={16}/></button><button className="profile-back" onClick={()=>setPage('home')}>Go to home</button></div></section>
+        </div></div>
       </main>}
 
       {page === 'dashboard' && <main className="page-content dashboard-page dashboard-redesign">
