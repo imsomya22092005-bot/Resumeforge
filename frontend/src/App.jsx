@@ -115,7 +115,11 @@ const apiRequest = async (path, options = {}) => {
     }
   });
   const payload = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(payload.message || 'Something went wrong. Please try again.');
+  if (!response.ok) {
+    const error = new Error(payload.message || 'Something went wrong. Please try again.');
+    error.status = response.status;
+    throw error;
+  }
   return payload;
 };
 
@@ -244,10 +248,14 @@ export default function App() {
         setSaved(migratedResumes || []);
       } catch (error) {
         if (!active) return;
-        localStorage.removeItem('resumeforge-token');
-        setCurrentUser(null);
-        setProfile({});
-        setSaved([]);
+        if (error.status === 401 || error.status === 404) {
+          localStorage.removeItem('resumeforge-token');
+          setCurrentUser(null);
+          setProfile({});
+          setSaved([]);
+        } else {
+          console.error('Could not load account data:', error);
+        }
       }
     };
     loadAccountData();
