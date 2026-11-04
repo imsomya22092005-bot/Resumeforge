@@ -140,6 +140,32 @@ export default function App() {
   const [profile, setProfile] = useState(() => {
     try { return JSON.parse(localStorage.getItem('resumeforge-profile') || '{}'); } catch { return {}; }
   });
+  const [showProfileConsent, setShowProfileConsent] = useState(false);
+  const applyProfileToResume = () => {
+    const fullName = String(profile.fullName || currentUser?.name || '').trim();
+    const nameParts = fullName.split(/\\s+/);
+    const city = profile.city || '';
+    const country = profile.country || '';
+    const educationDetails = profile.degree || profile.institution || profile.startYear || profile.endYear;
+    setResume(current => ({
+      ...current,
+      ...(fullName ? { name: fullName, firstName: nameParts[0] || '', surname: nameParts.slice(1).join(' ') } : {}),
+      ...(profile.title ? { role: profile.title } : {}),
+      ...(profile.email || currentUser?.email ? { email: profile.email || currentUser.email } : {}),
+      ...(profile.phone ? { phone: profile.phone } : {}),
+      ...(city ? { city } : {}),
+      ...(country ? { country } : {}),
+      ...(city || country ? { location: [city, country].filter(Boolean).join(', ') } : {}),
+      ...(profile.summary ? { summary: profile.summary } : {}),
+      ...(profile.skills ? { skills: profile.skills } : {}),
+      ...(profile.photo ? { photoUrl: profile.photo } : {}),
+      ...(profile.linkedin ? { linkedin: profile.linkedin } : {}),
+      ...(profile.portfolio ? { website: profile.portfolio } : {}),
+      ...(educationDetails ? { education: [{ ...(current.education?.[0] || {}), id: current.education?.[0]?.id || Date.now(), degree: profile.degree || current.education?.[0]?.degree || '', school: profile.institution || current.education?.[0]?.school || '', dates: [profile.startYear, profile.endYear].filter(Boolean).join(' — ') || current.education?.[0]?.dates || '', description: current.education?.[0]?.description || '' }, ...(current.education || []).slice(1)] } : {})
+    }));
+    setShowProfileConsent(false);
+    notify('Your profile details have been added to the resume.');
+  };
   const updateProfile = (key, value) => {
     setProfile(current => {
       const next = { ...current, [key]: value };
@@ -196,6 +222,7 @@ export default function App() {
     setResumeId(null);
     setSection('personal');
     setPage('editor');
+    setShowProfileConsent(Object.entries(profile).some(([key, value]) => key !== 'photo' ? String(value || '').trim() : Boolean(value)));
   };
   const beginResume = () => {
     setResume(starterResume);
@@ -711,6 +738,31 @@ export default function App() {
           {saved.length === 0 ? <div className="empty-state"><div className="empty-icon"><FileText size={27} /></div><h2>Your first draft starts here.</h2><p>Create a resume and it will appear here, ready whenever you are.</p><button className="button button-dark" onClick={() => startNew()}>Create My Resume <ArrowRight size={16} /></button></div> : <div className="saved-grid">{(Array.isArray(saved) ? saved : []).map(item => <div className="saved-card" key={item.id}><div className="saved-preview"><ResumePreview resume={item} template={item.template} accent={item.templateAccent} /></div><div className="saved-info"><div><h3>{item.name || 'Untitled resume'}</h3><p>{item.role || 'Resume draft'}</p></div><button className="icon-button danger" onClick={() => deleteResume(item.id)} aria-label="Delete resume"><Trash2 size={16} /></button></div><div className="saved-completeness"><div><span style={{width:getResumeCompleteness(item)+'%'}}/></div><small>Resume completeness <b>{getResumeCompleteness(item)}%</b></small></div><button className="button button-outline full-width" onClick={() => openResume(item)}>Continue editing <ArrowRight size={15} /></button></div>)}</div>}
         </section>
       </main>}
+
+      {showProfileConsent && page === 'editor' && <div className="profile-consent-backdrop" role="presentation">
+        <section className="profile-consent-modal" role="dialog" aria-modal="true" aria-labelledby="profile-consent-title">
+          <div className="profile-consent-icon"><UserRound size={25}/></div>
+          <div className="profile-consent-eyebrow">A QUICK HEAD START</div>
+          <h2 id="profile-consent-title">Make your resume yours?</h2>
+          <p>We found details in your ResumeForge profile. Would you like us to add them to this resume automatically?</p>
+          <div className="profile-consent-preview">{[profile.fullName || currentUser?.name, profile.title, profile.email, profile.degree].filter(Boolean).slice(0,3).map((item,index)=><span key={index}><Check size={13}/>{item}</span>)}</div>
+          <div className="profile-consent-actions">
+            <button className="button button-outline" onClick={()=>setShowProfileConsent(false)}>No, I'll fill manually</button>
+            <button className="button button-dark" onClick={applyProfileToResume}>Yes, autofill my details <ArrowRight size={15}/></button>
+          </div>
+          <small>Your profile will remain unchanged. You can edit every field in the resume.</small>
+        </section>
+        <style>{`
+          .profile-consent-backdrop{position:fixed;inset:0;z-index:9999;background:rgba(35,43,48,.48);backdrop-filter:blur(5px);display:grid;place-items:center;padding:20px}
+          .profile-consent-modal{width:min(100%,490px);box-sizing:border-box;background:linear-gradient(145deg,#fffdf8,#fff8ef);border:1px solid #ead9cc;border-radius:24px;padding:32px;box-shadow:0 24px 80px #17232b40;text-align:center;color:#34404a;animation:profileConsentIn .22s ease-out}
+          .profile-consent-icon{width:54px;height:54px;margin:0 auto 15px;border-radius:18px;background:#f3e8dc;color:#896c6c;display:grid;place-items:center}
+          .profile-consent-eyebrow{font-size:10px;letter-spacing:1.8px;font-weight:800;color:#a17c70}.profile-consent-modal h2{font-size:27px;letter-spacing:-.7px;margin:9px 0;color:#303d48}.profile-consent-modal>p{font-size:14px;line-height:1.65;color:#69747b;margin:0 auto 18px;max-width:390px}
+          .profile-consent-preview{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0 0 22px}.profile-consent-preview span{display:flex;align-items:center;gap:5px;background:#f3f0e8;border:1px solid #e9e2d7;color:#59636b;padding:7px 10px;border-radius:30px;font-size:11px}
+          .profile-consent-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.profile-consent-actions button{min-height:44px}.profile-consent-modal>small{display:block;color:#8a9296;font-size:11px;line-height:1.5;margin-top:17px}
+          @keyframes profileConsentIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+          @media(max-width:520px){.profile-consent-modal{padding:25px 20px}.profile-consent-actions{flex-direction:column}.profile-consent-actions button{width:100%}}
+        `}</style>
+      </div>}
 
       {page === 'editor' && <main className="editor-page resume-builder-workspace">
         <aside className="builder-sidebar no-print">
