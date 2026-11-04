@@ -103,13 +103,24 @@ const templatePalettes = {
 };
 const defaultPalette = ['#896C6C','#34495e','#26718a','#617b68','#c56d50','#79546f'];
 
-const loadSaved = () => {
-  try { return JSON.parse(localStorage.getItem('resumeforge-resumes') || '[]'); } catch { return []; }
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/+$/, '');
+const apiRequest = async (path, options = {}) => {
+  const token = localStorage.getItem('resumeforge-token');
+  const response = await fetch(API_BASE_URL + path, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: 'Bearer ' + token } : {}),
+      ...(options.headers || {})
+    }
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(payload.message || 'Something went wrong. Please try again.');
+  return payload;
 };
 
 export default function App() {
-  // Always open the public landing page on a fresh visit or reload.
-  // The signed-in user session and saved resumes remain stored locally.
+  // Accounts, profile details and resume drafts are loaded from the MongoDB-backed API.
   const [page, setPage] = useState('home');
   const [resume, setResume] = useState(starterResume);
   const [template, setTemplate] = useState('classic');
@@ -122,7 +133,7 @@ export default function App() {
   const [columnFilter, setColumnFilter] = useState('all');
   const [templateColors, setTemplateColors] = useState({});
   const [templateAccent, setTemplateAccent] = useState('#896C6C');
-  const [saved, setSaved] = useState(loadSaved);
+  const [saved, setSaved] = useState([]);
   const [resumeId, setResumeId] = useState(null);
   const [toast, setToast] = useState('');
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -134,12 +145,8 @@ export default function App() {
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
   const [authConfirmPassword, setAuthConfirmPassword] = useState('');
-  const [currentUser, setCurrentUser] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('resumeforge-user') || 'null'); } catch { return null; }
-  });
-  const [profile, setProfile] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('resumeforge-profile') || '{}'); } catch { return {}; }
-  });
+  const [currentUser, setCurrentUser] = useState(null);
+  const [profile, setProfile] = useState({});
   const [showProfileConsent, setShowProfileConsent] = useState(false);
   const applyProfileToResume = () => {
     const fullName = String(profile.fullName || currentUser?.name || '').trim();
@@ -167,25 +174,49 @@ export default function App() {
     notify('Your profile details have been added to the resume.');
   };
   const updateProfile = (key, value) => {
-    setProfile(current => {
-      const next = { ...current, [key]: value };
-      try { localStorage.setItem('resumeforge-profile', JSON.stringify(next)); } catch {}
-      if (key === 'fullName' || key === 'email') {
-        setCurrentUser(user => {
-          if (!user) return user;
-          const updated = { ...user, ...(key === 'fullName' ? { name: value } : { email: value }) };
-          try { localStorage.setItem('resumeforge-user', JSON.stringify(updated)); } catch {}
-          return updated;
-        });
-      }
-      return next;
-    });
+    setProfile(current => ({ ...current, [key]: value }));
+  };
+
+  const saveProfile = async () => {
+    try {
+      const { user } = await apiRequest('/api/profile', {
+        method: 'PUT',
+        body: JSON.stringify(profile)
+      });
+      setCurrentUser(user);
+      setProfile(user.profile || {});
+      notify('Profile saved to your account!');
+    } catch (error) {
+      notify(error.message || 'Could not save profile. Please try again.');
+    }
   };
 
   useEffect(() => {
-    localStorage.setItem('resumeforge-resumes', JSON.stringify(saved));
-  }, [saved]);
-  
+    const token = localStorage.getItem('resumeforge-token');
+    if (!token) return;
+    let active = true;
+    const loadAccountData = async () => {
+      try {
+        const [{ user }, { resumes }] = await Promise.all([
+          apiRequest('/api/auth/me'),
+          apiRequest('/api/resumes')
+        ]);
+        if (!active) return;
+        setCurrentUser(user);
+        setProfile(user.profile || {});
+        setSaved(resumes || []);
+      } catch (error) {
+        if (!active) return;
+        localStorage.removeItem('resumeforge-token');
+        setCurrentUser(null);
+        setProfile({});
+        setSaved([]);
+      }
+    };
+    loadAccountData();
+    return () => { active = false; };
+  }, []);
+
   useEffect(() => {
     try {
       localStorage.setItem('resumeforge-current-page', page);
@@ -197,21 +228,38 @@ export default function App() {
     window.setTimeout(() => setToast(''), 2600);
   };
   const openAuth = (mode) => { setAuthError(''); setAuthName(''); setAuthEmail(''); setAuthPassword(''); setAuthConfirmPassword(''); setPage(mode); setMobileMenu(false); };
-  const submitAuth = (event) => {
+  const submitAuth = async (event) => {
     event.preventDefault();
     const email = authEmail.trim().toLowerCase();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setAuthError('Please enter a valid email address.'); return; }
     if (authPassword.length < 6) { setAuthError('Password must be at least 6 characters.'); return; }
     if (page === 'signup' && !authName.trim()) { setAuthError('Please enter your name.'); return; }
     if (page === 'signup' && authPassword !== authConfirmPassword) { setAuthError('Passwords do not match. Please try again.'); return; }
-    const user = { name: authName.trim() || email.split('@')[0], email };
-    localStorage.setItem('resumeforge-user', JSON.stringify(user));
-    setCurrentUser(user); setAuthError(''); setPage('dashboard');
+    try {
+      const endpoint = page === 'signup' ? '/api/auth/signup' : '/api/auth/login';
+      const body = page === 'signup'
+        ? { name: authName.trim(), email, password: authPassword }
+        : { email, password: authPassword };
+      const { token, user } = await apiRequest(endpoint, { method: 'POST', body: JSON.stringify(body) });
+      localStorage.setItem('resumeforge-token', token);
+      setCurrentUser(user);
+      setProfile(user.profile || {});
+      const { resumes } = await apiRequest('/api/resumes');
+      setSaved(resumes || []);
+      setAuthError('');
+      setAuthPassword('');
+      setAuthConfirmPassword('');
+      setPage('dashboard');
+    } catch (error) {
+      setAuthError(error.message);
+    }
   };
   const signOut = () => {
-    localStorage.removeItem('resumeforge-user');
+    localStorage.removeItem('resumeforge-token');
     localStorage.setItem('resumeforge-current-page', 'home');
     setCurrentUser(null);
+    setProfile({});
+    setSaved([]);
     setPage('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -240,18 +288,19 @@ export default function App() {
     beginResume();
   };
   const update = (key, value) => setResume(current => ({ ...current, [key]: value }));
-  const saveResume = () => {
-    const id = resumeId || (globalThis.crypto?.randomUUID?.() ?? String(Date.now()));
-    const item = { ...resume, id, template, templateAccent, updatedAt: new Date().toISOString() };
-    const nextSaved = [item, ...saved.filter(entry => entry.id !== id)];
+  const saveResume = async () => {
     try {
-      localStorage.setItem('resumeforge-resumes', JSON.stringify(nextSaved));
-      setSaved(nextSaved);
-      setResumeId(id);
-      notify('Draft saved successfully on this device');
+      const item = { ...resume, ...(resumeId ? { id: resumeId } : {}), template, templateAccent };
+      const { resume: savedResume } = await apiRequest('/api/resumes', {
+        method: 'POST',
+        body: JSON.stringify(item)
+      });
+      setSaved(current => [savedResume, ...current.filter(entry => entry.id !== savedResume.id)]);
+      setResumeId(savedResume.id);
+      notify('Resume saved securely to your account.');
     } catch (error) {
-      console.error('Could not save resume draft:', error);
-      notify('Could not save. Your browser storage may be full.');
+      console.error('Could not save resume:', error);
+      notify(error.message || 'Could not save resume. Please try again.');
     }
   };
   const openResume = (item) => {
@@ -262,9 +311,14 @@ export default function App() {
     setSection('personal');
     setPage('editor');
   };
-  const deleteResume = (id) => {
-    setSaved(current => current.filter(item => item.id !== id));
-    notify('Resume deleted');
+  const deleteResume = async (id) => {
+    try {
+      await apiRequest('/api/resumes/' + id, { method: 'DELETE' });
+      setSaved(current => current.filter(item => item.id !== id));
+      notify('Resume deleted');
+    } catch (error) {
+      notify(error.message || 'Could not delete resume.');
+    }
   };
   const downloadResume = () => {
     // Print only the actual resume document; browser dialog lets the user save it as PDF.
@@ -698,7 +752,7 @@ export default function App() {
             <div className="profile-field"><label>LinkedIn URL</label><input value={profile.linkedin||''} onChange={e=>updateProfile('linkedin',e.target.value)} placeholder="https://linkedin.com/in/..."/></div>
             <div className="profile-field"><label>GitHub URL</label><input value={profile.github||''} onChange={e=>updateProfile('github',e.target.value)} placeholder="https://github.com/..."/></div>
             <div className="profile-field full"><label>Portfolio / personal website</label><input value={profile.portfolio||''} onChange={e=>updateProfile('portfolio',e.target.value)} placeholder="https://yourportfolio.com"/></div>
-          </div><div className="profile-save-note"><Check size={16}/> Your profile details are stored on this device. Use Save Profile to confirm your latest changes.</div><div className="profile-actions"><button className="button button-dark profile-save-button" onClick={()=>{try{localStorage.setItem('resumeforge-profile',JSON.stringify(profile));notify('Profile saved successfully!');}catch(error){notify('Could not save profile. Your browser storage may be full.');}}}><Check size={16}/> Save Profile</button><button className="button button-outline" onClick={()=>{setPage('dashboard');window.scrollTo({top:0,behavior:'smooth'});}}>Back to dashboard <ArrowRight size={16}/></button></div></section>
+          </div><div className="profile-save-note"><Check size={16}/> Your profile details are saved to your ResumeForge account in the database.</div><div className="profile-actions"><button className="button button-dark profile-save-button" onClick={saveProfile}><Check size={16}/> Save Profile</button><button className="button button-outline" onClick={()=>{setPage('dashboard');window.scrollTo({top:0,behavior:'smooth'});}}>Back to dashboard <ArrowRight size={16}/></button></div></section>
         </div></div>
       </main>}
 
@@ -731,7 +785,7 @@ export default function App() {
         <section className="dashboard-shortcuts">
           <button className="shortcut-card" onClick={() => beginResume()}><span className="shortcut-icon"><Plus size={20}/></span><span><b>Start from scratch</b><small>Build a resume step by step</small></span><ArrowRight size={17}/></button>
           <button className="shortcut-card" onClick={() => setPage('templates')}><span className="shortcut-icon shortcut-icon-cream"><LayoutTemplate size={20}/></span><span><b>Choose a template</b><small>Find a style that fits your goals</small></span><ArrowRight size={17}/></button>
-          <div className="shortcut-card shortcut-static"><span className="shortcut-icon shortcut-icon-sage"><FileText size={20}/></span><span><b>{saved.length} saved {saved.length === 1 ? 'resume' : 'resumes'}</b><small>Your drafts stay on this device</small></span></div>
+          <div className="shortcut-card shortcut-static"><span className="shortcut-icon shortcut-icon-sage"><FileText size={20}/></span><span><b>{saved.length} saved {saved.length === 1 ? 'resume' : 'resumes'}</b><small>Your drafts are saved to your account</small></span></div>
         </section>
         <section className="dashboard-saved-section">
           <div className="dashboard-heading"><div><div className="eyebrow">YOUR WORKSPACE</div><h2>My resumes<span>.</span></h2><p>Pick up where you left off, or start something new.</p></div>{saved.length > 0 && <button className="button button-outline" onClick={() => beginResume()}><Plus size={16}/> New resume</button>}</div>
