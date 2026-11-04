@@ -119,6 +119,41 @@ const apiRequest = async (path, options = {}) => {
   return payload;
 };
 
+const migrateLegacyLocalData = async (cloudResumes = []) => {
+  const readLegacy = key => {
+    try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; }
+  };
+  const legacyProfile = readLegacy('resumeforge-profile') || {};
+  const legacyResumes = readLegacy('resumeforge-resumes') || [];
+  const hasLegacyProfile = legacyProfile && Object.keys(legacyProfile).length > 0;
+  const hasLegacyResumes = Array.isArray(legacyResumes) && legacyResumes.length > 0;
+  if (!hasLegacyProfile && (!hasLegacyResumes || cloudResumes.length > 0)) return cloudResumes;
+
+  try {
+    if (hasLegacyProfile) {
+      await apiRequest('/api/profile', { method: 'PUT', body: JSON.stringify(legacyProfile) });
+    }
+    let result = cloudResumes;
+    if (hasLegacyResumes && cloudResumes.length === 0) {
+      result = [];
+      for (const oldResume of legacyResumes) {
+        const { resume } = await apiRequest('/api/resumes', {
+          method: 'POST',
+          body: JSON.stringify(oldResume)
+        });
+        result.push(resume);
+      }
+    }
+    localStorage.removeItem('resumeforge-profile');
+    localStorage.removeItem('resumeforge-resumes');
+    localStorage.removeItem('resumeforge-user');
+    return result;
+  } catch (error) {
+    console.warn('Previous browser data could not be fully migrated yet:', error);
+    return cloudResumes;
+  }
+};
+
 export default function App() {
   // Accounts, profile details and resume drafts are loaded from the MongoDB-backed API.
   const [page, setPage] = useState('home');
@@ -201,10 +236,12 @@ export default function App() {
           apiRequest('/api/auth/me'),
           apiRequest('/api/resumes')
         ]);
+        const migratedResumes = await migrateLegacyLocalData(resumes || []);
+        const { user: refreshedUser } = await apiRequest('/api/auth/me');
         if (!active) return;
-        setCurrentUser(user);
-        setProfile(user.profile || {});
-        setSaved(resumes || []);
+        setCurrentUser(refreshedUser || user);
+        setProfile((refreshedUser || user).profile || {});
+        setSaved(migratedResumes || []);
       } catch (error) {
         if (!active) return;
         localStorage.removeItem('resumeforge-token');
@@ -245,7 +282,11 @@ export default function App() {
       setCurrentUser(user);
       setProfile(user.profile || {});
       const { resumes } = await apiRequest('/api/resumes');
-      setSaved(resumes || []);
+      const migratedResumes = await migrateLegacyLocalData(resumes || []);
+      const { user: refreshedUser } = await apiRequest('/api/auth/me');
+      setCurrentUser(refreshedUser || user);
+      setProfile((refreshedUser || user).profile || {});
+      setSaved(migratedResumes || []);
       setAuthError('');
       setAuthPassword('');
       setAuthConfirmPassword('');
