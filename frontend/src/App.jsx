@@ -134,10 +134,13 @@ const migrateLegacyLocalData = async (cloudResumes = []) => {
   if (!hasLegacyProfile && (!hasLegacyResumes || cloudResumes.length > 0)) return cloudResumes;
 
   try {
+    let profileMigrated = !hasLegacyProfile;
     if (hasLegacyProfile) {
       await apiRequest('/api/profile', { method: 'PUT', body: JSON.stringify(legacyProfile) });
+      profileMigrated = true;
     }
     let result = cloudResumes;
+    let resumesMigrated = !hasLegacyResumes;
     if (hasLegacyResumes && cloudResumes.length === 0) {
       result = [];
       for (const oldResume of legacyResumes) {
@@ -147,9 +150,10 @@ const migrateLegacyLocalData = async (cloudResumes = []) => {
         });
         result.push(resume);
       }
+      resumesMigrated = true;
     }
-    localStorage.removeItem('resumeforge-profile');
-    localStorage.removeItem('resumeforge-resumes');
+    if (profileMigrated) localStorage.removeItem('resumeforge-profile');
+    if (resumesMigrated) localStorage.removeItem('resumeforge-resumes');
     localStorage.removeItem('resumeforge-user');
     return result;
   } catch (error) {
